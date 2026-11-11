@@ -4,6 +4,8 @@ An interactive prototype showing how shocks to Canada's food system could unfold
 
 **Live page:** https://bdzion.github.io/canada-food-stress-test/
 
+**User guide:** https://bdzion.github.io/canada-food-stress-test/guide.html
+
 Developed at the Arrell Food Institute (AFI), University of Guelph, as a discussion prototype for a long-term research program on anticipatory decision-making for food-system shocks. It builds on AFI's 2026 Canada Agri-Food Chokepoint Audit.
 
 ## What it shows
@@ -25,7 +27,7 @@ Developed at the Arrell Food Institute (AFI), University of Guelph, as a discuss
 
 ## Structure
 
-The site is a single self-contained file, `index.html` (HTML, CSS and JavaScript, no build step). Fonts load from Google Fonts. GitHub Pages serves it from the `main` branch root.
+The site has two self-contained pages with no build step: `index.html` (the interactive stress test) and `guide.html` (the user guide: plain-language definitions, a decision workflow, back-end work and evidence on effectiveness). `preview.png` is the image shown when the link is shared. Fonts load from Google Fonts. GitHub Pages serves it from the `main` branch root.
 
 ## Feedback
 

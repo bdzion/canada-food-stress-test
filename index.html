@@ -61,6 +61,9 @@ html, body { margin: 0; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 48px; display: grid; gap: 18px; }
 header { display: grid; gap: 8px; }
+.headrow { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+.guidelink { font-size: 14px; font-weight: 600; color: var(--act); border: 1px solid var(--act); border-radius: 999px; padding: 6px 14px; text-decoration: none; }
+.guidelink:hover { background: var(--band); }
 .eyebrow { font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 h1 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 38px); line-height: 1.1; margin: 0; text-wrap: balance; }
 .dek { max-width: 72ch; margin: 0; color: var(--muted); font-size: 16px; }
@@ -145,7 +148,7 @@ footer a, td a { color: var(--act); }
 <body>
 <div class="wrap">
   <header>
-    <div class="eyebrow">Arrell Food Institute · University of Guelph · Prototype for discussion, November 2026</div>
+    <div class="headrow"><div class="eyebrow">Arrell Food Institute · University of Guelph · Prototype for discussion, November 2026</div><a class="guidelink" href="guide.html">User guide: how to use this site</a></div>
     <h1>Canada Food Shock Stress Test</h1>
     <p class="dek">A ranked register of shocks to Canada's food system, a simulation of each priority shock, and an integrated test of what happens when they hit together. Every view compares losses if we act early, act late, or do nothing.</p>
     <div class="notice"><b>Illustrative only.</b><span>Stylized models with stated assumptions, built to show the logic of anticipatory action. They are not forecasts. Sourced figures and assumed values are marked in each scenario's assumptions table.</span></div>
