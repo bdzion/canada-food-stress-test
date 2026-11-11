@@ -30,7 +30,7 @@ The site has two self-contained pages with no build step: `index.html` (the inte
 
 ## Feedback
 
-Open an issue in this repository, or send comments to the team. Each revision is recorded in the commit history.
+Email comments to mbodrudd@uoguelph.ca. Each revision is recorded in the commit history.
 
 ## Contact
 
