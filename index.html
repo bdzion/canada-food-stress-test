@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Canada Food Shock Stress Test</title>
-<meta name="description" content="Interactive prototype from the Arrell Food Institute, University of Guelph: a ranked register of shocks to Canada's food system and stress tests comparing losses from acting early, acting late or doing nothing. Illustrative, not a forecast.">
+<title>Canada Food System Stress Test</title>
+<meta name="description" content="Interactive prototype from the Arrell Food Institute, University of Guelph: stresses to Canada's food system from inside and outside Canada, ranked by category, traced to where they hit, and stress-tested alone and together. Illustrative, not a forecast.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Canada Food Shock Stress Test">
-<meta property="og:description" content="Ranked shocks to Canada's food system and what acting early is worth. Interactive prototype for discussion, Arrell Food Institute, University of Guelph.">
+<meta property="og:title" content="Canada Food System Stress Test">
+<meta property="og:description" content="Stresses to Canada's food system from home and abroad, and what acting early is worth. Interactive prototype for discussion, Arrell Food Institute, University of Guelph.">
 <meta property="og:url" content="https://bdzion.github.io/canada-food-stress-test/">
 <meta property="og:image" content="https://bdzion.github.io/canada-food-stress-test/preview.png">
 <meta property="og:image:width" content="1200">
@@ -137,7 +137,82 @@ td.num, th.num { text-align: right; }
 footer { font-size: 12.5px; color: var(--muted); display: grid; gap: 6px; }
 footer a, td a { color: var(--act); }
 .hidden { display: none !important; }
-@media (max-width: 920px) { .main { grid-template-columns: 1fr; } .tiles { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+/* ---- overview, register, pathways, compound scenarios ---- */
+.page { display: grid; gap: 16px; }
+.page h2 { font-family: var(--font-display); font-size: 20px; margin: 0; line-height: 1.25; }
+.page h3 { font-size: 15px; margin: 0; }
+.qhead { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.qhead .qn { font-family: var(--font-display); font-size: 20px; color: var(--muted); }
+.snap { font-size: 13px; color: var(--muted); }
+.cats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+.cat { text-align: left; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 6px; cursor: pointer; border-left: 5px solid var(--line); }
+.cat:hover { border-color: var(--act); }
+.cat.s0 { border-left-color: var(--good); } .cat.s1 { border-left-color: var(--watch); } .cat.s2 { border-left-color: var(--ready); } .cat.s3 { border-left-color: var(--alert); }
+.cat .top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.cat .nm { font-weight: 700; font-size: 15px; }
+.cat .meta { font-size: 12.5px; color: var(--muted); }
+.sig { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+.sig::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.sig.s0 { color: var(--good); } .sig.s1 { color: var(--watch); } .sig.s2 { color: var(--ready); } .sig.s3 { color: var(--alert); }
+.org { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 1px 7px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); white-space: nowrap; }
+.trend { font-weight: 700; color: var(--muted); }
+.two { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 16px; align-items: start; }
+.list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.item { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: grid; gap: 4px; font-size: 13.5px; }
+.item .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.item .when { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.item a { color: var(--act); }
+.stype { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.planned { border-style: dashed; }
+.audience { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13.5px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip { font: inherit; font-size: 12.5px; font-weight: 600; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.filters { display: grid; gap: 8px; }
+.filters .lab { font-size: 12.5px; font-weight: 700; color: var(--muted); min-width: 64px; }
+select { font: inherit; font-size: 13px; padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); }
+.catgroup th.cg { background: var(--bg); color: var(--ink); font-size: 13.5px; }
+.chan { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.chan .item { cursor: default; align-content: start; }
+#page a { color: var(--act); }
+.sigcell { white-space: nowrap; }
+.sbtn { font: inherit; font-size: 12.5px; text-align: left; border: 0; background: none; color: var(--act); padding: 2px 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.sbtn[aria-pressed="true"] { color: var(--ink); font-weight: 700; text-decoration: none; }
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.flow .step:nth-child(5) { border-right: 0; }
+.stories { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+.story { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: grid; gap: 8px; align-content: start; font-size: 13.5px; }
+.story h3 { font-family: var(--font-display); font-size: 17px; }
+.story ul { margin: 0; padding-left: 18px; }
+.story .k { font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 700; }
+.pb { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+.pb > div { border-top: 3px solid var(--accent); padding-top: 6px; font-size: 13px; }
+.pb .k { font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 700; }
+.btnbrief { font: inherit; font-size: 14px; font-weight: 600; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.btnbrief:hover { border-color: var(--act); }
+.headlinks { display: flex; gap: 8px; flex-wrap: wrap; }
+#briefHead { display: none; }
+@media print {
+  body { background: #fff; color: #000; font-size: 12px; }
+  .tabs, .headlinks, aside.panel, #dataWrap, .audience, .noprint { display: none !important; }
+  #briefHead { display: block; font-size: 12px; border-bottom: 1px solid #999; padding-bottom: 6px; }
+  .main { grid-template-columns: 1fr !important; }
+  .card, .tile, .story, .item, .cat, details { break-inside: avoid; }
+  a { color: #000; }
+}
+@media (max-width: 920px) { .main { grid-template-columns: 1fr; } .tiles { grid-template-columns: repeat(2, minmax(0,1fr)); } .cats { grid-template-columns: repeat(2, minmax(0,1fr)); } .two, .stories { grid-template-columns: 1fr; } .pb { grid-template-columns: repeat(2, minmax(0,1fr)); } .flow { grid-template-columns: 1fr; } .flow .step { border-right: 0; border-bottom: 1px solid var(--line); } .flow .step::after { display: none; } }
+@media (max-width: 560px) { .cats, .pb { grid-template-columns: 1fr; } }
+@media (max-width: 700px) {
+  .regt thead { display: none; }
+  .regt, .regt tbody, .regt tr, .regt td, .regt th { display: block; width: 100%; }
+  .regt tr { border-bottom: 1px solid var(--line); padding: 8px 0; }
+  .regt td { border: 0; padding: 3px 0; display: grid; grid-template-columns: 92px minmax(0,1fr); gap: 8px; }
+  .regt td::before { content: attr(data-l); font-size: 12px; color: var(--muted); font-weight: 600; }
+  .regt td > * { grid-column: 2; justify-self: start; }
+  .regt td::before { grid-row: 1 / span 2; }
+  .regt td.rank { font-size: 15px; }
+  .regt th.cg { padding: 8px; border-radius: 4px; }
+}
 @media (max-width: 560px) {
   .path { grid-template-columns: 1fr 1fr; }
   .step:nth-child(2) { border-right: 0; } .step:nth-child(-n+2) { border-bottom: 1px solid var(--line); } .step:nth-child(2)::after { display: none; }
@@ -148,13 +223,16 @@ footer a, td a { color: var(--act); }
 <body>
 <div class="wrap">
   <header>
-    <div class="headrow"><div class="eyebrow">Arrell Food Institute · University of Guelph · Prototype for discussion, November 2026</div><a class="guidelink" href="guide.html">User guide: how to use this site</a></div>
-    <h1>Canada Food Shock Stress Test</h1>
-    <p class="dek">A ranked register of shocks to Canada's food system, a simulation of each priority shock, and an integrated test of what happens when they hit together. Every view compares losses if we act early, act late, or do nothing.</p>
-    <div class="notice"><b>Illustrative only.</b><span>Stylized models with stated assumptions, built to show the logic of anticipatory action. They are not forecasts. Sourced figures and assumed values are marked in each scenario's assumptions table.</span></div>
+    <div class="headrow"><div class="eyebrow">Arrell Food Institute · University of Guelph · Prototype for discussion, November 2026</div><div class="headlinks"><button class="btnbrief" type="button" id="printBrief">Print a decision brief</button><a class="guidelink" href="guide.html">User guide: how to use this site</a></div></div>
+    <h1>Canada Food System Stress Test</h1>
+    <p class="dek">Canada's food system at the centre: stresses from inside and outside Canada, sorted into six categories, ranked, traced to where they hit, and tested one at a time and together. Every test compares acting early, acting late and doing nothing.</p>
+    <div class="notice"><b>Illustrative only.</b><span>Signal levels are the authors' demonstration settings and the models are stylized, with stated assumptions. Nothing here is a forecast or a live feed. Events and statistics are real and linked to their sources.</span></div>
+    <div id="briefHead"></div>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Views" id="tabs"></nav>
+
+  <section class="page hidden" id="page" aria-live="polite"></section>
 
   <section class="path" id="path" aria-label="Shock pathway"></section>
 
@@ -191,10 +269,10 @@ footer a, td a { color: var(--act); }
         <p class="insight" id="insight2"></p>
       </div>
 
-      <div class="card hidden" id="regCard">
-        <h2>Shock register: preliminary ranking</h2>
-        <p class="sub">Each shock is scored 1 to 5 on likelihood over the next five years (L), national impact (I), speed of onset (S, 5 = days) and cascade reach across sectors (R). Priority = L × I × (S + R) ÷ 10, maximum 25; ties are ordered by speed. These are the authors' first judgements; Phase 1 of the program replaces them with a structured expert ranking.</p>
-        <div class="tablewrap"><table id="regTable"></table></div>
+      <div class="card" id="pbCard">
+        <h2 id="pbTitle">Pre-agreed playbook</h2>
+        <p class="sub">The four parts of an anticipatory action plan: the trigger, the action and who leads it, the money set aside in advance, and how results are reviewed. Leads and funding are proposals for discussion, not agreed arrangements.</p>
+        <div class="pb" id="pb"></div>
       </div>
     </section>
   </div>
@@ -210,7 +288,7 @@ footer a, td a { color: var(--act); }
   </details>
 
   <footer>
-    <div><b>How the models work.</b> Each scenario moves a shock through a chokepoint into the buffers that absorb it (stocks, inventory, storage, soil reserves, alternative supply). Losses begin when buffers run out. Early action slows the shock, refills the buffer or reallocates it, at a cost that is counted. Signals mark when a watch, readiness or action threshold is crossed on the no-action path. The integrated test runs the four modelled shocks in the same year, adds losses from shared buffers, and delays responses when agencies face several crises at once. The full program would replace these stylized equations with calibrated models, back-tested against 2020–26 Canadian events.</div>
+    <div><b>How the models work.</b> Each scenario moves a shock through a chokepoint into the buffers that absorb it (stocks, inventory, storage, soil reserves, feed, alternative supply). Losses begin when buffers run out. Early action slows the shock, refills the buffer or reallocates it, at a cost that is counted. Signals mark when a watch, readiness or action threshold is crossed on the no-action path. The integrated test runs the selected modelled shocks in the same year, adds losses from shared buffers, and delays responses when agencies face several crises at once. The full program would replace these stylized equations with calibrated models, back-tested against 2020–26 Canadian events, and feed them with reviewed satellite, market, official and news data (see the <a href="guide.html#platform">user guide</a>).</div>
     <div>Framework terms (shock, chokepoint, buffer, decision window) follow AFI's food-system buffer and cascade-state work, and build on AFI's 2026 Chokepoint Audit. Contact: Arrell Food Institute, University of Guelph.</div>
   </footer>
 </div>
@@ -226,10 +304,13 @@ const fmtM = (v) => {
 };
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-function dayToDate(d) {
-  const dt = new Date(Date.UTC(2027, 0, 1 + d));
+function dayToDate(d, month = 0) {
+  const dt = new Date(Date.UTC(2027, month, 1 + d));
   return dt.toLocaleDateString("en-CA", { month: "short", day: "numeric", timeZone: "UTC" });
 }
+/* Scenarios with a calendar start (s.dates = month index) show dates; others show "Day n" */
+const fmtDay = (s, d) => s.dates !== undefined ? dayToDate(d, s.dates) : "Day " + d;
+const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 /* ---------- scenario models (pure functions) ---------- */
 /* Avian influenza: regional wave of infected poultry premises. Day 0 = first detection in wild birds nearby. */
@@ -319,13 +400,33 @@ function railRun(p, a) {
   return { y, loss, cost, total: loss + cost, end: Math.min(...y) };
 }
 
+/* Prairie drought: 1 April = day 0. Feed for livestock (hay, pasture, feed grain) as a share of winter need.
+   Early action cannot make rain; it sources and moves feed sooner, which limits forced herd sales. */
+function droughtRun(p, a) {
+  const H = 180, f = [0.15, 0.30, 0.45][p.sev - 1], eff = p.eff / 100, lead = 30, ramp = 45;
+  const s = (t) => 1 / (1 + Math.exp(-(t - 85) / 12));
+  const s0 = s(0), s1 = s(H);
+  const acting = Number.isFinite(a);
+  const y = [];
+  for (let t = 0; t <= H; t++) {
+    const base = 100 * (1 - f * (s(t) - s0) / (s1 - s0));
+    const added = acting ? eff * f * 100 * clamp((t - a - lead) / ramp, 0, 1) : 0;
+    y.push(Math.min(100, base + added));
+  }
+  const gap = Math.max(0, 1 - y[H] / 100);
+  const loss = 4000 * gap + 6000 * Math.max(0, gap - 0.2);
+  const cost = acting ? 20 + eff * f * 800 * (1 + Math.max(0, a - 60) / 60) : 0;
+  return { y, loss, cost, total: loss + cost, end: y[H] };
+}
+
 /* ---------- scenario definitions ---------- */
 const SCEN = {
   "rail": {
-    tab: "Rail or port shutdown", rank: 1,
-    run: railRun, H: 60, aMax: 30,
+    tab: "Rail or port shutdown",
+    run: railRun,
+    playbook: { trigger: "Ready: 72-hour strike notice or flood warning. Act: Prairie elevators full.", action: "Move food, feed and fertilizer first; pre-book trucks and other ports. Proposed lead: Transport Canada with Agriculture and Agri-Food Canada, railways and shippers.", money: "Contingency funding agreed in advance and released at the action signal (to be designed).", learning: "After each event, review days to reopen, share of priority freight moved and losses avoided." }, H: 60, aMax: 30,
     path: [["Shock", "A labour dispute, flood or wildfire closes the main rail and port corridors"],
-           ["Chokepoint", "Two railways; about 95% of grain and 75% of fertilizer move by rail"],
+           ["Chokepoint", "Two railways; about 94% of grain exports move by rail"],
            ["Buffers", "Elevator storage, plant inventories, feed stocks, trucking and other ports"],
            ["Impact", "Lost exports, idled processing plants, feed shortages, contract penalties"]],
     params: [
@@ -345,7 +446,8 @@ const SCEN = {
       ["a flood keeps the corridor closed for a month?", () => ({ dur: 30 })]
     ],
     assumptions: [
-      ["Grain moved by rail", "About 95%", "src", "Just Food explainer, August 2024", "https://www.just-food.com/newsletters/explainer-canada-rail-shutdown-whats-caused-stoppage-and-what-might-impact-be"],
+      ["Grain exports moved by rail", "About 94%", "src", "Agriculture Transport Coalition analysis, via Farms.com, May 2026", "https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx"],
+      ["Cost of one week of rail and port disruption at peak season", "Up to $540M (grain sector)", "src", "Agriculture Transport Coalition analysis, via Farms.com, May 2026", "https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx"],
       ["Prairie elevators full after", "About 10 days", "src", "Quorum Corp., via Western Producer", "https://www.producer.com/news/n-american-farm-groups-ask-govts-to-act-on-rail-dispute/"],
       ["Meat plants shut after / recover in", "7–10 days / 2–5 weeks", "src", "Canadian Meat Council and Canadian Pork Council, via Western Producer", "https://www.producer.com/?p=289249"],
       ["Gross losses at full stoppage", "$134M per day", "src", "Sum of industry estimates: grain $43M, fertilizer $55–63M, canola $31.5M (may overlap)", "https://www.dtnpf.com/agriculture/web/ag/news/article/2024/08/22/cpkc-cn-railroads-halted-nationwide"],
@@ -355,15 +457,16 @@ const SCEN = {
     ]
   },
   "phosphate": {
-    tab: "Phosphate before seeding", rank: 3,
-    run: phosRun, H: 180, aMax: 150,
+    tab: "Phosphate before seeding", dates: 0,
+    run: phosRun,
+    playbook: { trigger: "Ready: seeding gap projected. Act: last day for imports to land before seeding.", action: "Source from other suppliers, book port and rail slots, and advise farmers to put phosphorus on low-soil-test fields first. Proposed lead: Agriculture and Agri-Food Canada with provinces and the fertilizer industry.", money: "Pre-agreed sharing of the price premium on replacement supply (to be designed).", learning: "Compare yields and soil phosphorus on fields that did and did not follow the guidance." }, H: 180, aMax: 150,
     path: [["Shock", "Imports cut by a route closure, trade dispute or plant outage"],
            ["Chokepoint", "No domestic phosphate fertilizer; one dominant supplier"],
            ["Buffers", "Dealer and farm inventory, alternative suppliers, legacy soil phosphorus"],
            ["Impact", "Under-fertilized crops, lower yields and farm income"]],
     params: [
       { id: "short", label: "Import shortfall", min: 20, max: 80, step: 5, value: 50, fmt: v => v + "%", hint: "Share of remaining imports that does not arrive." },
-      { id: "a", label: "Alternative sourcing starts", min: 0, max: 150, step: 1, value: 20, fmt: v => dayToDate(v), hint: "Shipments take about 55 days to reach farms." },
+      { id: "a", label: "Alternative sourcing starts", min: 0, max: 150, step: 1, value: 20, fmt: v => dayToDate(v, 0), hint: "Shipments take about 55 days to reach farms." },
       { id: "eff", label: "Shortfall replaced", min: 30, max: 90, step: 5, value: 70, fmt: v => v + "%", hint: "Share of the missing volume new suppliers can cover." }
     ],
     y: { label: "Phosphate available (% of season need)", fmt: v => Math.round(v) + "%", unit: "% of need" },
@@ -391,8 +494,9 @@ const SCEN = {
     ]
   },
   "cyber": {
-    tab: "Cyberattack on distribution", rank: 4,
-    run: cyberRun, H: 35, aMax: 21,
+    tab: "Cyberattack on distribution",
+    run: cyberRun,
+    playbook: { trigger: "Ready: a major distributor outage passes 24 hours. Act: perishables projected to run out.", action: "Manual ordering, mutual aid among distributors and grocers, public messaging against panic buying. Proposed lead: Public Safety Canada and the Canadian Centre for Cyber Security with industry.", money: "Industry mutual-aid agreement plus a public messaging budget set aside in advance (to be designed).", learning: "Review shelf availability, spoilage and days to recover after each incident." }, H: 35, aMax: 21,
     path: [["Shock", "Ransomware takes a major grocery distributor offline"],
            ["Chokepoint", "Ordering, routing and cold-chain systems run on one network"],
            ["Buffers", "Store inventory, manual fallback, other distributors, public messaging"],
@@ -416,7 +520,7 @@ const SCEN = {
     assumptions: [
       ["Time to restore normal capacity, no playbook", "About 21 days", "src", "UNFI 2025: normal capacity within three weeks", "https://cyberscoop.com/united-natural-foods-cyberattack-400-million/"],
       ["Scale reference", "Up to US$400M lost sales; ~30,000 stores in the U.S. and Canada", "src", "CyberScoop; Cybersecurity News", "https://cybersecuritynews.com/united-natural-foods-suffers-cyberattack/"],
-      ["Food distribution under Bill C-8", "Not covered", "src", "House of Commons debate, 2025", "https://www.noscommunes.ca/Content/House/451/Debates/030/HAN030-E.PDF"],
+      ["Food distribution under the 2026 cyber security law", "Not among the four covered sectors", "src", "Public Safety Canada, Royal Assent news release, June 2026", "https://www.canada.ca/en/public-safety-canada/news/2026/06/government-of-canada-strengthens-cyber-security-and-critical-infrastructure-with-royal-assent-of-bill-c8.html"],
       ["Retail grocery sales per day (national)", "$350M", "ill", "Assumed order of magnitude", ""],
       ["Store inventory: perishables / shelf-stable", "3 / 12 days", "ill", "Assumed", ""],
       ["Panic buying, first 5 days", "+30% (+10% with messaging)", "ill", "Assumed", ""],
@@ -425,8 +529,9 @@ const SCEN = {
     ]
   },
   "avian-flu": {
-    tab: "Avian influenza", rank: 6,
-    run: avianRun, H: 120, aMax: 90,
+    tab: "Avian influenza",
+    run: avianRun,
+    playbook: { trigger: "Ready: 5 infected farms in a region. Act: 15 infected farms.", action: "Movement controls, surge surveillance, rapid depopulation and regional trade agreements. Proposed lead: Canadian Food Inspection Agency with provinces and producers.", money: "Pre-arranged surge funding alongside existing compensation for ordered destruction of birds.", learning: "Track days from first detection to control and the number of farms infected." }, H: 120, aMax: 90,
     path: [["Shock", "Highly pathogenic avian influenza reaches a dense poultry region"],
            ["Chokepoint", "Concentrated barns, shared trucks and a few hatcheries spread it"],
            ["Buffers", "Biosecurity, movement controls, rapid depopulation, export-zone agreements"],
@@ -456,33 +561,136 @@ const SCEN = {
     ]
   }
 };
-const MODELLED = ["rail", "phosphate", "cyber", "avian-flu"];
+SCEN["drought"] = {
+  tab: "Prairie drought", dates: 3,
+  run: droughtRun, H: 180, aMax: 150,
+  playbook: { trigger: "Watch: moderate drought on the Canadian Drought Monitor in spring. Ready: dry soils at the end of seeding. Act: hay and pasture forecasts below winter need.",
+    action: "Source and move feed early, support pasture rental and feed transport, and defer tax on forced herd sales. Proposed lead: Agriculture and Agri-Food Canada with provinces and producer groups.",
+    money: "A pre-arranged early trigger for disaster assistance, rather than payments decided after the damage (to be designed).",
+    learning: "Compare herd numbers, feed prices and payment timing with the 2021 drought." },
+  path: [["Shock", "A dry spring and hot summer across the Prairies"],
+         ["Chokepoint", "Rain-fed cropland and local hay and pasture for livestock"],
+         ["Buffers", "Soil moisture, carry-over feed, feed from other regions, crop insurance"],
+         ["Impact", "Smaller crops, feed shortfalls, forced sales of breeding herds"]],
+  params: [
+    { id: "sev", label: "Drought severity", min: 1, max: 3, step: 1, value: 2, fmt: v => ["Moderate", "Severe", "Extreme"][v - 1], hint: "Severe is close to 2021, when canola fell 35% and wheat 39%." },
+    { id: "a", label: "Feed sourcing and support start", min: 0, max: 150, step: 1, value: 60, fmt: v => dayToDate(v, 3), hint: "Feed takes about 30 days to arrive once sourcing starts." },
+    { id: "eff", label: "Feed gap replaced", min: 30, max: 90, step: 5, value: 60, fmt: v => v + "%", hint: "Share of the missing feed brought in from other regions." }
+  ],
+  y: { label: "Livestock feed supply (% of winter need)", fmt: v => Math.round(v) + "%", unit: "% of need" },
+  xLabel: "Days from 1 April",
+  signals: () => [["Watch", 20, "moderate drought on the Drought Monitor"], ["Ready", 60, "dry soils at the end of seeding"], ["Act", 95, "hay forecast below need"]],
+  refLine: [100, "Winter need"],
+  endLabel: (r) => Math.round(r.end) + "% of winter feed need met by late September",
+  c1sub: "Feed for Prairie livestock as a share of winter need. Crop losses from the drought itself are not counted here; the model counts losses that feed shortages cause.",
+  questions: [
+    ["feed sourcing starts at the readiness signal in early June?", () => ({ a: 60 })],
+    ["support starts only once harvest begins?", () => ({ a: 130 })],
+    ["the drought is extreme?", () => ({ sev: 3 })]
+  ],
+  assumptions: [
+    ["2021 drought: change in canola and wheat production", "−35.4% and −38.5%", "src", "Statistics Canada, The Daily, December 2021", "https://www150.statcan.gc.ca/n1/daily-quotidien/211203/dq211203b-eng.htm"],
+    ["Feed shortfall by severity (moderate / severe / extreme)", "15% / 30% / 45% of winter need", "ill", "Assumed", ""],
+    ["Lead time for feed from other regions", "30 days, reaching full volume after 45 more", "ill", "Assumed", ""],
+    ["Losses from forced herd sales and the supply chain", "$40M per 1% feed gap, rising faster above a 20% gap", "ill", "Assumed order of magnitude", ""],
+    ["Cost of sourcing feed", "$20M + $8M per 1% of need replaced, rising for late starts", "ill", "Assumed; late buyers compete for scarce feed", ""],
+    ["Crop losses from the drought", "Not counted", "ill", "Early action cannot prevent them; they enter the register's impact score", ""]
+  ]
+};
+const MODELLED = ["rail", "phosphate", "cyber", "avian-flu", "drought"];
 
-/* ---------- shock register ---------- */
+/* ---------- Canada-centred shock register ---------- */
+const CATS = [
+  { id: "climate", name: "Climate and weather" },
+  { id: "health", name: "Plant and animal health" },
+  { id: "trade", name: "Conflict and trade" },
+  { id: "inputs", name: "Markets and inputs" },
+  { id: "logistics", name: "Logistics and cyber" },
+  { id: "people", name: "People and labour" }
+];
+const PATHS = {
+  prod: "Domestic production", imports: "Food imports", inputs: "Imported farm inputs", exports: "Export markets and prices",
+  logistics: "Transport, ports and shipping", digital: "Digital systems", labour: "Workers"
+};
+const ORIGIN = { inside: "Inside Canada", outside: "Outside Canada", both: "Inside and outside" };
+const SIG = ["Normal", "Watch", "Ready", "Act"];
+const TREND = { up: ["↑", "rising"], flat: ["→", "steady"], down: ["↓", "easing"] };
+const DOI = (d) => "https://doi.org/" + d;
+/* [name, category, origin, pathway, chokepoint, outcome, evidence, url, L, I, S, R, signal 0–3, trend, confidence, model] */
 const REG = [
-  ["Rail or port corridor shutdown", "2024 lockout halted freight; 2021 floods cut rail links to Vancouver", 4, 4, 5, 5, "rail", "https://www.just-food.com/newsletters/explainer-canada-rail-shutdown-whats-caused-stoppage-and-what-might-impact-be"],
-  ["Trade disruption with the United States", "CUSMA not renewed on 1 July 2026; annual reviews to 2036", 5, 4, 3, 5, "", "https://www.peacocktariffconsulting.com/cusma-at-the-crossroads-what-non-renewal-means-for-canadian-agriculture/"],
-  ["Fertilizer and input supply cut", "No domestic phosphate; 2026 Hormuz closure lifted urea about 40%", 4, 4, 3, 4, "phosphate", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/"],
-  ["Cyberattack on food distribution or processing", "UNFI 2025, up to US$400M lost sales; Colabor (Quebec) 2025", 4, 3, 5, 4, "cyber", "https://cyberscoop.com/united-natural-foods-cyberattack-400-million/"],
-  ["Energy and fuel price spike", "Hormuz carries 20% of world oil and LNG", 4, 3, 4, 5, "", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/"],
-  ["Highly pathogenic avian influenza", "17.3 million poultry on 639 premises since 2021", 5, 3, 4, 3, "avian-flu", "https://search.open.canada.ca/qpnotes/record/aafc-aac%2CCFIA-2026-QP-00012"],
-  ["Prairie drought and heat", "2021: canola output −35.4%, wheat −38.5%", 4, 4, 2, 4, "", "https://www150.statcan.gc.ca/n1/daily-quotidien/211203/dq211203b-eng.htm"],
-  ["Human pandemic", "2020 outbreak idled about 36% of beef capacity", 2, 5, 4, 5, "", "https://www.thecattlesite.com/news/55180/cargill-temporarily-idles-beef-plant-in-alberta-as-workers-test-positive-for-coronavirus"],
-  ["African swine fever", "Not in Canada; reached the Dominican Republic in 2021", 2, 5, 4, 4, "", "https://www.country-guide.ca/?p=138895"],
-  ["Processing plant failure", "Two Alberta plants hold about 70% of beef capacity", 3, 3, 5, 3, "", "https://www.farms.com/news/for-canadian-beef-processors-the-worst-of-covid-19-appears-to-be-over-157222.aspx"],
-  ["Export market closure by a third country", "China duties on canola oil, meal (2025) and seed (75.8%)", 4, 3, 3, 3, "", "https://www.farms.com/news/trade-with-china-235038.aspx"],
-  ["Telecom or payment outage", "July 2022 outage took Interac debit offline nationwide", 3, 2, 5, 4, "", "https://en.wikipedia.org/wiki/2022_Rogers_Communications_outage"],
-  ["Climate shocks in import-supplying regions", "Heat in supplying regions linked to lettuce price spikes averaging 35%", 5, 2, 3, 2, "", "https://cias.wisc.edu/?p=23542"],
-  ["Farm labour disruption", "Heavy reliance on temporary foreign workers (AFI Chokepoint Audit)", 3, 3, 3, 2, "", "https://feeding9billion-cmyk.github.io/Canada-Stress-Test/"],
-  ["Foot-and-mouth disease", "Not present; a detection would halt meat and live-animal exports", 1, 5, 5, 4, "", "https://feeding9billion-cmyk.github.io/Canada-Stress-Test/"]
-].map(([name, ev, L, I, S, R, model, url]) => ({ name, ev, L, I, S, R, model, url, score: L * I * (S + R) / 10 }))
- .sort((x, y) => y.score - x.score || y.S - x.S);
+  ["Rail or port corridor shutdown", "logistics", "inside", "logistics", "Two railways and the Vancouver gateway", "Lost exports, idled plants, feed shortages", "2024: both railways stopped at once; about 94% of grain exports move by rail", "https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx", 4, 4, 5, 5, 1, "flat", "Medium", "rail"],
+  ["Trade disruption with the United States", "trade", "outside", "exports", "One dominant export market", "Lost sales, lower farm prices, plant closures", "The trade agreement is reviewed every year since the United States declined to extend it on 1 July 2026; about 62% of agri-food exports go there", "https://www.canada.ca/en/global-affairs/news/2026/07/statement-by-minister-leblanc-following-trilateral-cusma-joint-review-meeting.html", 5, 4, 3, 5, 2, "up", "Medium", ""],
+  ["Fertilizer supply cut", "inputs", "outside", "inputs", "Imports from a few suppliers through a few ports", "Under-fertilized crops, lower yields", "No domestic phosphate fertilizer; the 2026 Strait of Hormuz closure lifted urea prices about 40%", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/", 4, 4, 3, 4, 1, "flat", "Medium", "phosphate"],
+  ["Cyberattack on food distribution or processing", "logistics", "both", "digital", "Ordering, routing and cold-chain systems", "Empty shelves, spoiled food, lost sales", "2025 attack on a North American grocery distributor cost up to US$400M; the 2026 cyber security law does not cover food", "https://cyberscoop.com/united-natural-foods-cyberattack-400-million/", 4, 3, 5, 4, 1, "up", "Low", "cyber"],
+  ["Energy and fuel price spike", "inputs", "outside", "inputs", "Diesel, natural gas and fertilizer costs", "Higher farm, transport and food costs", "The Strait of Hormuz carries about 20% of world oil and liquefied natural gas", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/", 4, 3, 4, 5, 1, "flat", "Medium", ""],
+  ["Highly pathogenic avian influenza", "health", "both", "prod", "Dense barns, shared trucks, a few hatcheries", "Lost birds, egg and poultry shortfalls, trade limits", "17.3 million poultry on 639 premises since 2021", "https://search.open.canada.ca/qpnotes/record/aafc-aac%2CCFIA-2026-QP-00012", 5, 3, 4, 3, 1, "up", "High", "avian-flu"],
+  ["Prairie drought and heat", "climate", "inside", "prod", "Rain-fed cropland, hay and pasture", "Smaller crops, feed shortfalls, herd sell-offs", "2021: canola output −35.4%, wheat −38.5%", "https://www150.statcan.gc.ca/n1/daily-quotidien/211203/dq211203b-eng.htm", 4, 4, 2, 4, 0, "flat", "High", "drought"],
+  ["Flood or wildfire on transport corridors", "climate", "inside", "logistics", "Mountain rail and highway corridors", "Stranded exports and supplies", "2021 floods halted all rail traffic in and out of the Port of Vancouver", "https://www.cbc.ca/1.6250554", 4, 3, 5, 4, 0, "flat", "Medium", "rail"],
+  ["Drought or heat in other grain-exporting regions", "climate", "outside", "exports", "World grain and oilseed prices", "Price swings for farmers and food buyers", "Compound climate and other shocks strain global grain supplies (Verschuur et al., 2026)", DOI("10.1371/journal.pclm.0000825"), 4, 3, 2, 4, 0, "flat", "Low", ""],
+  ["Climate shocks in fruit and vegetable supplying regions", "climate", "outside", "imports", "Winter produce from a few regions", "Higher prices, less choice", "Heat in supplying regions linked to lettuce price spikes averaging 35%", "https://cias.wisc.edu/?p=23542", 5, 2, 3, 2, 1, "flat", "Medium", ""],
+  ["Export market closure by another country", "trade", "outside", "exports", "Single large buyers for some products", "Lost sales, lower farm prices", "China cut canola seed duties to 14.9% in March 2026; canola oil still faces 100%", "https://www.canada.ca/en/global-affairs/news/2026/03/canada-secures-renewed-market-access-with-china-to-boost-exports-and-strengthen-economic-collaboration.html", 4, 3, 3, 3, 1, "down", "Medium", ""],
+  ["War or export bans in world food and input markets", "trade", "outside", "inputs", "World prices for grain, fertilizer and fuel", "Higher input costs, volatile prices", "Shocks from the Russia–Ukraine war spread through the global food network (Laber et al., 2023)", DOI("10.1038/s43016-023-00771-4"), 3, 3, 3, 4, 1, "flat", "Medium", ""],
+  ["African swine fever", "health", "outside", "exports", "Market access for pork", "Pork export bans, culls", "Not in Canada; reached the Dominican Republic in 2021", "https://www.country-guide.ca/?p=138895", 2, 5, 4, 4, 0, "flat", "Medium", ""],
+  ["Foot-and-mouth disease", "health", "outside", "exports", "Market access for meat and live animals", "Export halt, movement bans", "Not present; a detection would halt meat and live-animal exports", "https://feeding9billion-cmyk.github.io/Canada-Stress-Test/", 1, 5, 5, 4, 0, "flat", "Medium", ""],
+  ["Processing plant failure", "logistics", "inside", "prod", "Two Alberta plants hold about 70% of beef capacity", "Cattle backlog, beef shortfalls", "2020: plant closures cut beef processing sharply", "https://www.farms.com/news/for-canadian-beef-processors-the-worst-of-covid-19-appears-to-be-over-157222.aspx", 3, 3, 5, 3, 0, "flat", "Medium", ""],
+  ["Telecom or payment outage", "logistics", "inside", "digital", "Card payments and store networks", "Shoppers unable to pay, orders stalled", "July 2022 outage took Interac debit offline nationwide", "https://en.wikipedia.org/wiki/2022_Rogers_Communications_outage", 3, 2, 5, 4, 0, "flat", "Medium", ""],
+  ["Human pandemic", "people", "both", "labour", "Plant and farm workforces", "Plant closures, labour gaps", "2020 outbreak idled about 36% of beef capacity", "https://www.thecattlesite.com/news/55180/cargill-temporarily-idles-beef-plant-in-alberta-as-workers-test-positive-for-coronavirus", 2, 5, 4, 5, 0, "flat", "Medium", ""],
+  ["Farm labour disruption", "people", "both", "labour", "Temporary foreign workers in horticulture and processing", "Unharvested crops, slower processing", "Heavy reliance on temporary foreign workers (AFI Chokepoint Audit)", "https://feeding9billion-cmyk.github.io/Canada-Stress-Test/", 3, 3, 3, 2, 0, "flat", "Low", ""]
+].map(([name, cat, origin, path, choke, outcome, ev, url, L, I, S, R, sig, trend, conf, model]) =>
+  ({ name, cat, origin, path, choke, outcome, ev, url, L, I, S, R, sig, trend, conf, model, score: L * I * (S + R) / 10 }));
+REG.forEach(r => { r.band = r.score >= 12 ? "High" : r.score >= 6 ? "Moderate" : "Low"; });
+const byScore = (x, y) => y.score - x.score || y.S - x.S;
+REG.slice().sort(byScore).forEach((r, i) => r.rankAll = i + 1);
+CATS.forEach(c => REG.filter(r => r.cat === c.id).sort(byScore).forEach((r, i) => r.rankCat = i + 1));
+
+/* Recent developments: real, dated, linked. Signal effects are the authors' demonstration settings. */
+const SNAPSHOT = "11 November 2026";
+const UPDATES = [
+  ["2026-07-01", "trade", "outside", "Official", "The United States declined to extend the Canada-United States-Mexico Agreement; the three countries now review it every year.", "https://www.canada.ca/en/global-affairs/news/2026/07/statement-by-minister-leblanc-following-trilateral-cusma-joint-review-meeting.html", "Trade with the United States set to Ready"],
+  ["2026-06-16", "logistics", "inside", "Official", "Canada's new cyber security law received Royal Assent. It covers finance, telecommunications, energy and transportation, not food.", "https://www.canada.ca/en/public-safety-canada/news/2026/06/government-of-canada-strengthens-cyber-security-and-critical-infrastructure-with-royal-assent-of-bill-c8.html", "Cyberattack risk trend set to rising"],
+  ["2026-06-11", "", "inside", "Official", "The National Food Security Strategy was launched, with more than $3 billion over ten years.", "https://www.pm.gc.ca/en/news/news-releases/2026/06/11/prime-minister-carney-launches-national-food-security-strategy", "Context for playbooks and funding"],
+  ["2026-05-01", "logistics", "inside", "Industry analysis", "One week of rail and port disruption at peak export season could cost the grain sector up to $540 million.", "https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx", "Rail model assumptions updated"],
+  ["2026-03-04", "trade", "outside", "Official", "China cut its duties on Canadian canola seed to 14.9%, down from almost 85%. Canola oil still faces a 100% tariff.", "https://www.canada.ca/en/global-affairs/news/2026/03/canada-secures-renewed-market-access-with-china-to-boost-exports-and-strengthen-economic-collaboration.html", "Export market closure trend set to easing"],
+  ["2026", "inputs", "outside", "News", "The closure of the Strait of Hormuz lifted urea fertilizer prices about 40% just before spring planting.", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/", "Fertilizer and energy stresses held at Watch"],
+  ["2026", "health", "both", "Official", "Avian influenza has affected 17.3 million poultry on 639 premises since 2021. Autumn migration is a high-risk season.", "https://search.open.canada.ca/qpnotes/record/aafc-aac%2CCFIA-2026-QP-00012", "Avian influenza trend set to rising (seasonal)"],
+  ["2026", "", "outside", "Report", "The 2026 Global Report on Food Crises was published by the Food and Agriculture Organization, the World Food Programme and partners.", DOI("10.4060/cd9424en"), "Global context"]
+];
+const NOTES = {
+  climate: "Heat in winter produce regions is on watch; the Prairie 2027 outlook is reviewed in spring.",
+  health: "Autumn migration raises avian influenza risk.",
+  trade: "Annual review of the trade agreement keeps uncertainty high.",
+  inputs: "Fertilizer and fuel prices remain sensitive to the Strait of Hormuz.",
+  logistics: "Food systems sit outside the new cyber security law.",
+  people: "No current signals."
+};
+
+/* Compound storylines across categories */
+const STORIES = [
+  { id: "dry-corridor", title: "A dry year with a blocked corridor", on: ["drought", "rail"], cats: ["climate", "logistics"], origin: "inside",
+    path: "A dry spring cuts Prairie feed and crops. In late summer, wildfire or a labour dispute closes the main rail corridor just as harvest moves, so export grain backs up while livestock regions wait for feed.",
+    change: ["Timely June rain on the Prairies", "A quick negotiated end to the stoppage or fast repair of the line", "Feed imports from the United States, which depend on trade relations"],
+    unmodelled: ["Trade disruption with the United States", "Drought or heat in other grain-exporting regions"] },
+  { id: "conflict-abroad", title: "Conflict abroad, pressure at home", on: ["phosphate", "rail", "cyber"], cats: ["trade", "inputs", "logistics"], origin: "both",
+    path: "A war closes a major shipping route. Fertilizer and fuel prices jump before seeding, ports and rail are crowded with rerouted cargo, and a cyberattack on a grocery distributor arrives while agencies are already stretched.",
+    change: ["Reopening of the shipping route before March", "Alternative fertilizer suppliers with spare capacity", "Early public messaging that limits panic buying"],
+    unmodelled: ["Energy and fuel price spike", "War or export bans in world food and input markets"] },
+  { id: "disease-drought", title: "Disease and drought together", on: ["avian-flu", "drought"], cats: ["health", "climate"], origin: "both",
+    path: "Avian influenza spreads during spring migration while a Prairie drought builds. Veterinary, provincial and farm-support staff are needed for both at once, and feed and poultry markets tighten together.",
+    change: ["Fast control of the first infected farms", "Rain in June", "Regional trade agreements that keep unaffected zones exporting"],
+    unmodelled: ["African swine fever", "Farm labour disruption"] },
+  { id: "everything", title: "Everything at once", on: ["rail", "phosphate", "cyber", "avian-flu", "drought"], cats: ["climate", "health", "inputs", "logistics"], origin: "both",
+    path: "All five modelled shocks fall in one year. This is a severe but plausible stress case, the kind banks are asked to survive, and it shows how much a joint playbook is worth when every agency is busy.",
+    change: ["Any single shock being resolved early frees agencies and buffers for the rest", "A joint playbook agreed before the year begins"],
+    unmodelled: ["Trade disruption with the United States", "Energy and fuel price spike"] }
+];
 
 /* ---------- state ---------- */
-let view = "integrated";
+let view = "overview";
 const state = {};
 Object.keys(SCEN).forEach(k => { state[k] = {}; SCEN[k].params.forEach(p => state[k][p.id] = p.value); });
-const integ = { on: { "rail": true, "phosphate": true, "cyber": true, "avian-flu": true }, kappa: 15, penalty: 5, playbook: false, delay: 28 };
+const integ = { on: { "rail": true, "phosphate": true, "cyber": true, "avian-flu": true, "drought": true }, kappa: 15, penalty: 5, playbook: false, delay: 28, story: "" };
+const regFilter = { cat: "all", origin: "all", path: "all", sort: "cat" };
+let pathSel = "Trade disruption with the United States";
 
 /* ---------- charts ---------- */
 function niceMax(v) {
@@ -637,29 +845,33 @@ function integrated(cfg, delayAfterReady, withPlaybook) {
 }
 
 /* ---------- UI build ---------- */
+const PAGES = ["overview", "register", "pathways", "compound"];
 function buildTabs() {
-  const items = [["integrated", "Integrated stress test", ""], ["register", "Shock register", ""], "sep",
-    ...MODELLED.map(k => [k, SCEN[k].tab, "#" + SCEN[k].rank])];
+  const items = [["overview", "Overview"], ["register", "Shock register"], ["pathways", "Pathways into Canada"], ["compound", "Compound scenarios"], ["integrated", "Integrated stress test"], "sep",
+    ...MODELLED.map(k => [k, SCEN[k].tab])];
   $("tabs").innerHTML = "";
   items.forEach(it => {
     if (it === "sep") { const d = document.createElement("span"); d.className = "tabsep"; d.setAttribute("aria-hidden", "true"); $("tabs").appendChild(d); return; }
-    const [k, label, num] = it;
+    const [k, label] = it;
     const b = document.createElement("button");
     b.className = "tab"; b.type = "button"; b.id = "tab-" + k;
     b.setAttribute("role", "tab"); b.setAttribute("aria-selected", k === view ? "true" : "false");
-    b.innerHTML = (num ? `<span class="num">${num}</span>` : "") + label;
+    b.textContent = label;
     b.addEventListener("click", () => { location.hash = k; });
     $("tabs").appendChild(b);
   });
 }
 function showParts(kind) {
-  $("main").classList.toggle("full", kind === "register");
-  ["tiles", "card1", "card2"].forEach(id => $(id).classList.toggle("hidden", kind === "register"));
-  $("regCard").classList.toggle("hidden", kind !== "register");
-  $("path").classList.toggle("hidden", kind === "register");
-  $("dataWrap").classList.toggle("hidden", kind === "register");
+  const page = kind === "page";
+  $("page").classList.toggle("hidden", !page);
+  ["main", "path", "dataWrap", "assumpWrap"].forEach(id => $(id).classList.toggle("hidden", page));
+  if (page) return;
   $("presetWrap").classList.toggle("hidden", kind !== "scenario");
-  $("qWrap").classList.toggle("hidden", kind === "register");
+}
+function renderPlaybook(pb, title) {
+  $("pbTitle").textContent = title;
+  $("pb").innerHTML = [["Trigger", pb.trigger], ["Action and lead", pb.action], ["Money", pb.money], ["Learning", pb.learning]]
+    .map(([k, v]) => `<div><div class="k">${k}</div>${esc(v)}</div>`).join("");
 }
 function buildScenario() {
   const s = SCEN[view], st = state[view];
@@ -691,6 +903,7 @@ function buildScenario() {
     $("questions").appendChild(b);
   });
   $("assump").innerHTML = assumpTable(s.assumptions);
+  renderPlaybook(s.playbook, "Pre-agreed playbook: " + s.tab.toLowerCase());
 }
 function assumpTable(rows) {
   return "<thead><tr><th>Parameter</th><th>Value</th><th>Basis</th><th>Source or note</th></tr></thead><tbody>" +
@@ -711,7 +924,8 @@ function buildIntegrated() {
   $("c1title").textContent = "Where the losses come from";
   $("c2title").textContent = "The cost of waiting, all shocks together";
   $("c2sub").textContent = "Total cost of the compound year as every response waits longer after its readiness signal. A pre-agreed joint playbook removes the extra delay that overlapping crises cause.";
-  $("path").innerHTML = [["Compound year", "Four modelled shocks fall in the same year: phosphate before seeding, avian influenza, a rail shutdown and a distributor cyberattack"],
+  const story = STORIES.find(x => x.id === integ.story && x.on.length === MODELLED.filter(k => integ.on[k]).length && x.on.every(k => integ.on[k]));
+  $("path").innerHTML = [[story ? "Storyline: " + story.title : "Compound year", story ? story.path : "The selected modelled shocks fall in the same year: " + MODELLED.filter(k => integ.on[k]).map(k => SCEN[k].tab.toLowerCase()).join(", ")],
     ["Shared chokepoints", "Rail capacity, inventories, cold chain and the same response agencies serve every shock"],
     ["Buffers drawn twice", "When shocks overlap, each draws on buffers the others need, so losses compound"],
     ["Decision", "Act at each readiness signal, act four weeks late, or do nothing"]]
@@ -719,7 +933,7 @@ function buildIntegrated() {
   $("controls").innerHTML = `
     <div class="ctrl"><span class="lab">Shocks in the compound year</span>
       ${MODELLED.map(k => `<label class="check" for="on-${k}"><input type="checkbox" id="on-${k}" ${integ.on[k] ? "checked" : ""}> ${SCEN[k].tab}</label>`).join("")}
-      <div class="hint">Each uses the settings from its own tab.</div></div>
+      <div class="hint">Each uses the settings from its own tab. Ready-made combinations are on the Compound scenarios tab.</div></div>
     <div class="ctrl"><label for="in-delay">Late response: delay after readiness<output id="out-delay"></output></label>
       <input type="range" id="in-delay" min="7" max="56" step="7" value="${integ.delay}"><div class="hint">Used for the "act late" case.</div></div>
     <div class="ctrl"><label for="in-kappa">Compounding from shared buffers<output id="out-kappa"></output></label>
@@ -727,7 +941,7 @@ function buildIntegrated() {
     <div class="ctrl"><label for="in-pen">Response delay when crises overlap<output id="out-pen"></output></label>
       <input type="range" id="in-pen" min="0" max="21" step="1" value="${integ.penalty}"><div class="hint">Added days per additional shock, unless a joint playbook exists.</div></div>
     <label class="check" for="in-play"><input type="checkbox" id="in-play" ${integ.playbook ? "checked" : ""}> Pre-agreed joint playbook</label>`;
-  MODELLED.forEach(k => $("on-" + k).addEventListener("change", e => { integ.on[k] = e.target.checked; update(); }));
+  MODELLED.forEach(k => $("on-" + k).addEventListener("change", e => { integ.on[k] = e.target.checked; buildIntegrated(); update(); }));
   $("in-delay").addEventListener("input", e => { integ.delay = +e.target.value; update(); });
   $("in-kappa").addEventListener("input", e => { integ.kappa = +e.target.value; update(); });
   $("in-pen").addEventListener("input", e => { integ.penalty = +e.target.value; update(); });
@@ -745,23 +959,135 @@ function buildIntegrated() {
     ["Response delay when crises overlap", "5 days per additional shock without a joint playbook", "ill", "Assumed", ""],
     ["Early response", "Each shock acted on at its readiness signal", "ill", "Definition", ""],
     ["Late response", "Each shock acted on 4 weeks after its readiness signal", "ill", "Definition (adjustable)", ""],
-    ["Shock-level assumptions", "See each shock's tab", "ill", "Rail, phosphate, cyber and avian influenza models", ""]
+    ["Shock-level assumptions", "See each shock's tab", "ill", "Rail, phosphate, cyber, avian influenza and drought models", ""]
   ]);
+  renderPlaybook({ trigger: "Each shock's own readiness and action signals, watched together in one place.",
+    action: "One joint plan that says which agency leads each shock and who steps in when several overlap. Proposed convenor: Agriculture and Agri-Food Canada with Public Safety Canada.",
+    money: "A shared contingency fund agreed before the year begins, released by trigger rather than by negotiation during the crisis (to be designed).",
+    learning: "An annual national report on readiness and an after-action review of every overlap." }, "Pre-agreed joint playbook");
+}
+const sigBadge = (n) => `<span class="sig s${n}">${SIG[n]}</span>`;
+const orgBadge = (o) => `<span class="org">${ORIGIN[o]}</span>`;
+const catName = (id) => (CATS.find(c => c.id === id) || { name: "General" }).name;
+function catStatus(c) {
+  const rows = REG.filter(r => r.cat === c.id);
+  const top = Math.max(...rows.map(r => r.sig));
+  const elevated = rows.filter(r => r.sig > 0).length;
+  const trend = rows.some(r => r.trend === "up") ? "up" : rows.some(r => r.trend === "down") && !rows.some(r => r.trend === "up") ? "down" : "flat";
+  const inside = rows.filter(r => r.origin !== "outside").length, outside = rows.filter(r => r.origin !== "inside").length;
+  return { rows, top, elevated, trend, inside, outside };
+}
+function go(hash, fn) { if (fn) fn(); if (location.hash === "#" + hash) route(); else location.hash = hash; }
+function buildOverview() {
+  showParts("page");
+  const attention = REG.slice().sort((x, y) => y.sig - x.sig || byScore(x, y)).slice(0, 5);
+  const fmtDate = (d) => d.length === 4 ? d : new Date(d + "T12:00:00Z").toLocaleDateString("en-CA", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+  $("page").innerHTML = `
+    <div class="audience noprint"><b>Start here:</b>
+      <button class="chip" type="button" data-go="compound">I make policy decisions</button>
+      <button class="chip" type="button" data-go="pathways">I work in the food industry</button>
+      <a class="chip" href="guide.html#platform" style="text-decoration:none">I am a researcher or data partner</a></div>
+    <p class="snap">Situation snapshot, curated by the authors, last reviewed ${SNAPSHOT}. Not a live feed. In the full platform, analysts would review new evidence each month and update these signals.</p>
+    <div class="qhead"><span class="qn">1</span><h2>Where is the pressure now?</h2></div>
+    <div class="cats">${CATS.map(c => { const st = catStatus(c); return `
+      <button class="cat s${st.top}" type="button" data-cat="${c.id}">
+        <span class="top"><span class="nm">${c.name}</span>${sigBadge(st.top)}</span>
+        <span class="meta">${st.elevated} of ${st.rows.length} stresses above normal · <span class="trend">${TREND[st.trend][0]}</span> ${TREND[st.trend][1]}</span>
+        <span class="meta">${st.inside} with roots inside Canada · ${st.outside} from outside</span>
+        <span class="meta">${NOTES[c.id]}</span>
+      </button>`; }).join("")}</div>
+    <div class="two">
+      <div style="display:grid;gap:10px">
+        <div class="qhead"><span class="qn">2</span><h2>What needs attention?</h2></div>
+        <ol class="list">${attention.map(r => `
+          <li class="item"><div class="row">${sigBadge(r.sig)}<b>${esc(r.name)}</b></div>
+            <div class="row">${orgBadge(r.origin)}<span class="org">${catName(r.cat)}</span><span class="org">via ${PATHS[r.path]}</span></div>
+            <div>${esc(r.outcome)}. <a href="${r.url}">${esc(r.ev)}</a></div>
+            <div class="row noprint"><button class="sbtn" type="button" data-path="${esc(r.name)}">Trace its pathway</button>${r.model ? ` · <a href="#${r.model}">Run the stress test</a>` : ""}</div></li>`).join("")}</ol>
+      </div>
+      <div style="display:grid;gap:10px">
+        <div class="qhead"><span class="qn">3</span><h2>Why: what changed recently</h2></div>
+        <ul class="list">${UPDATES.map(([d, cat, origin, type, text, url, effect]) => `
+          <li class="item"><div class="row"><span class="when">${fmtDate(d)}</span><span class="stype">${type}</span>${orgBadge(origin)}${cat ? `<span class="org">${catName(cat)}</span>` : ""}</div>
+            <div><a href="${url}">${esc(text)}</a></div>
+            <div class="snap">Effect in this prototype: ${esc(effect)}</div></li>`).join("")}
+          <li class="item planned"><div class="row"><span class="stype">Planned, not connected</span></div>
+            <div><b>Satellite and crop-condition feed.</b> Soil moisture, crop growth and drought maps for the Prairies and for competing and supplying regions abroad, from proposed data partners (for example Planet, RAAPID, GEOGLAM and the Canadian Drought Monitor). Not part of this prototype.</div></li>
+        </ul>
+      </div>
+    </div>`;
+  $("page").querySelectorAll("[data-cat]").forEach(b => b.addEventListener("click", () => go("register", () => { regFilter.cat = b.dataset.cat; regFilter.origin = "all"; regFilter.path = "all"; })));
+  $("page").querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => go(b.dataset.go)));
+  $("page").querySelectorAll("[data-path]").forEach(b => b.addEventListener("click", () => go("pathways", () => { pathSel = b.dataset.path; })));
 }
 function buildRegister() {
-  showParts("register");
-  $("regTable").innerHTML = `<thead><tr><th>Rank</th><th>Shock</th><th>Recent Canadian evidence</th><th class="num">L</th><th class="num">I</th><th class="num">S</th><th class="num">R</th><th>Priority (of 25)</th><th>Prototype</th></tr></thead><tbody>` +
-    REG.map((r, i) => `<tr><td class="rank">${i + 1}</td><td><b>${r.name}</b></td><td><a href="${r.url}">${r.ev}</a></td><td class="num">${r.L}</td><td class="num">${r.I}</td><td class="num">${r.S}</td><td class="num">${r.R}</td><td><span class="scorebar"><i style="width:${Math.round(r.score / 25 * 100)}px"></i>${r.score.toFixed(1)}</span></td><td>${r.model ? `<a class="tag mod" href="#${r.model}">Modelled</a>` : `<span class="tag ill">Next</span>`}</td></tr>`).join("") + "</tbody>";
-  $("assump").innerHTML = assumpTable([
-    ["Scores", "Authors' preliminary judgement, 1–5 per dimension", "ill", "To be replaced by structured expert elicitation (Phase 1)", ""],
-    ["Priority formula", "L × I × (S + R) ÷ 10", "ill", "Weights speed and reach, which shrink decision windows", ""],
-    ["Evidence", "One recent Canadian event per shock", "src", "Linked in each row", ""]
-  ]);
+  showParts("page");
+  const chip = (group, val, label) => `<button class="chip" type="button" data-f="${group}" data-v="${val}" aria-pressed="${regFilter[group] === val}">${label}</button>`;
+  const rows = REG.filter(r => (regFilter.cat === "all" || r.cat === regFilter.cat) && (regFilter.origin === "all" || r.origin === regFilter.origin || (regFilter.origin !== "both" && r.origin === "both")) && (regFilter.path === "all" || r.path === regFilter.path));
+  const rowHtml = (r) => `<tr><td class="rank" data-l="Rank">${regFilter.sort === "cat" ? r.rankCat : r.rankAll}</td><td data-l="Stress"><b>${esc(r.name)}</b><div class="snap">${regFilter.sort === "cat" ? "" : catName(r.cat)}</div></td><td data-l="Origin">${orgBadge(r.origin)}</td><td data-l="Pathway">${PATHS[r.path]}</td><td data-l="Evidence"><a href="${r.url}">${esc(r.ev)}</a></td>
+    <td data-l="Priority"><span class="scorebar" title="Priority ${r.score.toFixed(1)} of 25 (L ${r.L}, I ${r.I}, S ${r.S}, R ${r.R})"><i style="width:${Math.round(r.score / 25 * 80)}px"></i>${r.band}</span></td><td data-l="Confidence">${r.conf}</td><td class="sigcell" data-l="Signal">${sigBadge(r.sig)} <span class="trend" title="${TREND[r.trend][1]}">${TREND[r.trend][0]} ${TREND[r.trend][1]}</span></td>
+    <td data-l="Prototype">${r.model ? `<a class="tag mod" href="#${r.model}">Modelled</a>` : `<span class="tag ill">Next</span>`}</td></tr>`;
+  const head = `<thead><tr><th>${regFilter.sort === "cat" ? "Rank in category" : "Rank overall"}</th><th>Stress</th><th>Origin</th><th>Pathway into Canada</th><th>Recent evidence</th><th>Priority band</th><th>Confidence</th><th>Signal</th><th>Prototype</th></tr></thead>`;
+  let body = "";
+  if (regFilter.sort === "cat") CATS.forEach(c => { const g = rows.filter(r => r.cat === c.id).sort(byScore); if (g.length) body += `<tr class="catgroup"><th class="cg" colspan="9">${c.name}</th></tr>` + g.map(rowHtml).join(""); });
+  else body = rows.slice().sort(byScore).map(rowHtml).join("");
+  $("page").innerHTML = `
+    <div><h2>Shock register: Canada at the centre</h2>
+    <p class="snap" style="max-width:90ch">Each stress is placed in one of six categories, tagged by where it starts (inside Canada, outside, or both) and by the pathway through which it reaches Canada's food system. Stresses are ranked within each category. Priority bands come from the authors' first scores of likelihood over five years (L), national impact (I), speed of onset (S) and reach across sectors (R): priority = L × I × (S + R) ÷ 10, out of 25 (High 12 or more, Moderate 6 to 12, Low under 6). Hover over a band to see the scores. Phase 1 of the program replaces these with a structured expert ranking.</p></div>
+    <div class="filters noprint">
+      <div class="chips"><span class="lab">Category</span>${chip("cat", "all", "All")}${CATS.map(c => chip("cat", c.id, c.name)).join("")}</div>
+      <div class="chips"><span class="lab">Origin</span>${chip("origin", "all", "All")}${chip("origin", "inside", "Inside Canada")}${chip("origin", "outside", "Outside Canada")}${chip("origin", "both", "Both only")}</div>
+      <div class="chips"><span class="lab">Pathway</span><select id="pathF" aria-label="Pathway into Canada"><option value="all">All pathways</option>${Object.entries(PATHS).map(([k, v]) => `<option value="${k}" ${regFilter.path === k ? "selected" : ""}>${v}</option>`).join("")}</select>
+        <span class="lab" style="margin-left:8px">Order</span>${chip("sort", "cat", "By category")}${chip("sort", "all", "Overall ranking")}</div>
+    </div>
+    <p class="snap">${rows.length} of ${REG.length} stresses shown. "Origin: Inside Canada" or "Outside Canada" also includes stresses with roots in both.</p>
+    <div class="card"><div class="tablewrap"><table class="regt">${head}<tbody>${body || `<tr><td colspan="9">No stresses match these filters.</td></tr>`}</tbody></table></div></div>`;
+  $("page").querySelectorAll("[data-f]").forEach(b => b.addEventListener("click", () => { regFilter[b.dataset.f] = b.dataset.v; buildRegister(); }));
+  $("pathF").addEventListener("change", e => { regFilter.path = e.target.value; buildRegister(); });
+}
+function buildPathways() {
+  showParts("page");
+  const r = REG.find(x => x.name === pathSel) || REG[0];
+  const shared = REG.filter(x => x.path === r.path && x !== r);
+  $("page").innerHTML = `
+    <div><h2>Pathways into Canada</h2>
+    <p class="snap" style="max-width:90ch">A shock matters to Canada through a channel: food we import, farm inputs we import, the markets we sell to, the routes that move food, digital systems, or workers. Pick a stress to trace how it reaches Canadian households and farms. Stresses that share a channel draw on the same buffers, which is why they compound when they overlap.</p></div>
+    <div class="flow" aria-label="Pathway of the selected stress">
+      <div class="step"><div class="k">Event</div><div class="v"><b>${esc(r.name)}</b><br>${orgBadge(r.origin)}</div></div>
+      <div class="step"><div class="k">Pathway</div><div class="v">${PATHS[r.path]}</div></div>
+      <div class="step"><div class="k">Canadian chokepoint</div><div class="v">${esc(r.choke)}</div></div>
+      <div class="step"><div class="k">Outcome</div><div class="v">${esc(r.outcome)}</div></div>
+      <div class="step"><div class="k">Signal now</div><div class="v">${sigBadge(r.sig)} ${r.model ? `<br><a href="#${r.model}">Run the stress test</a>` : "<br>Model planned"}</div></div>
+    </div>
+    <p class="snap">Evidence: <a href="${r.url}">${esc(r.ev)}</a>. ${shared.length ? `Shares this pathway with: ${shared.map(x => esc(x.name)).join("; ")}.` : ""}</p>
+    <div class="chan">${Object.entries(PATHS).map(([k, v]) => { const g = REG.filter(x => x.path === k); return `
+      <div class="item"><h3>${v}</h3><div class="snap">${g.filter(x => x.origin !== "inside").length} from outside · ${g.filter(x => x.origin !== "outside").length} from inside</div>
+        ${g.map(x => `<div><button class="sbtn" type="button" data-s="${esc(x.name)}" aria-pressed="${x === r}">${esc(x.name)}</button> <span class="org">${{ inside: "Inside", outside: "Outside", both: "Both" }[x.origin]}</span></div>`).join("")}</div>`; }).join("")}</div>`;
+  $("page").querySelectorAll("[data-s]").forEach(b => b.addEventListener("click", () => { pathSel = b.dataset.s; buildPathways(); $("page").scrollIntoView({ block: "start" }); }));
+}
+function buildCompound() {
+  showParts("page");
+  $("page").innerHTML = `
+    <div><h2>Compound scenarios</h2>
+    <p class="snap" style="max-width:90ch">Shocks rarely arrive alone. Each storyline combines stresses from different categories and from inside and outside Canada. It gives the most likely path, the events that would change it, and the register stresses that matter but are not yet modelled. Run any storyline in the integrated stress test to compare acting early, acting late and doing nothing.</p></div>
+    <div class="stories">${STORIES.map(st => `
+      <div class="story"><h3>${st.title}</h3>
+        <div class="row" style="display:flex;flex-wrap:wrap;gap:6px">${st.cats.map(c => `<span class="org">${catName(c)}</span>`).join("")}${orgBadge(st.origin)}</div>
+        <div><span class="k">Modelled shocks</span><br>${st.on.map(k => SCEN[k].tab).join(" · ")}</div>
+        <div><span class="k">Most likely path</span><br>${st.path}</div>
+        <div><span class="k">Events that would change it</span><ul>${st.change.map(c => `<li>${c}</li>`).join("")}</ul></div>
+        <div><span class="k">Also matters, not yet modelled</span><br>${st.unmodelled.join("; ")}</div>
+        <div class="noprint"><button class="btn" type="button" data-story="${st.id}">Run in the integrated stress test</button></div>
+      </div>`).join("")}</div>`;
+  $("page").querySelectorAll("[data-story]").forEach(b => b.addEventListener("click", () => go("integrated", () => {
+    const st = STORIES.find(x => x.id === b.dataset.story);
+    MODELLED.forEach(k => integ.on[k] = st.on.includes(k)); integ.story = st.id;
+  })));
 }
 
 /* ---------- update ---------- */
 function update() {
-  if (view === "register") return;
+  if (PAGES.includes(view)) return;
   if (view === "integrated") return updateIntegrated();
   const s = SCEN[view], st = state[view];
   s.params.forEach(p => $("out-" + p.id).textContent = p.fmt(st[p.id]));
@@ -774,7 +1100,7 @@ function update() {
   curve.forEach((c, d) => { if (base.loss - c >= 0.5 * maxAvoid && maxAvoid > 0) closeDay = d; });
   const saved = base.loss - act.total;
   const pct = base.loss > 0 ? Math.round(100 * saved / base.loss) : 0;
-  const dayFmt = (d) => view === "phosphate" ? dayToDate(d) : "Day " + d;
+  const dayFmt = (d) => fmtDay(s, d);
   $("tiles").innerHTML = `
     <div class="tile base"><span class="l">Projected loss, no early action</span><span class="n">${fmtM(base.loss)}</span><span class="s">${s.endLabel(base)}</span></div>
     <div class="tile act"><span class="l">With action from ${dayFmt(st.a)}</span><span class="n">${fmtM(act.total)}</span><span class="s">Loss ${fmtM(act.loss)} + response ${fmtM(act.cost)}</span></div>
@@ -790,7 +1116,7 @@ function update() {
     aria: s.y.label + " over time, with and without early action",
     xMax: s.H, dx: 1, yMax: yMax1, yTicks: s.refLine ? 5 : 4,
     xTicks: Array.from({ length: Math.floor(s.H / xStep) + 1 }, (_, i) => i * xStep),
-    xFmt: (v, long) => view === "phosphate" ? dayToDate(v) : (long ? "Day " + v : v),
+    xFmt: (v, long) => s.dates !== undefined ? dayToDate(v, s.dates) : (long ? "Day " + v : v),
     yFmt: (v, long) => long ? s.y.fmt(v) + (view === "avian-flu" ? " premises" : "") : s.y.fmt(v),
     xLabel: s.xLabel, band: s.band, ref: s.refLine,
     fillBetween: [base.y, act.y],
@@ -806,9 +1132,9 @@ function update() {
     aria: "Total cost by response start day compared with no early action",
     xMax: s.aMax, dx: 1, yMax: yMax2,
     xTicks: Array.from({ length: Math.floor(s.aMax / step2) + 1 }, (_, i) => i * step2),
-    xFmt: (v, long) => view === "phosphate" ? dayToDate(v) : (long ? "Start on day " + v : v),
+    xFmt: (v, long) => s.dates !== undefined ? dayToDate(v, s.dates) : (long ? "Start on day " + v : v),
     yFmt: (v) => fmtM(v),
-    xLabel: view === "phosphate" ? "Date the response starts" : "Day the response starts",
+    xLabel: s.dates !== undefined ? "Date the response starts" : "Day the response starts",
     vlines: closeDay >= 0 ? [[closeDay, "Window closes", css("--ready"), "sig"]] : [],
     series: [{ name: "No early action", data: days.map(() => base.loss), color: colors.base, dash: "6 4" },
              { name: "Act on that day", data: curve, color: colors.act }],
@@ -821,8 +1147,8 @@ function update() {
     : `Around ${dayFmt(st.a)}, a week's delay changes little; the costly delays come ${closeDay >= 0 && st.a < closeDay ? "later, as the window closes" : "earlier"}.`;
   const stepT = s.H <= 60 ? 1 : 5;
   let rows = "";
-  for (let i = 0; i <= s.H; i += stepT) rows += `<tr><td>${view === "phosphate" ? dayToDate(i) : "Day " + i}</td><td>${s.y.fmt(base.y[i])}</td><td>${s.y.fmt(act.y[i])}</td></tr>`;
-  $("datatable").innerHTML = `<thead><tr><th>${view === "phosphate" ? "Date" : "Day"}</th><th>No early action (${s.y.unit})</th><th>With early action (${s.y.unit})</th></tr></thead><tbody>${rows}</tbody>`;
+  for (let i = 0; i <= s.H; i += stepT) rows += `<tr><td>${fmtDay(s, i)}</td><td>${s.y.fmt(base.y[i])}</td><td>${s.y.fmt(act.y[i])}</td></tr>`;
+  $("datatable").innerHTML = `<thead><tr><th>${s.dates !== undefined ? "Date" : "Day"}</th><th>No early action (${s.y.unit})</th><th>With early action (${s.y.unit})</th></tr></thead><tbody>${rows}</tbody>`;
 }
 
 function updateIntegrated() {
@@ -881,13 +1207,30 @@ function updateIntegrated() {
 /* ---------- routing ---------- */
 function route() {
   const h = location.hash.replace("#", "");
-  view = (SCEN[h] || h === "register" || h === "integrated") ? h : "integrated";
+  view = (SCEN[h] || PAGES.includes(h) || h === "integrated") ? h : "overview";
   buildTabs();
-  if (view === "register") buildRegister();
+  if (view === "overview") buildOverview();
+  else if (view === "register") buildRegister();
+  else if (view === "pathways") buildPathways();
+  else if (view === "compound") buildCompound();
   else if (view === "integrated") buildIntegrated();
   else buildScenario();
   update();
 }
+function viewTitle() {
+  const t = { overview: "Situation overview", register: "Shock register", pathways: "Pathways into Canada: " + pathSel, compound: "Compound scenarios", integrated: "Integrated stress test" }[view];
+  return t || "Stress test: " + SCEN[view].tab;
+}
+$("printBrief").addEventListener("click", () => window.print());
+window.addEventListener("beforeprint", () => {
+  const today = new Date().toLocaleDateString("en-CA", { day: "numeric", month: "long", year: "numeric" });
+  let settings = "";
+  if (SCEN[view]) settings = "Settings: " + SCEN[view].params.map(p => p.label + " " + p.fmt(state[view][p.id])).join("; ") + ".";
+  else if (view === "integrated") settings = "Settings: shocks " + MODELLED.filter(k => integ.on[k]).map(k => SCEN[k].tab.toLowerCase()).join(", ") + "; late response " + integ.delay + " days after readiness; compounding " + integ.kappa + "%; overlap delay " + integ.penalty + " days; joint playbook " + (integ.playbook ? "on" : "off") + ".";
+  $("briefHead").innerHTML = `<b>Decision brief: ${esc(viewTitle())}</b><br>${settings ? esc(settings) + "<br>" : ""}Printed ${today} from ${esc(location.href)}. Situation snapshot last reviewed ${SNAPSHOT}. Illustrative prototype: signal levels are demonstration settings and model results are not forecasts.`;
+  document.querySelectorAll("details").forEach(d => { d.dataset.wasOpen = d.open ? "1" : ""; if (d.id === "assumpWrap") d.open = true; });
+});
+window.addEventListener("afterprint", () => document.querySelectorAll("details").forEach(d => d.open = !!d.dataset.wasOpen));
 window.addEventListener("hashchange", route);
 let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(update, 120); });
 if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", update);
