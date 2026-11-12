@@ -92,7 +92,7 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
 
   <h1>User guide: Canada Food System Stress Test</h1>
   <p class="lead">The <a href="./">Canada Food System Stress Test</a> is a free, interactive web page that shows how a shock to Canada's food system could unfold, and how the timing of a response could change the outcome. It was built at the Arrell Food Institute (AFI), University of Guelph, as a prototype for a long-term research program on anticipatory decision-making.</p>
-  <p class="note"><b>Prototype v0.3, 12 November 2026.</b> This is a demonstration (validation level V0). Events and statistics are observed and linked to their sources; model results are illustrative, not forecasts; signal levels are demonstration settings; playbook leads and funding are proposals that no agency has agreed to.</p>
+  <p class="note"><b>Prototype v0.4, 12 November 2026.</b> This is a demonstration (validation level V0). Events and statistics are observed and linked to their sources; model results are illustrative, not forecasts; signal levels are demonstration settings; playbook leads and funding are proposals that no agency has agreed to.</p>
 
   <nav class="toc" aria-label="Contents">
     <b>Contents</b>
@@ -132,7 +132,9 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
   <p>A breadcrumb at the top of each page (for example, Home › Climate and weather › Prairie drought) takes you back up a level.</p>
   <p><b>Explore the platform.</b> A panel at the bottom of every page links to the supporting pages:</p>
   <ul>
-    <li><a href="./#challenge">Decision challenge</a>: a 90-second exercise for meetings. A rail corridor may close in 72 hours; the visitor picks an action, sees the consequence, faces a complication and reads a debrief on what is known, what is illustrative and what the research would test.</li>
+    <li><a href="./#challenge">Decision challenge</a>: a three-minute exercise for meetings. The visitor advises a joint coordination table after a warning that the Prairie grain rail line to the Port of Vancouver may close in 72 hours. They commit a Day 0 plan within a budget of eight exercise units, receive new information on Day 5 and may adapt, then see the outcome on Day 35: a corridor diagram, a timeline, storage and freight charts, and a comparison with a reactive comparator or any other plan. The debrief tests the same choices against a short closure and a warning that resolves, and separates what is observed from what is assumed.</li>
+    <li><a href="./#partners">Potential partners</a>: the universities, companies and international bodies the programme proposes to work with, with their proposed roles. The list is not finalized; listing does not mean an organization has agreed or endorses the prototype, and logos will be added only with permission.</li>
+    <li><a href="https://evandgfraser.substack.com/">Food system narrative</a>: <i>Feeding a Fragile World</i>, Evan Fraser's Substack on buffers, food and crisis (external site).</li>
     <li><a href="./#research">From prototype to science</a>: the research programme behind the prototype: the question, how it fits the National Food Security Strategy and emergency management in agriculture, three workstreams, the first pilot (Prairie grain transport), the validation ladder, the timeline and what we ask of partners.</li>
     <li><a href="./#methods">Methodology</a>: how the categories, scoring, signals and models work; the full shock register with filters; and the transmission channels, which trace how each stress reaches Canada's food system.</li>
     <li><a href="./#scenarios">Compound scenarios</a>: four storylines that combine stresses across categories, each with its most likely path, the events that would change it, and a button to run it.</li>
@@ -249,13 +251,13 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
   <ul>
     <li><b>Rail or port shutdown:</b> freight capacity drops to zero for the shutdown period, then recovers over two weeks. Losses grow once elevator storage and feed stocks run out.</li>
     <li><b>Phosphate before seeding:</b> tracks phosphate in Canada against the season's need. Replacement shipments take about 55 days and are worth less if they land after seeding. Fields with high soil phosphorus lose less yield.</li>
-    <li><b>Cyberattack on distribution:</b> tracks store stock of perishable and shelf-stable food day by day as deliveries stop, including panic buying.</li>
+    <li><b>Cyberattack on distribution:</b> tracks store stock of perishable and shelf-stable food day by day as deliveries stop, including panic buying. Public messaging that dampens panic buying takes effect only once the response starts.</li>
     <li><b>Avian influenza:</b> a simple spread model counts infected farms; a coordinated response slows farm-to-farm spread.</li>
     <li><b>Prairie drought:</b> tracks feed for livestock against winter need as a dry season unfolds. Feed from other regions arrives about 30 days after sourcing starts. The model counts losses from feed shortages, such as forced herd sales; crop losses from the drought itself are not counted, because early action cannot prevent them.</li>
     <li><b>Integrated test:</b> adds the selected shocks together, then adds extra loss for shared buffers and a response delay when crises overlap. It compares early action (each shock acted on at its readiness signal) with a reactive response (each acted on at its action signal) and with no response. The overlap cost is a simple multiplier, not a model of shared resources over time; that is part of the research programme.</li>
-    <li><b>Decision challenge:</b> uses the rail model with three preset options and a complication (a longer stoppage and dearer trucking). Prairie elevator space is tracked from the model's freight path, assuming elevators fill after about 10 days of a full stoppage, as in past events.</li>
+    <li><b>Decision challenge:</b> a daily stock-and-flow model of one grain corridor, separate from the rail model. Farms deliver 100 thousand tonnes a day to elevators that start with 10 days of storage room, matching how fast elevators filled in past stoppages. Rail, reserved or booked trucking, and temporary storage each have lead times and confirmation rates; feed and food deliveries (15 thousand tonnes a day) either share what moves or get first call. A Day 5 choice can change only what happens from Day 5 onward; higher fuel costs apply only to transport activated from Day 5. The reactive comparator monitors and books trucking only when elevators fill. All volumes, capacities and costs are illustrative.</li>
     <li><b>Loss of an export market:</b> tracks the share of affected exports that still find a buyer after a trading partner imposes prohibitive duties. Planned diversification and storage support redirect sales sooner; redirected sales earn a little less, and unsold stock loses value.</li>
-    <li><b>Workforce outbreak at meat plants:</b> tracks national beef processing capacity as an illness spreads through plant workforces. Plants need minimum crews, so capacity falls faster than attendance. Earlier workplace protections reduce absence across the whole wave.</li>
+    <li><b>Workforce outbreak at meat plants:</b> tracks national beef processing capacity as an illness spreads through plant workforces. Plants need minimum crews, so capacity falls faster than attendance. Workplace protections reduce absence only after they start, building up over about ten days.</li>
     <li><b>Register, signals and channels:</b> the stresses, signals and recent developments are stored in the page as a dated snapshot curated by the authors. Nothing is fetched live.</li>
   </ul>
   <p>The page is hosted free on GitHub Pages. Each change is recorded in the <a href="https://github.com/bdzion/canada-food-stress-test">repository</a>, so any earlier version can be restored.</p>
@@ -299,7 +301,7 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
     </svg>
   </div>
   <h3>Data streams and proposed data partners</h3>
-  <p>The organizations below are <b>proposed</b> sources and partners. None has yet agreed to take part; commercial data would need a licence or research agreement.</p>
+  <p>The organizations below are <b>proposed</b> sources and partners. None has yet agreed to take part; commercial data would need a licence or research agreement. The prototype's <a href="./#partners">Potential partners</a> page lists the proposed research, industry and international partners.</p>
   <div class="tablewrap"><table>
     <thead><tr><th>Data stream</th><th>Examples</th><th>What it updates</th></tr></thead>
     <tbody>

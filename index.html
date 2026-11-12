@@ -213,7 +213,44 @@ select { font: inherit; font-size: 13px; padding: 5px 8px; border: 1px solid var
 #page a.btn.primary, a.btn.primary { color: var(--bg); }
 #page a.btn { color: var(--ink); }
 .btn.primary:hover { opacity: .92; }
-.chal { display: grid; gap: 14px; max-width: 860px; }
+.chal { display: grid; gap: 14px; max-width: 900px; }
+.chal h2:focus { outline: none; }
+.stepper { display: flex; flex-wrap: wrap; gap: 4px; list-style: none; margin: 0; padding: 0; font-size: 12.5px; }
+.stepper li { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.stepper li.done { color: var(--ink); }
+.stepper li.cur { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 700; }
+.corr svg, .timeline svg { width: 100%; height: auto; display: block; }
+.corr { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+fieldset.opts { border: 0; padding: 0; margin: 0; }
+.opt { position: relative; }
+.opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.opt:has(input:checked) { border: 2px solid var(--act); padding: 11px 13px; background: var(--band); }
+.opt:has(input:focus-visible) { outline: 3px solid var(--act); outline-offset: 2px; }
+.opt.off { opacity: .55; cursor: not-allowed; }
+.opt { align-content: start; }
+.opt .up { color: var(--good); } .opt .risk { color: var(--alert); }
+.record { font-size: 13.5px; border-left: 3px solid var(--act); padding: 6px 10px; background: var(--surface); }
+.budget { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13px; }
+.budget .lab { font-weight: 700; }
+.budget .cells { display: inline-flex; gap: 3px; }
+.budget .cells i { width: 18px; height: 14px; border-radius: 3px; border: 1px solid var(--line); background: var(--surface); display: inline-block; }
+.budget .cells i.used { background: var(--act); border-color: var(--act); }
+.budget .cells i.pend { background: var(--band); border: 1px dashed var(--act); }
+.evlog { margin: 4px 0 0; padding-left: 18px; font-size: 13.5px; }
+.pathsel { display: flex; flex-wrap: wrap; gap: 6px; }
+.pathsel .chip:has(input:checked) { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.pathsel input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pathsel .chip:has(input:focus-visible) { outline: 3px solid var(--act); outline-offset: 2px; }
+.cmpwrap { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13.5px; }
+.cmpwrap select { max-width: 100%; }
+.notfinal { border: 1px solid var(--ready); border-left: 4px solid var(--ready); background: var(--band-warm); padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+.ptgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.ptile { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+.pmark { flex: 0 0 56px; height: 56px; border-radius: 8px; border: 1px dashed var(--muted); display: grid; place-items: center; text-align: center; color: var(--muted); font-size: 11px; line-height: 1.2; padding: 4px; }
+.pbody { display: grid; gap: 4px; font-size: 13.5px; }
+.pstat { justify-self: start; font-size: 12px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .chal .stepdots { display: flex; gap: 6px; font-size: 12.5px; color: var(--muted); align-items: center; }
 .chal .stepdots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); display: inline-block; }
 .chal .stepdots i.on { background: var(--accent); }
@@ -232,7 +269,7 @@ select { font: inherit; font-size: 13px; padding: 5px 8px; border: 1px solid var
 .ladder td.here { font-weight: 700; color: var(--act); }
 .ws { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
 .ws .item h3 { font-family: var(--font-display); font-size: 16px; }
-@media (max-width: 760px) { .opts, .ws { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .opts, .ws, .three { grid-template-columns: 1fr; } }
 .hero h1 { font-size: clamp(32px, 5vw, 48px); }
 .tagline { font-family: var(--font-display); font-size: clamp(19px, 2.4vw, 24px); line-height: 1.3; margin: 0; max-width: 52ch; color: var(--ink); }
 .subhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
@@ -294,7 +331,7 @@ a.excard:hover { border-color: var(--act); }
     <h1>Canada Food System Stress Test</h1>
     <p class="tagline">A proposed national platform to test threats before they strike and help decision-makers judge when to act.</p>
     <p class="dek">Canada monitors many risks. What no one tests is how they combine across the whole food system, and what a late response costs. This prototype shows how a stress test could bring every major stress, at home and abroad, into one decision framework that supports the National Food Security Strategy and emergency management in agriculture: the warning signs, and the cost of acting early, reactively or not at all.</p>
-    <div class="herobtns"><a class="btn primary" href="#challenge">Try the 90-second decision challenge</a><a class="btn" href="#research">From prototype to science: the research programme</a></div>
+    <div class="herobtns"><a class="btn primary" href="#challenge">Try the three-minute decision challenge</a><a class="btn" href="#research">From prototype to science: the research programme</a></div>
     <div class="notice"><b>Illustrative only.</b><span>Signal levels are demonstration settings and the models are stylized, with stated assumptions. Nothing here is a forecast or a live feed. Events and statistics are real and linked to their sources.</span></div>
   </header>
   <header id="subhead" class="subhead hidden">
@@ -363,10 +400,12 @@ a.excard:hover { border-color: var(--act); }
     <h2 id="exploreTitle">Explore the platform</h2>
     <div class="exgrid">
       <a class="excard" href="#research"><b>From prototype to science</b><span>The research programme: three workstreams, the first pilot, the validation ladder, and what we ask of partners.</span></a>
-      <a class="excard" href="#challenge"><b>Decision challenge</b><span>A 90-second exercise: a rail corridor may close in 72 hours. What would you do?</span></a>
+      <a class="excard" href="#challenge"><b>Decision challenge</b><span>A three-minute exercise: a Prairie grain rail corridor may close in 72 hours. Commit a plan, adapt it on Day 5, and see how it holds up.</span></a>
       <a class="excard" href="#methods"><b>Methodology</b><span>How the stress test works: categories, scoring, transmission channels, models, and the full shock register.</span></a>
       <a class="excard" href="#scenarios"><b>Compound scenarios</b><span>Storylines that combine stresses from different categories, at home and abroad.</span></a>
       <a class="excard" href="#updates"><b>Recent developments</b><span>The dated, sourced events behind the current signals, and the planned data feeds.</span></a>
+      <a class="excard" href="#partners"><b>Potential partners</b><span>The universities, companies and international bodies we propose to work with. Not finalized.</span></a>
+      <a class="excard" href="https://evandgfraser.substack.com/" rel="noopener"><b>Food system narrative</b><span><i>Feeding a Fragile World</i>, Evan Fraser's Substack on buffers, food and crisis (external site).</span></a>
       <a class="excard" href="guide.html"><b>User guide</b><span>Plain-language terms, a step-by-step decision workflow, and how the full platform will work.</span></a>
       <div class="excard"><b>Single-stress tests</b><span id="exModels"></span></div>
       <div class="excard"><b>Share and comment</b><span><button class="linkbtn" type="button" id="printBrief">Print a decision brief</button> of the page you are on, or <a href="mailto:mbodrudd@uoguelph.ca?subject=Feedback%3A%20Canada%20Food%20System%20Stress%20Test">send feedback</a> to mbodrudd@uoguelph.ca.</span></div>
@@ -447,7 +486,7 @@ function cyberRun(p, a) {
   const y = [];
   let unmet = 0, extra = 0;
   for (let t = 0; t <= H; t++) {
-    const surge = t < 6 ? ((acting && t >= Math.min(a, 2)) ? 1.1 : 1.3) : 1.0;
+    const surge = t < 6 ? ((acting && t >= a) ? 1.1 : 1.3) : 1.0;   // public messaging takes effect only once the response starts
     let sold = 0, dem = 0;
     cats.forEach(c => {
       const demand = c.w * surge, supply = c.w * cap(t);
@@ -527,9 +566,10 @@ function exportRun(p, a) {
 const wfAbsent = (p, t, red) => [0.12, 0.25, 0.40][p.sev - 1] * Math.exp(-(((t - 28) / 9) ** 2)) * (1 - red);
 function workforceRun(p, a) {
   const H = 60, eff = p.eff / 100, acting = Number.isFinite(a);
-  const red = acting ? eff * clamp((28 - a) / 21, 0, 1) : 0;
   const y = []; let loss = 0;
   for (let t = 0; t <= H; t++) {
+    // protections cut absence only after they start, building up over about ten days as transmission falls
+    const red = acting ? eff * clamp((t - a - 3) / 10, 0, 1) : 0;
     const cap = clamp(1 - 2.2 * wfAbsent(p, t, red), 0, 1);
     y.push(cap * 100);
     loss += 40 * (1 - cap) * 0.6;
@@ -824,7 +864,7 @@ const REG = [
   ["Rail or port corridor shutdown", "logistics", "inside", "logistics", "Two railways and the Vancouver gateway", "Lost exports, idled plants, feed shortages", "2024: both railways stopped at once; about 94% of grain exports move by rail", "https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx", 4, 4, 5, 5, 1, "flat", "Medium", "rail"],
   ["Trade disruption with the United States", "trade", "outside", "exports", "One dominant export market", "Lost sales, lower farm prices, plant closures", "The trade agreement is reviewed every year since the United States declined to extend it on 1 July 2026; about 62% of agri-food exports go there", "https://www.canada.ca/en/global-affairs/news/2026/07/statement-by-minister-leblanc-following-trilateral-cusma-joint-review-meeting.html", 5, 4, 3, 5, 2, "up", "Medium", "export"],
   ["Fertilizer supply cut", "inputs", "outside", "inputs", "Imports from a few suppliers through a few ports", "Under-fertilized crops, lower yields", "No domestic phosphate fertilizer; the 2026 Strait of Hormuz closure lifted urea prices about 40%", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/", 4, 4, 3, 4, 1, "flat", "Medium", "phosphate"],
-  ["Cyberattack on food distribution or processing", "logistics", "both", "digital", "Ordering, routing and cold-chain systems", "Empty shelves, spoiled food, lost sales", "2025 attack on a North American grocery distributor cost up to US$400M; the 2026 cyber security law does not cover food", "https://cyberscoop.com/united-natural-foods-cyberattack-400-million/", 4, 3, 5, 4, 1, "up", "Low", "cyber"],
+  ["Cyberattack on food distribution or processing", "logistics", "both", "digital", "Ordering, routing and cold-chain systems", "Empty shelves, spoiled food, lost sales", "2025 attack on a North American grocery distributor cost up to US$400M; the 2026 cyber security law names finance, telecommunications, energy and transportation", "https://cyberscoop.com/united-natural-foods-cyberattack-400-million/", 4, 3, 5, 4, 1, "up", "Low", "cyber"],
   ["Energy and fuel price spike", "inputs", "outside", "inputs", "Diesel, natural gas and fertilizer costs", "Higher farm, transport and food costs", "The Strait of Hormuz carries about 20% of world oil and liquefied natural gas", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/", 4, 3, 4, 5, 1, "flat", "Medium", ""],
   ["Highly pathogenic avian influenza", "health", "both", "prod", "Dense barns, shared trucks, a few hatcheries", "Lost birds, egg and poultry shortfalls, trade limits", "17.3 million poultry on 639 premises by early 2026 (CFIA); new commercial outbreaks in British Columbia in November 2026", "https://search.open.canada.ca/qpnotes/record/aafc-aac%2CCFIA-2026-QP-00012", 5, 3, 4, 3, 1, "up", "High", "avian-flu"],
   ["Prairie drought and heat", "climate", "inside", "prod", "Rain-fed cropland, hay and pasture", "Smaller crops, feed shortfalls, herd sell-offs", "2021: canola output −35.4%, wheat −38.5%", "https://www150.statcan.gc.ca/n1/daily-quotidien/211203/dq211203b-eng.htm", 4, 4, 2, 4, 0, "flat", "High", "drought"],
@@ -848,13 +888,13 @@ CATS.forEach(c => REG.filter(r => r.cat === c.id).sort(byScore).forEach((r, i) =
 
 /* Recent developments: real, dated, linked. Signal effects are the authors' demonstration settings. */
 const SNAPSHOT = "12 November 2026";
-const VERSION = "0.3";
+const VERSION = "0.4";
 const CHECKED = "12 November 2026";
 const UPDATES = [
   ["2026-11-06", "health", "both", "News", "Avian influenza was detected in a British Columbia commercial poultry flock for the first time this autumn season.", "https://www.ctvnews.ca/vancouver/article/avian-flu-detected-in-bc-poultry-flock-for-first-time-this-season/", "Avian influenza trend set to rising (seasonal)"],
   ["2026-07", "", "inside", "Official", "Federal, provincial and territorial agriculture ministers welcomed the renewed Emergency Management Framework for Agriculture in Canada, which takes an all-hazards approach.", "https://www.canada.ca/en/agriculture-agri-food/news/2026/07/backgrounder-summary-of-items-from-the-2026-annual-meeting-of-federal-provincial-and-territorial-fpt-ministers-of-agriculture.html", "Context for playbooks and partners"],
   ["2026-07-01", "trade", "outside", "Official", "The United States declined to extend the Canada-United States-Mexico Agreement; the three countries now review it every year.", "https://www.canada.ca/en/global-affairs/news/2026/07/statement-by-minister-leblanc-following-trilateral-cusma-joint-review-meeting.html", "Trade with the United States set to Ready"],
-  ["2026-06-16", "logistics", "inside", "Official", "Canada's new cyber security law received Royal Assent. It covers finance, telecommunications, energy and transportation, not food.", "https://www.canada.ca/en/public-safety-canada/news/2026/06/government-of-canada-strengthens-cyber-security-and-critical-infrastructure-with-royal-assent-of-bill-c8.html", "Cyberattack risk trend set to rising"],
+  ["2026-06-16", "logistics", "inside", "Official", "Canada's new cyber security law received Royal Assent. Its covered sectors are finance, telecommunications, energy and transportation.", "https://www.canada.ca/en/public-safety-canada/news/2026/06/government-of-canada-strengthens-cyber-security-and-critical-infrastructure-with-royal-assent-of-bill-c8.html", "Context for the cyberattack stress"],
   ["2026-06-11", "", "inside", "Official", "The National Food Security Strategy was launched, with more than $3 billion over ten years.", "https://www.pm.gc.ca/en/news/news-releases/2026/06/11/prime-minister-carney-launches-national-food-security-strategy", "Context for playbooks and funding"],
   ["2026-05-01", "logistics", "inside", "Industry analysis", "One week of rail and port disruption at peak export season could cost the grain sector up to $540 million.", "https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx", "Rail model assumptions updated"],
   ["2026-03-04", "trade", "outside", "Official", "China cut its duties on Canadian canola seed to 14.9%, down from almost 85%. Canola oil still faces a 100% tariff.", "https://www.canada.ca/en/global-affairs/news/2026/03/canada-secures-renewed-market-access-with-china-to-boost-exports-and-strengthen-economic-collaboration.html", "Export market closure trend set to easing"],
@@ -867,7 +907,7 @@ const NOTES = {
   health: "Autumn migration raises avian influenza risk.",
   trade: "Annual review of the trade agreement keeps uncertainty high.",
   inputs: "Fertilizer and fuel prices remain sensitive to the Strait of Hormuz.",
-  logistics: "Food systems sit outside the new cyber security law.",
+  logistics: "The 2026 cyber security law names finance, telecommunications, energy and transportation as its covered sectors.",
   people: "No current signals."
 };
 
@@ -1237,8 +1277,8 @@ function buildHome() {
     <div class="sechead"><div class="row"><h2>Where is the pressure now?</h2>${DEMO}</div>
       <p class="snap">Every stress, from inside and outside Canada, sorted into six categories. Each tile shows the highest signal in the category. Choose a category to open its stress test. Snapshot reviewed ${SNAPSHOT}.</p></div>
     ${catTiles()}
-    <div class="sechead" style="margin-top:10px"><h2>What a severe year would cost Canada</h2>
-      <p class="snap">The integrated stress test runs a modelled shock from every category in the same year and compares early action with a reactive response and with no response. Choose a category in the chart to open it.</p></div>`;
+    <div class="sechead" style="margin-top:10px"><div class="row"><h2>What a severe year could cost: illustrative combined model costs</h2><span class="ev ev-ill">Illustrative</span></div>
+      <p class="snap">The integrated stress test runs a modelled shock from every category in the same year and compares early action with a reactive response and with no response. The models count different kinds of loss, so the totals are a demonstration of the method, not an estimate for Canada. Choose a category in the chart to open it.</p></div>`;
   intControls();
 }
 function buildCategory() {
@@ -1381,74 +1421,283 @@ function buildUpdates() {
     </ul>`;
 }
 
-/* ----- 90-second decision challenge (built on the rail model) ----- */
-const CH = {
-  opts: [
-    { id: "essential", name: "Move essential freight first", what: "Ask the railways and shippers to give food, feed and fertilizer priority as soon as the notice is served.", a: 1, eff: 35, costMult: 1 },
-    { id: "reroute", name: "Book trucks and other routes now", what: "Pay to pre-book trucking and space through other ports before the stoppage starts.", a: 1, eff: 55, costMult: 1.15 },
-    { id: "wait", name: "Wait for clearer information", what: "Hold off until the stoppage is real and elevators fill, then respond (the reactive response).", a: 13, eff: 45, costMult: 1 }
-  ],
-  step: 0, pick: "", pick2: ""
+/* ----- Decision challenge: joint grain-transport exercise (stateful stock-and-flow) ----- */
+const GX = { H: 35, arr: 100, cap: 2000, s0: 1000, prio: 15, budget: 8, close0: 3 };
+const GPATHS = {
+  long: { name: "Long closure", dur: 28, resolved: false, conf: 0.6, fuel: 1.5,
+    info: "Talks have broken down and the closure may last several weeks. Operators can confirm only 60% of any trucking requested. Diesel prices have risen, so transport activated from today costs 50% more." },
+  short: { name: "Short closure", dur: 10, resolved: false, conf: 1, fuel: 1,
+    info: "Talks continue and a deal looks likely within a week. Operators can confirm all trucking requested. Fuel prices are steady." },
+  resolved: { name: "Warning resolves", dur: 0, resolved: true, conf: 1, fuel: 1,
+    info: "A deal was reached on Day 2 and no closure occurred. Commitments already made cannot be refunded." }
 };
-function chRun(opt, complicated) {
-  const p = { dur: complicated ? 28 : 14, eff: opt.eff };
-  const r = railRun(p, opt.a);
-  const cost = r.cost * opt.costMult * (complicated ? 1.5 : 1);
-  let cum = 0, fill = -1, left10 = 10;
-  r.y.forEach((v, t) => { if (t >= 3) { cum += 1 - v / 100; if (fill < 0 && cum >= 10) fill = t; } if (t === 13) left10 = Math.max(0, 10 - cum); });
-  return { total: r.loss + cost, loss: r.loss, cost, fill, left10, low: Math.min(...r.y) };
+const GPLANS0 = {
+  monitor: { name: "Monitor with a deadline", units: 1, facts: ["1 unit now", "Capacity report by Day 1"], up: "Keeps the budget free while the warning is uncertain.", risk: "Trucking booked later is scarcer, dearer and slower to arrive." },
+  reserve: { name: "Reserve limited alternatives", units: 3, facts: ["3 units now, 2 more if the closure begins", "30 kt a day requested; confirmed by Day 2"], up: "Alternative transport can start soon after a closure.", risk: "The 3 reservation units are spent even if talks succeed." },
+  coord: { name: "Coordinate priority and storage", units: 4, facts: ["4 units now", "From Day 2, feed and food get first call, with 10 kt a day of existing trucking redirected to them", "300 kt more storage from Day 3"], up: "Feed and food deliveries are protected, and storage fills later.", risk: "Other freight waits longer; little new transport capacity." }
+};
+const gUnits0 = (p0, path) => GPLANS0[p0].units + (p0 === "reserve" && !GPATHS[path].resolved ? 2 : 0);
+function gOpts5(p0, path) {
+  const P = GPATHS[path], f = P.fuel;
+  const o = [{ id: "keep", name: "Keep the current plan", units: 0, desc: "No new commitment. Actions already taken continue." }];
+  if (p0 === "reserve") o.push({ id: "transport", name: "Expand the reservation", units: Math.ceil(2 * f), desc: `Ask the same operators for 20 kt a day more; ${Math.round(20 * P.conf)} kt a day can be confirmed, from Day 7.` });
+  else o.push({ id: "transport", name: "Book trucking now", units: Math.ceil(4 * f), desc: `Without a reservation, trucks are scarcer: ${Math.round(25 * P.conf)} kt a day can be confirmed, from Day 9.` });
+  if (p0 === "coord") o.push({ id: "priority", name: "Add more temporary storage", units: 2, desc: "300 kt more room, ready on Day 8." });
+  else o.push({ id: "priority", name: "Prioritize feed and food, add storage", units: 4, desc: "Feed and food get first call from Day 6 (operator approval needed), with 10 kt a day of trucking redirected to them from Day 7. Storage gains 300 kt from Day 8. Other freight waits longer." });
+  const used = gUnits0(p0, path);
+  o.forEach(x => { x.ok = used + x.units <= GX.budget; });
+  return o;
 }
-function buildChallenge() {
+/* plan = { p0, p5, react }. Day 0 choice runs from Day 0; the Day 5 choice can only change Day 5 onward. */
+function gSim(plan, path) {
+  const P = GPATHS[path], H = GX.H, closeEnd = GX.close0 + P.dur;
+  const ev = [], alt = [], store = [];
+  let units = 0, prioFrom = Infinity, transportUnits = 0;
+  const spend = (d, u, what, transport) => { units += u; if (transport) transportUnits += u; ev.push([d, `${what}: ${u} unit${u === 1 ? "" : "s"}`]); };
+  const pl = GPLANS0[plan.p0];
+  spend(0, pl.units, pl.name);
+  if (plan.p0 === "monitor") ev.push([1, "Capacity report received"]);
+  if (plan.p0 === "reserve") {
+    ev.push([2, `Operators confirm ${Math.round(30 * P.conf)} kt a day of trucking`]);
+    if (!P.resolved) { spend(3, 2, "Reservation activated as the closure begins", true); alt.push([4, 30 * P.conf]); ev.push([4, `Reserved trucking starts: ${Math.round(30 * P.conf)} kt a day`]); }
+  }
+  if (plan.p0 === "coord") { prioFrom = 2; alt.push([2, 10]); store.push([3, 300]); ev.push([2, "Priority allocation approved; 10 kt a day of trucking redirected to feed and food"]); ev.push([3, "Temporary storage ready (+300 kt)"]); }
+  ev.push(P.resolved ? [2, "Deal reached; no closure"] : [3, "Rail closure begins"]);
+  if (!P.resolved && plan.p5 && plan.p5 !== "keep") {
+    const o = gOpts5(plan.p0, path).find(x => x.id === plan.p5);
+    if (o && o.ok) {
+      if (o.id === "transport") { spend(5, o.units, o.name, true); const a = plan.p0 === "reserve" ? [7, 20 * P.conf] : [9, 25 * P.conf]; alt.push(a); ev.push([a[0], `${Math.round(a[1])} kt a day more trucking starts`]); }
+      else if (plan.p0 === "coord") { spend(5, o.units, o.name); store.push([8, 300]); ev.push([8, "More temporary storage ready (+300 kt)"]); }
+      else { spend(5, o.units, o.name); prioFrom = Math.min(prioFrom, 6); alt.push([7, 10]); store.push([8, 300]); ev.push([6, "Priority allocation approved"]); ev.push([7, "10 kt a day of trucking redirected to feed and food"]); ev.push([8, "Temporary storage ready (+300 kt)"]); }
+    } else if (o) ev.push([5, `${o.name} not possible within the budget`]);
+  }
+  let S = GX.s0, delivered = 0, prioUnmet = 0, refused = 0, firstFull = -1, reacted = false;
+  const head = [], disp = [], prioMet = [], stock = [], capA = [], railA = [];
+  for (let t = 0; t <= H; t++) {
+    const closed = !P.resolved && t >= GX.close0 && t < closeEnd;
+    let rail = 100;
+    if (closed) rail = 0;
+    else if (!P.resolved && t >= closeEnd) { rail = Math.min(120, 60 + 15 * (t - closeEnd)); if (S <= GX.s0) rail = Math.min(rail, 100); }
+    const capT = GX.cap + store.filter(([d]) => t >= d).reduce((a, [, c]) => a + c, 0);
+    const accepted = Math.min(GX.arr, Math.max(0, capT - S));   // start of day: farm deliveries accepted while there is room
+    refused += GX.arr - accepted; S += accepted;
+    head.push(capT - S); stock.push(S); capA.push(capT);   // free space once the day's farm deliveries are in
+    if (accepted < GX.arr && firstFull < 0) { firstFull = t; ev.push([t, "Elevators full; farm deliveries turned away"]); }
+    if (plan.react && !reacted && closed && accepted < GX.arr) {   // comparator: book trucking once storage is full
+      reacted = true; const u = Math.ceil(4 * P.fuel); spend(t, u, "Trucking booked once storage is full", true); alt.push([t + 4, 25 * P.conf]); ev.push([t + 4, `${Math.round(25 * P.conf)} kt a day of trucking starts`]);
+    }
+    const altCap = closed ? alt.filter(([d]) => t >= d).reduce((a, [, c]) => a + c, 0) : 0;
+    const dispatch = Math.min(S, rail + altCap);
+    const pm = t >= prioFrom ? Math.min(GX.prio, dispatch) : Math.min(GX.prio, dispatch * GX.prio / 100);
+    prioUnmet += GX.prio - pm; S -= dispatch; delivered += dispatch;
+    disp.push(dispatch); prioMet.push(pm); railA.push(Math.min(rail, dispatch));
+  }
+  if (!P.resolved) ev.push([closeEnd, "Rail line reopens; backlog clears at up to 120 kt a day"]);
+  ev.sort((a, b) => a[0] - b[0]);
+  return { head, disp, prioMet, stock, capA, railA, delivered, cont: 100 * delivered / ((H + 1) * GX.arr), prioUnmet, refused, units, transportUnits, firstFull, ev, closeEnd, path };
+}
+const GCOMP = { p0: "monitor", p5: "keep", react: true };
+const CH = { step: 0, p0: "", p5: "", path: "long", cmp: "comp" };
+function gPlanName(pl) { return pl.react ? "Monitor, then book trucking once storage is full" : GPLANS0[pl.p0].name + (pl.p5 && pl.p5 !== "keep" ? " + " + gOpts5(pl.p0, "long").find(x => x.id === pl.p5).name.toLowerCase() : ""); }
+
+function corridorSVG(sim, day, label) {
+  const P = GPATHS[sim.path], t = Math.min(day, GX.H);
+  const closed = !P.resolved && t >= GX.close0 && t < sim.closeEnd;
+  const stockShare = clamp(sim.stock[t] / sim.capA[t], 0, 1);   // gauge: share of storage in use at the end of the day
+  const altOn = closed && sim.disp[t] > 0;
+  const prioOk = sim.prioMet[t] >= GX.prio - 0.01;
+  const ink = css("--ink"), muted = css("--muted"), line = css("--line"), act = css("--act"), alert = css("--alert"), good = css("--good"), surf = css("--surface");
+  const box = (x, y, w, h, title, sub, stroke) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="${surf}" stroke="${stroke || line}" stroke-width="1.5"/><text x="${x + w / 2}" y="${y + 22}" text-anchor="middle" font-size="13" font-weight="700" fill="${ink}">${title}</text>${sub ? `<text x="${x + w / 2}" y="${y + 40}" text-anchor="middle" font-size="11.5" fill="${muted}">${sub}</text>` : ""}`;
+  const gaugeH = 70, gy = 34, gx = 222;
+  const aria = `${esc(label)}: rail ${closed ? "closed" : "open"}, storage ${Math.round(100 * stockShare)}% full with ${Math.round(sim.head[t])} kilotonnes of room, ${altOn ? "alternative transport moving freight" : "no alternative transport"}, feed and food deliveries ${prioOk ? "met" : "short"}.`;
+  if (window.innerWidth < 560) {   // stacked layout for phones
+    const gH = 64, gTop = 104;
+    return `<svg viewBox="0 0 380 420" role="img" aria-label="${aria}">
+      <defs><marker id="gar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${muted}"/></marker></defs>
+      ${box(20, 8, 340, 50, "Prairie farms", "100 kt a day")}
+      <line x1="190" y1="60" x2="190" y2="80" stroke="${muted}" stroke-width="2" marker-end="url(#gar)"/>
+      ${box(20, 82, 340, 96, "Prairie elevators", "")}
+      <rect x="60" y="${gTop}" width="26" height="${gH}" rx="3" fill="none" stroke="${muted}"/>
+      <rect x="60" y="${gTop + gH * (1 - stockShare)}" width="26" height="${gH * stockShare}" rx="3" fill="${sim.head[t] <= 0.5 ? alert : act}" opacity=".8"/>
+      <text x="200" y="${gTop + 36}" font-size="14" fill="${ink}" text-anchor="middle">${Math.round(100 * stockShare)}% full · ${Math.round(sim.head[t])} kt room</text>
+      <line x1="110" y1="180" x2="110" y2="290" stroke="${closed ? alert : ink}" stroke-width="${closed ? 3 : 4}" stroke-dasharray="${closed ? "8 6" : ""}" marker-end="url(#gar)"/>
+      <text x="100" y="225" text-anchor="end" font-size="13" font-weight="700" fill="${closed ? alert : ink}">Rail</text><text x="100" y="242" text-anchor="end" font-size="13" font-weight="700" fill="${closed ? alert : ink}">${closed ? "closed" : Math.round(sim.disp[t]) + " kt"}</text>
+      <line x1="270" y1="180" x2="270" y2="290" stroke="${altOn ? good : line}" stroke-width="${altOn ? 3 : 1.5}" stroke-dasharray="${altOn ? "" : "4 4"}" marker-end="url(#gar)"/>
+      <text x="280" y="225" font-size="13" font-weight="${altOn ? 700 : 400}" fill="${altOn ? good : muted}">Trucks</text><text x="280" y="242" font-size="13" font-weight="${altOn ? 700 : 400}" fill="${altOn ? good : muted}">${altOn ? Math.round(sim.disp[t]) + " kt" : "not active"}</text>
+      ${box(20, 294, 340, 50, "Port and buyers", "export grain")}
+      ${box(20, 356, 340, 50, "Feed and food deliveries", "", prioOk ? good : alert)}
+      <text x="190" y="396" text-anchor="middle" font-size="13" font-weight="700" fill="${prioOk ? good : alert}">${prioOk ? "Met" : "Short by " + (GX.prio - sim.prioMet[t]).toFixed(0) + " kt today"}</text>
+    </svg>`;
+  }
+  return `<svg viewBox="0 0 720 210" role="img" aria-label="${aria}">
+    <defs><marker id="gar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${muted}"/></marker></defs>
+    ${box(10, 50, 120, 56, "Prairie farms", "100 kt a day")}
+    <line x1="132" y1="78" x2="196" y2="78" stroke="${muted}" stroke-width="2" marker-end="url(#gar)"/>
+    ${box(200, 20, 150, 120, "Prairie elevators", "")}
+    <rect x="${gx}" y="${gy + 14}" width="26" height="${gaugeH}" rx="3" fill="none" stroke="${muted}"/>
+    <rect x="${gx}" y="${gy + 14 + gaugeH * (1 - stockShare)}" width="26" height="${gaugeH * stockShare}" rx="3" fill="${sim.head[t] <= 0.5 ? alert : act}" opacity=".8"/>
+    <text x="300" y="${gy + 40}" font-size="11.5" fill="${ink}">${Math.round(100 * stockShare)}% full</text><text x="300" y="${gy + 56}" font-size="11.5" fill="${muted}">${Math.round(sim.head[t])} kt room</text>
+    <line x1="352" y1="60" x2="578" y2="60" stroke="${closed ? alert : ink}" stroke-width="${closed ? 3 : 4}" stroke-dasharray="${closed ? "8 6" : ""}" marker-end="url(#gar)"/>
+    <text x="465" y="50" text-anchor="middle" font-size="12" font-weight="700" fill="${closed ? alert : ink}">Rail line ${closed ? "closed" : "open · " + Math.round(sim.disp[t]) + " kt"}</text>
+    <path d="M352 100 C 420 130, 520 130, 578 100" fill="none" stroke="${altOn ? good : line}" stroke-width="${altOn ? 3 : 1.5}" stroke-dasharray="${altOn ? "" : "4 4"}" marker-end="url(#gar)"/>
+    <text x="465" y="140" text-anchor="middle" font-size="12" fill="${altOn ? good : muted}" font-weight="${altOn ? 700 : 400}">Trucks and other routes ${altOn ? "· " + Math.round(sim.disp[t]) + " kt" : "(not active)"}</text>
+    ${box(582, 50, 128, 56, "Port and buyers", "export grain")}
+    <line x1="275" y1="142" x2="275" y2="160" stroke="${muted}" stroke-width="2" marker-end="url(#gar)"/>
+    ${box(190, 162, 172, 44, "Feed and food deliveries", "", prioOk ? good : alert)}
+    <text x="376" y="190" font-size="12" fill="${prioOk ? good : alert}" font-weight="700">${prioOk ? "Met" : "Short by " + (GX.prio - sim.prioMet[t]).toFixed(0) + " kt today"}</text>
+    <text x="10" y="200" font-size="11.5" fill="${muted}">${esc(label)}</text>
+  </svg>`;
+}
+function timelineSVG(sim, upto, marks) {
+  const small = window.innerWidth < 560, W = small ? 400 : 720, x0 = 24, x1 = W - 24, X = (d) => x0 + (x1 - x0) * d / GX.H;
+  const P = GPATHS[sim.path], ink = css("--ink"), muted = css("--muted"), alert = css("--alert"), act = css("--act"), line = css("--line");
+  let s = `<svg viewBox="0 0 ${W} 74" role="img" aria-label="Timeline from Day 0 to Day ${GX.H}${P.resolved ? "; no closure" : `; rail closed from Day ${GX.close0} to Day ${sim.closeEnd}`}; current day ${upto}.">`;
+  s += `<line x1="${x0}" y1="34" x2="${x1}" y2="34" stroke="${line}" stroke-width="6" stroke-linecap="round"/>`;
+  if (!P.resolved) { const a = X(GX.close0), b = X(Math.min(GX.H, sim.closeEnd)); s += `<rect x="${a}" y="28" width="${b - a}" height="12" rx="3" fill="${alert}" opacity="${upto >= GX.close0 ? .55 : .2}"/><text x="${a}" y="20" font-size="11.5" fill="${alert}" font-weight="700">Rail closed${upto < sim.closeEnd ? " (duration unknown)" : ""}</text>`; }
+  s += `<rect x="${x0}" y="31" width="${X(upto) - x0}" height="6" rx="3" fill="${act}"/>`;
+  (small ? [0, 10, 20, 30] : [0, 5, 10, 15, 20, 25, 30, 35]).forEach(d => s += `<text x="${X(d)}" y="62" text-anchor="middle" font-size="11" fill="${muted}">Day ${d}</text>`);
+  (marks || []).forEach(([d, lab]) => s += `<circle cx="${X(d)}" cy="34" r="6" fill="${ink}"/><text x="${X(d)}" y="${lab.length > 0 ? 50 : 0}" text-anchor="middle" font-size="11" font-weight="700" fill="${ink}">${lab}</text>`);
+  return s + `</svg>`;
+}
+function budgetStrip(used, pending) {
+  const cells = Array.from({ length: GX.budget }, (_, i) => `<i class="${i < used ? "used" : i < used + pending ? "pend" : ""}"></i>`).join("");
+  return `<div class="budget" role="img" aria-label="${used} of ${GX.budget} exercise units committed${pending ? ", " + pending + " more selected" : ""}"><span class="lab">Budget</span><span class="cells">${cells}</span><span>${used} of ${GX.budget} units committed${pending ? ` · ${pending} selected` : ""}</span></div>`;
+}
+function gMetrics(sim) {
+  return [["Freight delivered", Math.round(sim.delivered).toLocaleString("en-CA") + " kt", Math.round(sim.cont) + "% of normal"],
+          ["Feed and food deliveries unmet", Math.round(sim.prioUnmet).toLocaleString("en-CA") + " kt", "priority demand 15 kt a day"],
+          ["Farm deliveries turned away", Math.round(sim.refused).toLocaleString("en-CA") + " kt", sim.firstFull >= 0 ? "storage full from Day " + sim.firstFull : "storage never full"],
+          ["Exercise units spent", sim.units + " of " + GX.budget, sim.transportUnits ? sim.transportUnits + " on transport" : "none on transport"]];
+}
+function buildChallenge(focusHead) {
   mode = "info"; showParts("info");
   setCrumbs([["Home", "#"], ["Decision challenge", ""]]);
-  const steps = ["The situation", "Your choice", "What happens", "A complication", "Debrief"];
-  const dots = `<div class="stepdots" aria-label="Step ${CH.step + 1} of ${steps.length}">${steps.map((_, i) => `<i class="${i <= CH.step ? "on" : ""}"></i>`).join("")}<span>Step ${CH.step + 1} of ${steps.length}: ${steps[CH.step]}</span></div>`;
+  const steps = ["Briefing", "Day 0: your plan", "Day 5: update", "Day 35: outcome", "Debrief"];
   const ill = `<span class="ev ev-ill">Illustrative</span>`;
-  const optBtns = (key) => `<div class="opts">${CH.opts.map(o => `<button class="opt" type="button" data-pick="${o.id}" data-key="${key}" aria-pressed="${CH[key] === o.id}"><b>${o.name}</b><span>${o.what}</span></button>`).join("")}</div>`;
-  const meter = (r) => `<div class="meter" role="img" aria-label="${r.left10.toFixed(1)} of 10 days of elevator space left on day 13"><i style="width:${r.left10 * 10}%"></i></div>`;
-  const resultLine = (o, r) => `<p class="tnote">${ill} With <b>${o.name.toLowerCase()}</b>, agri-food freight falls to ${Math.round(r.low)}% of normal at worst. Prairie elevators ${r.fill >= 0 ? `fill on day ${r.fill}` : "do not fill"}. Total cost in the model: <b>${fmtM(r.total)}</b> (losses ${fmtM(r.loss)} + response ${fmtM(r.cost)}).</p>`;
+  const dots = `<ol class="stepper" aria-label="Progress">${steps.map((n, i) => `<li class="${i === CH.step ? "cur" : i < CH.step ? "done" : ""}" ${i === CH.step ? 'aria-current="step"' : ""}>${n}</li>`).join("")}</ol>`;
+  const plan = { p0: CH.p0, p5: CH.p5 || "keep" };
   let body = "";
   if (CH.step === 0) {
-    body = `<p class="scene">A strike notice says Canada's two main railways may stop in 72 hours. It is October, peak export season. Grain, canola, feed and next spring's fertilizer all move by rail.</p>
-      <p class="tnote"><span class="ev ev-obs">Observed</span> About <a href="https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx">94% of Canada's grain exports move by rail</a>, and one week of rail and port disruption at peak season could cost the grain sector up to $540 million. In past stoppages, <a href="https://www.producer.com/news/n-american-farm-groups-ask-govts-to-act-on-rail-dispute/">Prairie elevators filled in about 10 days</a>.</p>
-      <div><button class="btn primary" type="button" data-next>Start the challenge</button></div>`;
-  } else if (CH.step === 1) {
-    body = `<p class="scene">You have 72 hours. What would you prioritize?</p>${optBtns("pick")}
-      <p class="snap">There is no single right answer. Each choice has costs and limits.</p>
-      <div><button class="btn primary" type="button" data-next ${CH.pick ? "" : "disabled"}>See what happens</button></div>`;
-  } else if (CH.step === 2) {
-    const o = CH.opts.find(x => x.id === CH.pick), r = chRun(o, false), w = chRun(CH.opts[2], false);
-    body = `<p class="scene">The stoppage begins on day 3 and lasts two weeks.</p>
-      <div><b>Elevator space left on day 13</b> (when elevators fill without action): ${r.left10.toFixed(1)} of 10 days ${meter(r)}</div>
-      ${resultLine(o, r)}
-      ${o.id !== "wait" ? `<p class="tnote">Compared with waiting and reacting once elevators are full, your choice ${r.total <= w.total ? `costs about <b>${fmtM(w.total - r.total)} less</b>` : `costs about <b>${fmtM(r.total - w.total)} more</b>`} in this model.</p>` : `<p class="tnote">Waiting keeps response spending low but lets storage fill before anything moves.</p>`}
-      <p class="snap">Why: rerouting and priority access take time to arrange, so acting before storage fills protects deliveries. That is the model's logic, not a guaranteed effect.</p>
-      <div><button class="btn primary" type="button" data-next>Continue</button></div>`;
-  } else if (CH.step === 3) {
-    body = `<p class="scene">Day 5: talks break down. The stoppage may now last four weeks, and diesel prices jump, making trucking half as expensive again. Would your response still work?</p>
-      ${optBtns("pick2")}
-      <div><button class="btn primary" type="button" data-next ${CH.pick2 ? "" : "disabled"}>Compare the options</button></div>`;
-  } else {
-    const rowsFor = (comp) => CH.opts.map(o => { const r = chRun(o, comp); return { o, r }; });
-    const a = rowsFor(false), b = rowsFor(true);
-    const bestB = b.slice().sort((x, y) => x.r.total - y.r.total)[0];
-    const mine = b.find(x => x.o.id === CH.pick2);
-    body = `<p class="scene">How the three options compare</p>
-      <div class="tablewrap"><table class="cmp"><thead><tr><th>Option</th><th>Two-week stoppage</th><th>Four weeks, dearer trucking</th><th>Elevators fill (four weeks)</th></tr></thead><tbody>
-        ${CH.opts.map((o, i) => `<tr class="${o.id === CH.pick2 ? "mine" : ""}"><td>${o.name}${o.id === CH.pick2 ? " (your final choice)" : ""}${o.id === "wait" ? "<br><span class='snap'>Reactive response</span>" : ""}</td><td>${fmtM(a[i].r.total)}</td><td>${fmtM(b[i].r.total)}</td><td>${b[i].r.fill >= 0 ? "Day " + b[i].r.fill : "Do not fill"}</td></tr>`).join("")}
-      </tbody></table></div>
-      <p class="tnote">${ill} In this model, <b>${bestB.o.name.toLowerCase()}</b> costs least when the stoppage drags on${mine && mine.o.id !== bestB.o.id ? `; your final choice costs about ${fmtM(mine.r.total - bestB.r.total)} more` : ", and that was your final choice"}. Timing and spare capacity matter more than any single action, and the answer changes as the situation changes.</p>
-      <div class="two">
-        <div class="item"><h3>What we know</h3><div>How much grain moves by rail, how fast elevators filled in past stoppages, and industry estimates of the cost of a week's disruption. These are observed and linked.</div></div>
-        <div class="item"><h3>What is illustrative</h3><div>How much freight each option keeps moving, what it costs, and how long a stoppage lasts. These are assumptions, not estimates.</div></div>
+    const preview = gSim({ p0: "monitor", p5: "keep" }, "short");
+    body = `<p class="scene">Day 0. An operator warns that the main rail line from the Prairies to the Port of Vancouver may close in 72 hours. It is October, peak export season.</p>
+      <div class="corr">${corridorSVG(preview, 0, "Day 0: before the closure")}</div>
+      <div class="three">
+        <div class="item"><h3>Your role</h3><div>You advise a joint coordination table of governments, railways, shippers and grain companies. You recommend a plan; the members decide whether to approve it.</div></div>
+        <div class="item"><h3>Your objective</h3><div>Keep feed and food deliveries moving (15 kt a day) and limit farm deliveries turned away, within a budget of ${GX.budget} exercise units.</div></div>
+        <div class="item"><h3>What is uncertain</h3><div>Whether the closure happens, how long it lasts, and how much trucking operators can confirm.</div></div>
       </div>
-      <div class="item"><h3>What the research would test</h3><div>With the Canadian Grain Commission's <a href="https://www.canada.ca/en/grain-commission/services/statistics/grain-statistics-weekly.html">weekly grain statistics</a> and partners in rail, ports and government, the first pilot would rebuild past stoppages, document what agencies and shippers actually did, and test which options are feasible and when early action is worth its cost.</div></div>
-      <div class="btnrow"><a class="btn primary" href="#research" style="text-decoration:none">See the research programme</a><a class="btn" href="#rail" style="text-decoration:none">Open the full rail stress test</a><button class="btn" type="button" data-restart>Start again</button></div>`;
+      <p class="tnote">${ill} The corridor, volumes (kt = thousand tonnes), budget units, lead times and capacities are assumptions chosen to show the mechanism, not estimates. <span class="ev ev-obs">Observed</span> About <a href="https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx">94% of Canada's grain exports move by rail</a>, and in past stoppages <a href="https://www.producer.com/news/n-american-farm-groups-ask-govts-to-act-on-rail-dispute/">Prairie elevators filled in about 10 days</a>; the exercise starts with 10 days of storage room to match.</p>
+      <div class="btnrow"><button class="btn primary" type="button" data-next>Choose a plan</button></div>`;
+  } else if (CH.step === 1) {
+    const sel = CH.p0 ? GPLANS0[CH.p0] : null;
+    body = `<p class="scene">What would you commit today?</p>
+      ${budgetStrip(0, sel ? sel.units : 0)}
+      <fieldset class="opts"><legend class="sr">Day 0 plan</legend>${Object.entries(GPLANS0).map(([k, o]) => `
+        <label class="opt"><input type="radio" name="p0" value="${k}" ${CH.p0 === k ? "checked" : ""}>
+          <b>${o.name}</b>${o.facts.map(f => `<span>${f}</span>`).join("")}
+          <span class="up">+ ${o.up}</span><span class="risk">− ${o.risk}</span></label>`).join("")}</fieldset>
+      <div class="record" id="rec0">${sel ? `Decision record: <b>${sel.name}</b>, ${sel.units} units now. Nothing is known yet about how long a closure would last.` : "Select a plan to see its commitment."}</div>
+      <div class="btnrow"><button class="btn" type="button" data-back>Back</button><button class="btn primary" type="button" data-next ${CH.p0 ? "" : "disabled"}>Commit and advance to Day 5</button></div>`;
+  } else if (CH.step === 2) {
+    const sim5 = gSim({ p0: CH.p0, p5: "keep" }, CH.path), P = GPATHS[CH.path];
+    const used = gUnits0(CH.p0, CH.path);
+    const opts = gOpts5(CH.p0, CH.path);
+    const selO = opts.find(o => o.id === CH.p5);
+    body = `<p class="scene">Day 5 update</p>
+      <div class="timeline">${timelineSVG(sim5, 5, [[0, "Plan"], [5, "Now"]])}</div>
+      <div class="corr">${corridorSVG(sim5, 5, "Day 5: the situation now")}</div>
+      <div class="two">
+        <div class="item"><h3>What has happened</h3><ul class="evlog">${sim5.ev.filter(([d]) => d <= 5).map(([d, t]) => `<li><b>Day ${d}</b> ${esc(t)}</li>`).join("")}</ul></div>
+        <div class="item"><h3>New information</h3><div>${P.info}</div></div>
+      </div>
+      ${budgetStrip(used, selO ? selO.units : 0)}
+      ${P.resolved ? `<p class="tnote">There is no closure to respond to. Your Day 0 commitment is already spent.</p>` : `
+      <fieldset class="opts"><legend class="sr">Day 5 choice</legend>${opts.map(o => `
+        <label class="opt ${o.ok ? "" : "off"}"><input type="radio" name="p5" value="${o.id}" ${CH.p5 === o.id ? "checked" : ""} ${o.ok ? "" : "disabled"}>
+          <b>${o.name}</b><span>${o.units} unit${o.units === 1 ? "" : "s"}</span><span>${o.desc}</span>${o.ok ? "" : `<span class="risk">Not possible: it would take the plan past ${GX.budget} units.</span>`}</label>`).join("")}</fieldset>`}
+      <p class="snap">Your Day 0 plan and everything it has already done stay in place. A Day 5 choice can only change what happens from Day 5 onward, after its own lead time.</p>
+      <div class="btnrow"><button class="btn primary" type="button" data-next ${P.resolved || CH.p5 ? "" : "disabled"}>Commit and run to Day 35</button></div>`;
+  } else if (CH.step === 3) {
+    const mine = gSim(plan, CH.path), comp = gSim(GCOMP, CH.path);
+    const others = [];
+    Object.keys(GPLANS0).forEach(p0 => gOpts5(p0, CH.path).forEach(o => { if (o.ok && !(p0 === CH.p0 && o.id === (CH.p5 || "keep"))) others.push({ p0, p5: o.id }); }));
+    const cmpPlan = CH.cmp === "comp" ? GCOMP : others.find(o => o.p0 + "|" + o.p5 === CH.cmp) || GCOMP;
+    const alt = gSim(cmpPlan, CH.path);
+    const mm = gMetrics(mine), am = gMetrics(alt);
+    body = `<p class="scene">Day 35: outcome under the <b>${GPATHS[CH.path].name.toLowerCase()}</b> path</p>
+      <div class="pathsel" role="radiogroup" aria-label="Event path">${Object.entries(GPATHS).map(([k, p]) => `<label class="chip"><input type="radio" name="path" value="${k}" ${CH.path === k ? "checked" : ""}> ${p.name}${k === "long" ? " (as experienced)" : ""}</label>`).join("")}</div>
+      <p class="snap">Change the event path to see how the same choices perform if the closure is shorter or the warning resolves. Plans use only the information available on the day each choice was made.</p>
+      <div class="timeline">${timelineSVG(mine, GX.H, [[0, "Plan"], [5, "Update"]])}</div>
+      <div class="cmpwrap">
+        <label for="cmpSel"><b>Compare with</b></label>
+        <select id="cmpSel"><option value="comp" ${CH.cmp === "comp" ? "selected" : ""}>Reactive comparator: monitor, then book trucking once storage is full</option>${others.map(o => `<option value="${o.p0}|${o.p5}" ${CH.cmp === o.p0 + "|" + o.p5 ? "selected" : ""}>${esc(gPlanName(o))}</option>`).join("")}</select>
+      </div>
+      <div class="tablewrap"><table class="cmp"><thead><tr><th>Outcome</th><th>Your plan<br><span class="snap">${esc(gPlanName(plan))}</span></th><th>Comparison<br><span class="snap">${esc(gPlanName(cmpPlan))}</span></th></tr></thead><tbody>
+        ${mm.map((m, i) => `<tr><td>${m[0]}</td><td><b>${m[1]}</b><br><span class="snap">${m[2]}</span></td><td><b>${am[i][1]}</b><br><span class="snap">${am[i][2]}</span></td></tr>`).join("")}
+      </tbody></table></div>
+      <div class="card"><h2>Storage room at the elevators</h2><p class="sub">Thousand tonnes of free space once each day's farm deliveries are in. At zero, further farm deliveries are turned away.</p>
+        <div class="legend"><span><i class="sw" style="border-color:${css("--act")}"></i>Your plan</span><span><i class="sw" style="border-top:2px dashed ${css("--late")}"></i>Comparison</span></div>
+        <div class="chart" id="gch1"><div class="tip" id="gtip1"></div></div></div>
+      <div class="card"><h2>Freight moved each day</h2><p class="sub">Thousand tonnes dispatched by rail, trucks and other routes. Normal is 100 kt a day; after reopening, the backlog clears at up to 120 kt a day.</p>
+        <div class="legend"><span><i class="sw" style="border-color:${css("--act")}"></i>Your plan</span><span><i class="sw" style="border-top:2px dashed ${css("--late")}"></i>Comparison</span></div>
+        <div class="chart" id="gch2"><div class="tip" id="gtip2"></div></div></div>
+      <details><summary>Data table: storage room and freight by day</summary><div class="tablewrap"><table class="cmp"><thead><tr><th>Day</th><th>Storage room, your plan (kt)</th><th>Storage room, comparison (kt)</th><th>Freight moved, your plan (kt)</th><th>Freight moved, comparison (kt)</th></tr></thead><tbody>${mine.head.map((h, i) => `<tr><td>${i}</td><td>${Math.round(h)}</td><td>${Math.round(alt.head[i])}</td><td>${Math.round(mine.disp[i])}</td><td>${Math.round(alt.disp[i])}</td></tr>`).join("")}</tbody></table></div></details>
+      <details><summary>Event log for your plan</summary><ul class="evlog">${mine.ev.map(([d, t]) => `<li><b>Day ${d}</b> ${esc(t)}</li>`).join("")}</ul></details>
+      <div class="btnrow"><button class="btn" type="button" data-back>Back to Day 5</button><button class="btn primary" type="button" data-next>Read the debrief</button></div>`;
+    setTimeout(() => {
+      const band = GPATHS[CH.path].resolved ? null : [GX.close0, Math.min(GX.H, mine.closeEnd), "Rail closed"];
+      const base = { xMax: GX.H, dx: 1, xTicks: [0, 5, 10, 15, 20, 25, 30, 35], xFmt: (v, long) => long ? "Day " + v : v, xLabel: "Day", band };
+      lineChart($("gch1"), $("gtip1"), { ...base, aria: "Storage room at the elevators by day, your plan and the comparison", yMax: niceMax(Math.max(...mine.head, ...alt.head) * 1.1), yFmt: v => Math.round(v) + " kt",
+        series: [{ name: "Your plan", data: mine.head, color: css("--act"), label: true }, { name: "Comparison", data: alt.head, color: css("--late"), dash: "6 4" }] });
+      lineChart($("gch2"), $("gtip2"), { ...base, aria: "Freight moved each day, your plan and the comparison", yMax: 125, yTicks: 5, yFmt: v => Math.round(v) + " kt", ref: [100, "Normal"],
+        series: [{ name: "Your plan", data: mine.disp, color: css("--act"), label: true }, { name: "Comparison", data: alt.disp, color: css("--late"), dash: "6 4" }] });
+    }, 0);
+  } else {
+    const paths = Object.keys(GPATHS);
+    const rows = paths.map(k => [k, gSim(plan, k), gSim(GCOMP, k)]);
+    const L = rows[0][1], Lc = rows[0][2], R = rows[2][1];
+    const drivers = [];
+    if (CH.p0 === "reserve") drivers.push("The reservation made on Day 0 meant alternative transport could start on Day 4, only a day into the closure.");
+    if (CH.p0 === "reserve" && CH.p5 === "transport") drivers.push(`Expanding the reservation on Day 5 added ${Math.round(20 * GPATHS.long.conf)} kt a day from Day 7, at the higher fuel cost, and used the rest of the budget.`);
+    else if (CH.p5 === "transport") drivers.push("Trucking booked on Day 5 without a reservation arrived on Day 9 and at lower volume, because spare trucks were already scarce.");
+    if (CH.p0 === "coord" || CH.p5 === "priority") drivers.push(`Giving feed and food first call, with trucking redirected to them, cut unmet feed and food deliveries to ${Math.round(L.prioUnmet)} kt (reactive comparator: ${Math.round(Lc.prioUnmet)} kt). It added little capacity, so other freight waited longer.`);
+    else drivers.push(`Without a priority allocation, feed and food shared whatever moved with all other freight; ${Math.round(L.prioUnmet)} kt of their deliveries went unmet (reactive comparator: ${Math.round(Lc.prioUnmet)} kt).`);
+    if (CH.p0 === "coord" || CH.p5 === "priority") drivers.push(`Temporary storage pushed back the day elevators filled (${L.firstFull >= 0 ? "Day " + L.firstFull : "never"} with your plan, Day ${Lc.firstFull} for the reactive comparator).`);
+    if (CH.p0 === "monitor" && (CH.p5 || "keep") === "keep") drivers.push("Keeping the budget free avoided spending if talks had succeeded, but nothing moved during the closure.");
+    drivers.push(R.units > 0 ? `If the warning had resolved, your plan would still have spent ${R.units} unit${R.units === 1 ? "" : "s"} with no closure to respond to.` : "");
+    body = `<p class="scene">Debrief</p>
+      <div class="item"><h3>What drove your result</h3><ul>${drivers.filter(Boolean).map(d => `<li>${d}</li>`).join("")}</ul>
+        <div class="snap">In this exercise no plan is best on every outcome and every path: reserving transport moves the most freight, coordinating priority protects feed and food, and monitoring spends least if the warning resolves.</div></div>
+      <div class="card"><h2>Would your plan still work?</h2><p class="sub">Your choices under each event path, against the reactive comparator. Same assumptions, same budget, same starting state.</p>
+        <div class="tablewrap"><table class="cmp"><thead><tr><th>Event path</th><th>Feed and food unmet</th><th>Farm deliveries turned away</th><th>Freight delivered</th><th>Units spent</th></tr></thead><tbody>
+        ${rows.map(([k, m, c]) => `<tr><td>${GPATHS[k].name}</td><td><b>${Math.round(m.prioUnmet)} kt</b> <span class="snap">vs ${Math.round(c.prioUnmet)}</span></td><td><b>${Math.round(m.refused)} kt</b> <span class="snap">vs ${Math.round(c.refused)}</span></td><td><b>${Math.round(m.cont)}%</b> <span class="snap">vs ${Math.round(c.cont)}%</span></td><td><b>${m.units}</b> <span class="snap">vs ${c.units}</span></td></tr>`).join("")}
+        </tbody></table></div></div>
+      <div class="two">
+        <div class="item"><h3><span class="ev ev-obs">Observed</span> What we know</h3><div>How much grain moves by rail and how fast elevators filled in past stoppages, from published sources.</div></div>
+        <div class="item"><h3><span class="ev ev-ill">Illustrative</span> What is assumed</h3><div>Volumes, storage room, spare trucking, lead times, approval delays, budget units and the event paths. The comparator stands in for current practice until real practice is documented.</div></div>
+      </div>
+      <div class="item"><h3>What the research would test</h3><div>Outcomes in this exercise turn on assumptions about spare trucking capacity, how quickly it can be mobilized, approval delays and storage room at elevators. The <a href="#research">Prairie grain transport pilot</a> would estimate these with the Canadian Grain Commission's <a href="https://www.canada.ca/en/grain-commission/services/statistics/grain-statistics-weekly.html">weekly grain statistics</a>, operator records and interviews, and test whether exercises like this one improve real preparedness decisions.</div></div>
+      <div class="btnrow">
+        <button class="btn" type="button" data-replay="resolved">Replay: the warning resolves</button>
+        <button class="btn" type="button" data-replay="short">Replay: a short closure</button>
+        <button class="btn" type="button" data-restart>Start again with a new plan</button>
+        <button class="btn" type="button" data-print>Print a decision brief</button>
+        <a class="btn primary" href="#research" style="text-decoration:none">See the research programme</a>
+      </div>`;
   }
-  $("page").innerHTML = `<div class="chal"><div class="sechead"><h2>Decision challenge: a rail corridor may close in 72 hours</h2></div>${dots}${body}</div>`;
-  $("page").querySelectorAll("[data-pick]").forEach(b => b.addEventListener("click", () => { CH[b.dataset.key] = b.dataset.pick; if (b.dataset.key === "pick" && !CH.pick2) CH.pick2 = b.dataset.pick; buildChallenge(); }));
-  $("page").querySelector("[data-next]")?.addEventListener("click", () => { CH.step++; buildChallenge(); $("page").scrollIntoView({ block: "start" }); });
-  $("page").querySelector("[data-restart]")?.addEventListener("click", () => { CH.step = 0; CH.pick = CH.pick2 = ""; buildChallenge(); });
+  $("page").innerHTML = `<div class="chal"><div class="sechead"><h2 id="chHead" tabindex="-1">Decision challenge: a Prairie grain corridor may close</h2><p class="snap">Joint grain-transport exercise · about 3 minutes · ${ill} research demonstration, not a forecast</p></div>${dots}<div id="chStatus" class="sr" role="status"></div>${body}</div>`;
+  const pg = $("page");
+  pg.querySelectorAll('input[name="p0"]').forEach(r => r.addEventListener("change", () => { CH.p0 = r.value; CH.p5 = ""; buildChallenge(); pg.querySelector('input[name="p0"]:checked')?.focus(); $("chStatus").textContent = GPLANS0[CH.p0].name + " selected"; }));
+  pg.querySelectorAll('input[name="p5"]').forEach(r => r.addEventListener("change", () => { CH.p5 = r.value; buildChallenge(); pg.querySelector('input[name="p5"]:checked')?.focus(); $("chStatus").textContent = "Day 5 choice selected"; }));
+  pg.querySelectorAll('input[name="path"]').forEach(r => r.addEventListener("change", () => { CH.path = r.value; CH.cmp = "comp"; buildChallenge(); pg.querySelector('input[name="path"]:checked')?.focus(); $("chStatus").textContent = GPATHS[CH.path].name + " path shown"; }));
+  $("cmpSel")?.addEventListener("change", e => { CH.cmp = e.target.value; buildChallenge(); $("cmpSel").focus(); });
+  const goStep = (n) => { CH.step = n; buildChallenge(true); };
+  pg.querySelector("[data-next]")?.addEventListener("click", () => { if (CH.step === 1) { CH.path = "long"; CH.p5 = ""; } if (CH.step === 2 && GPATHS[CH.path].resolved) CH.p5 = "keep"; goStep(CH.step + 1); });
+  pg.querySelector("[data-back]")?.addEventListener("click", () => goStep(CH.step - 1));
+  pg.querySelectorAll("[data-replay]").forEach(b => b.addEventListener("click", () => { CH.path = b.dataset.replay; CH.cmp = "comp"; goStep(3); }));
+  pg.querySelector("[data-restart]")?.addEventListener("click", () => { CH.step = 1; CH.p0 = CH.p5 = ""; CH.path = "long"; CH.cmp = "comp"; buildChallenge(true); });
+  pg.querySelector("[data-print]")?.addEventListener("click", () => window.print());
+  if (focusHead) { $("chHead").focus(); $("page").scrollIntoView({ block: "start" }); }
 }
 
 /* ----- research programme page ----- */
@@ -1492,8 +1741,49 @@ function buildResearch() {
       <h3>What we will not claim</h3>
       <p>No real-time national prediction service in the first phase, no automated policy triggers, and no dollar benefits presented as estimates until a model has passed historical and decision tests.</p>
       <h3>What we ask of partners</h3>
-      <p>Help define one urgent decision problem; share suitable data under agreements that protect sensitive information; open access to preparedness exercises; and support scoped research funding.</p>
+      <p>Help define one urgent decision problem; share suitable data under agreements that protect sensitive information; open access to preparedness exercises; and support scoped research funding. See the <a href="#partners">potential partners</a> we propose to work with.</p>
+      <p><a class="btn primary" href="mailto:mbodrudd@uoguelph.ca?subject=Pilot%20discussion%3A%20Canada%20Food%20System%20Stress%20Test" style="text-decoration:none">Request a pilot discussion</a></p>
       <p><b>Contact:</b> Professor Evan Fraser, Executive Director, Arrell Food Institute, University of Guelph; Dr. Md Bodrud-Doza, Postdoctoral Scholar, University of Guelph, <a href="mailto:mbodrudd@uoguelph.ca?subject=Canada%20Food%20System%20Stress%20Test%20research%20programme">mbodrudd@uoguelph.ca</a>.</p>
+    </div>`;
+}
+
+/* ----- potential partners page (text tiles; logos only with each organization's permission) ----- */
+const PARTNERS = [
+  { group: "Research partners", items: [
+    { org: "University of Guelph and Arrell Food Institute", type: "University", where: "Guelph, Ontario", role: "Proposed lead and coordinating institution: research design, the shock register, models and partner engagement.", url: "https://arrellfoodinstitute.ca/", status: "Lead (proposed)" },
+    { org: "Cornell University, Ashley School of Global Development and the Environment", type: "University", where: "Ithaca, New York", role: "Food policy, nutrition and humanitarian response.", url: "https://cals.cornell.edu/", status: "Proposed" },
+    { org: "University of Maryland and NASA Harvest", type: "University and program", where: "College Park, Maryland", role: "Satellite monitoring of crops and agricultural conditions.", url: "https://www.nasaharvest.org/", status: "Proposed" },
+    { org: "University of the Fraser Valley", type: "University", where: "Abbotsford, British Columbia", role: "Food systems and agricultural land in British Columbia.", url: "https://www.ufv.ca/", status: "Proposed" },
+    { org: "University of Oxford", type: "University", where: "Oxford, United Kingdom", role: "Food system science and food security.", url: "https://www.ox.ac.uk/", status: "Proposed" }
+  ] },
+  { group: "Industry and data partners", items: [
+    { org: "Planet Labs", type: "Company", where: "San Francisco, California", role: "Daily satellite imagery for monitoring crops, storage and transport.", url: "https://www.planet.com/", status: "Proposed" }
+  ] },
+  { group: "International bodies and initiatives", items: [
+    { org: "Food and Agriculture Organization of the United Nations", type: "United Nations agency", where: "Rome, Italy", role: "Global food security monitoring and early warning.", url: "https://www.fao.org/", status: "Planned engagement" },
+    { org: "RAAPID initiative", type: "Initiative", where: "", role: "An initiative led by the University of Maryland; would link the stress test to the satellite monitoring work.", url: "", status: "Planned engagement" }
+  ] }
+];
+function buildPartners() {
+  mode = "info"; showParts("info");
+  setCrumbs([["Home", "#"], ["Potential partners", ""]]);
+  $("page").innerHTML = `
+    <div class="prose">
+      <h2>Potential partners</h2>
+      <div class="notfinal" role="note"><b>Not finalized.</b> This list shows the organizations we propose to work with. Roles are still under discussion, and listing an organization does not mean it has agreed to take part or endorses this prototype. Logos will be added only with each organization's permission.</div>
+      <p>The programme needs partners who hold data, run preparedness exercises and make the decisions the stress test is meant to support. University of Guelph and the Arrell Food Institute would coordinate the work, with ethics approval for interviews and exercises, and equity, diversity and inclusion built into the research design.</p>
+    </div>
+    ${PARTNERS.map(g => `<div class="sechead"><h2>${g.group}</h2></div>
+      <div class="ptgrid">${g.items.map(p => `<div class="ptile">
+        <div class="pmark" aria-hidden="true">Logo pending</div>
+        <div class="pbody"><b>${p.url ? `<a href="${p.url}" rel="noopener">${esc(p.org)}</a>` : esc(p.org)}</b>
+          <span class="snap">${p.type}${p.where ? " · " + p.where : ""}</span>
+          <span>${p.role}</span>
+          <span class="pstat">${p.status}</span></div></div>`).join("")}</div>`).join("")}
+    <div class="prose">
+      <h3>Who else we hope to engage</h3>
+      <p>Federal and provincial departments responsible for agriculture, food safety, transport and emergency management; railways, ports and grain companies for the first pilot; food processors, distributors and retailers; and farm and Indigenous organizations. We will add them here only once they have agreed.</p>
+      <p><b>Interested in partnering?</b> <a href="mailto:mbodrudd@uoguelph.ca?subject=Partnering%3A%20Canada%20Food%20System%20Stress%20Test">Contact us</a>, or read <a href="#research">the research programme</a>.</p>
     </div>`;
 }
 
@@ -1657,6 +1947,7 @@ function route() {
   else if (head === "updates") { view = "updates"; buildUpdates(); }
   else if (head === "challenge") { view = "challenge"; buildChallenge(); }
   else if (head === "research") { view = "research"; buildResearch(); }
+  else if (head === "partners") { view = "partners"; buildPartners(); }
   else { view = "home"; buildHome(); }
   update();
   if (!["methods"].includes(view)) window.scrollTo(0, 0);
@@ -1665,7 +1956,7 @@ function viewTitle() {
   if (SCEN[view]) return "Stress test: " + SCEN[view].tab;
   if (view === "cat") return catName(catSel) + ": integrated stress test";
   if (view === "run") return "Compound scenario: " + STORIES.find(x => x.id === storySel).title;
-  return { home: "National integrated stress test", methods: "Methodology", scenarios: "Compound scenarios", updates: "Recent developments", challenge: "Decision challenge", research: "From prototype to science" }[view];
+  return { home: "National integrated stress test", methods: "Methodology", scenarios: "Compound scenarios", updates: "Recent developments", challenge: "Decision challenge", research: "From prototype to science", partners: "Potential partners" }[view];
 }
 $("snapDate").textContent = SNAPSHOT; $("verNo").textContent = VERSION; $("chkDate").textContent = CHECKED;
 $("exModels").innerHTML = MODELLED.map(k => `<a href="#${k}">${SCEN[k].tab}</a>`).join(" · ");
@@ -1673,6 +1964,7 @@ $("printBrief").addEventListener("click", () => window.print());
 window.addEventListener("beforeprint", () => {
   const today = new Date().toLocaleDateString("en-CA", { day: "numeric", month: "long", year: "numeric" });
   let settings = "";
+  if (view === "challenge" && CH.p0) settings = "Choices: Day 0 " + GPLANS0[CH.p0].name.toLowerCase() + "; Day 5 " + (CH.p5 && CH.p5 !== "keep" ? gOpts5(CH.p0, CH.path).find(x => x.id === CH.p5).name.toLowerCase() : "keep the current plan") + "; event path " + GPATHS[CH.path].name.toLowerCase() + ". Exercise units, volumes, capacities and lead times are illustrative.";
   if (SCEN[view]) settings = "Settings: " + SCEN[view].params.map(p => p.label + " " + p.fmt(state[view][p.id])).join("; ") + ".";
   else if (["home", "cat", "run"].includes(view)) settings = "Settings: shocks " + integ.set.map(k => SCEN[k].tab.toLowerCase()).join(", ") + "; reactive response at each action signal; early action at each readiness signal; compounding " + integ.kappa + "%; overlap delay " + integ.penalty + " days; joint playbook " + (integ.playbook ? "on" : "off") + ".";
   $("briefHead").innerHTML = `<b>Decision brief: ${esc(viewTitle())}</b> · Canada Food System Stress Test, prototype v${VERSION}<br>${settings ? esc(settings) + "<br>" : ""}<b>Evidence status:</b> events and statistics are observed and sourced; model results are illustrative (validation level V0, not forecasts); signal levels are demonstration settings; playbook leads and funding are proposals, not agreed. Sources checked ${CHECKED}.<br>Printed ${today} from ${esc(location.href)}.`;
