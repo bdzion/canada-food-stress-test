@@ -16,7 +16,9 @@ The site has three levels:
 2. **Category pages** (`#cat/<id>`). The ranked stresses in a category, each with signal, origin, transmission channel and evidence, and the integrated stress test for that category's modelled shocks.
 3. **Single-stress tests.** Prairie drought, avian influenza, loss of an export market, phosphate before seeding, rail or port shutdown, cyberattack on distribution, and workforce outbreak at meat plants. Each shows warning signs, the cost of waiting, the decision window and a four-part playbook (trigger, action and lead, money, learning).
 
-Supporting pages are linked from the "Explore the platform" panel at the bottom of every page: Methodology (`#methods`, including the full shock register and transmission channels), Compound scenarios (`#scenarios`), Recent developments (`#updates`), the user guide, and a printable decision brief.
+Every test compares early action with a **reactive response** (acting at the action signal, an assumed stand-in for current practice) and with no response as a boundary case. Results carry evidence labels (observed, illustrative, proposed, demonstration signals), "About this number" notes, a false-alarm cost and a model card. All models are at validation level V0 (demonstration).
+
+The header links to a **90-second decision challenge** (`#challenge`) and to **From prototype to science** (`#research`), the research programme with its workstreams, first pilot and validation ladder. Other supporting pages are linked from the "Explore the platform" panel at the bottom of every page: Methodology (`#methods`, including the full shock register and transmission channels), Compound scenarios (`#scenarios`), Recent developments (`#updates`), the user guide, and a printable decision brief.
 
 ## Important caveats
 

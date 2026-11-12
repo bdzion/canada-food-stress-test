@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Canada Food System Stress Test</title>
-<meta name="description" content="Interactive prototype from the Arrell Food Institute, University of Guelph: stresses to Canada's food system from inside and outside Canada, ranked by category, traced to where they hit, and stress-tested alone and together. Illustrative, not a forecast.">
+<meta name="description" content="Prototype from the Arrell Food Institute, University of Guelph, for a proposed national food system stress test: stresses from inside and outside Canada, tested alone and together, comparing early action with a reactive response. Illustrative, not a forecast.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Canada Food System Stress Test">
 <meta property="og:description" content="Stresses to Canada's food system from home and abroad, and what acting early is worth. Interactive prototype for discussion, Arrell Food Institute, University of Guelph.">
@@ -110,6 +110,20 @@ input[type=range] { width: 100%; accent-color: var(--act); }
 .tile.act { border-top: 3px solid var(--act); }
 .tile.save { border-top: 3px solid var(--good); }
 .tile.win { border-top: 3px solid var(--ready); }
+.tile.react { border-top: 3px solid var(--late); }
+.ev { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .02em; padding: 1px 7px; border-radius: 4px; border: 1px solid currentColor; white-space: nowrap; vertical-align: 1px; }
+.ev-obs { color: var(--good); } .ev-ill { color: color-mix(in srgb, var(--ready) 72%, var(--ink)); } .ev-prop { color: var(--act); } .ev-demo { color: var(--watch); }
+.evrow { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 13px; color: var(--muted); }
+details.tinfo { background: none; border: 0; padding: 0; margin-top: 4px; font-size: 12px; color: var(--muted); }
+details.tinfo summary { font-weight: 600; color: var(--act); font-size: 12px; }
+details.tinfo[open] summary { margin-bottom: 4px; }
+.tnote { font-size: 13.5px; margin: 0; color: var(--ink); }
+.mcard { font-size: 13.5px; }
+.mcard dl { display: grid; grid-template-columns: 170px minmax(0,1fr); gap: 4px 14px; margin: 10px 0 0; }
+.mcard dt { font-weight: 700; color: var(--muted); }
+.mcard dd { margin: 0; }
+:focus-visible { outline: 3px solid var(--act); outline-offset: 2px; }
+.chart:focus-visible { outline-offset: 4px; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px 10px; display: grid; gap: 6px; min-width: 0; }
 .card .sub { font-size: 13px; color: var(--muted); margin: 0; }
 .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12.5px; color: var(--muted); }
@@ -193,6 +207,32 @@ select { font: inherit; font-size: 13px; padding: 5px 8px; border: 1px solid var
 .headlinks { display: flex; gap: 8px; flex-wrap: wrap; }
 #briefHead { display: none; }
 .hero { display: grid; gap: 10px; padding: 8px 0 4px; }
+.herobtns { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 2px; }
+.herobtns .btn { font-size: 14.5px; padding: 9px 16px; text-decoration: none; border-radius: 999px; }
+.btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+#page a.btn.primary, a.btn.primary { color: var(--bg); }
+#page a.btn { color: var(--ink); }
+.btn.primary:hover { opacity: .92; }
+.chal { display: grid; gap: 14px; max-width: 860px; }
+.chal .stepdots { display: flex; gap: 6px; font-size: 12.5px; color: var(--muted); align-items: center; }
+.chal .stepdots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); display: inline-block; }
+.chal .stepdots i.on { background: var(--accent); }
+.chal .scene { font-family: var(--font-display); font-size: 20px; line-height: 1.35; margin: 0; }
+.opts { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+.opt { font: inherit; text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px; padding: 12px 14px; cursor: pointer; display: grid; gap: 4px; }
+.opt:hover { border-color: var(--act); }
+.opt[aria-pressed="true"] { border: 2px solid var(--act); padding: 11px 13px; }
+.opt b { font-size: 15px; }
+.opt span { font-size: 13px; color: var(--muted); }
+.meter { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--act); }
+.cmp { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.cmp th, .cmp td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+.cmp tr.mine td { font-weight: 700; }
+.ladder td.here { font-weight: 700; color: var(--act); }
+.ws { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+.ws .item h3 { font-family: var(--font-display); font-size: 16px; }
+@media (max-width: 760px) { .opts, .ws { grid-template-columns: 1fr; } }
 .hero h1 { font-size: clamp(32px, 5vw, 48px); }
 .tagline { font-family: var(--font-display); font-size: clamp(19px, 2.4vw, 24px); line-height: 1.3; margin: 0; max-width: 52ch; color: var(--ink); }
 .subhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
@@ -228,7 +268,7 @@ a.excard:hover { border-color: var(--act); }
   a { color: #000; }
 }
 @media (max-width: 920px) { .exgrid { grid-template-columns: 1fr 1fr; } .main { grid-template-columns: 1fr; } .tiles { grid-template-columns: repeat(2, minmax(0,1fr)); } .cats { grid-template-columns: repeat(2, minmax(0,1fr)); } .two, .stories { grid-template-columns: 1fr; } .pb { grid-template-columns: repeat(2, minmax(0,1fr)); } .flow { grid-template-columns: 1fr; } .flow .step { border-right: 0; border-bottom: 1px solid var(--line); } .flow .step::after { display: none; } }
-@media (max-width: 560px) { .cats, .pb, .exgrid { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .cats, .pb, .exgrid { grid-template-columns: 1fr; } .mcard dl { grid-template-columns: 1fr; } }
 @media (max-width: 700px) {
   .regt thead { display: none; }
   .regt, .regt tbody, .regt tr, .regt td, .regt th { display: block; width: 100%; }
@@ -252,8 +292,9 @@ a.excard:hover { border-color: var(--act); }
   <header id="hero" class="hero">
     <div class="eyebrow">Arrell Food Institute · University of Guelph · Prototype for discussion, November 2026</div>
     <h1>Canada Food System Stress Test</h1>
-    <p class="tagline">A national platform that tests threats before they strike and tells decision-makers when to act.</p>
-    <p class="dek">No one is watching Canada's whole food system. This stress test brings every major stress, at home and abroad, into one decision framework that supports the National Food Security Strategy. It gives decision-makers the facts: the warning signs, and the cost of acting early, acting late or not at all.</p>
+    <p class="tagline">A proposed national platform to test threats before they strike and help decision-makers judge when to act.</p>
+    <p class="dek">Canada monitors many risks. What no one tests is how they combine across the whole food system, and what a late response costs. This prototype shows how a stress test could bring every major stress, at home and abroad, into one decision framework that supports the National Food Security Strategy and emergency management in agriculture: the warning signs, and the cost of acting early, reactively or not at all.</p>
+    <div class="herobtns"><a class="btn primary" href="#challenge">Try the 90-second decision challenge</a><a class="btn" href="#research">From prototype to science: the research programme</a></div>
     <div class="notice"><b>Illustrative only.</b><span>Signal levels are demonstration settings and the models are stylized, with stated assumptions. Nothing here is a forecast or a live feed. Events and statistics are real and linked to their sources.</span></div>
   </header>
   <header id="subhead" class="subhead hidden">
@@ -281,7 +322,9 @@ a.excard:hover { border-color: var(--act); }
     </aside>
 
     <section class="results" aria-live="polite">
+      <div class="evrow" id="evrow"></div>
       <div class="tiles" id="tiles"></div>
+      <p class="tnote" id="tnote"></p>
       <div class="card" id="card1">
         <h2 id="c1title">How the shock unfolds</h2>
         <p class="sub" id="c1sub"></p>
@@ -297,10 +340,11 @@ a.excard:hover { border-color: var(--act); }
         <p class="insight" id="insight2"></p>
       </div>
       <div class="card" id="pbCard">
-        <h2 id="pbTitle">Pre-agreed playbook</h2>
-        <p class="sub">The four parts of an anticipatory action plan: the trigger, the action and who leads it, the money set aside in advance, and how results are reviewed. Leads and funding are proposals for discussion, not agreed arrangements.</p>
+        <h2 id="pbTitle">Proposed playbook</h2>
+        <p class="sub"><span class="ev ev-prop">Proposed, not agreed</span> The four parts of an anticipatory action plan: the trigger, the action and who leads it, the money set aside in advance, and how results are reviewed. Named leads and funding are proposals for discussion. No agency has agreed to them.</p>
         <div class="pb" id="pb"></div>
       </div>
+      <details class="card mcard" id="mcard"><summary>Model card</summary><div id="mcardBody"></div></details>
     </section>
   </div>
 
@@ -318,6 +362,8 @@ a.excard:hover { border-color: var(--act); }
   <section class="explore noprint" id="explore" aria-labelledby="exploreTitle">
     <h2 id="exploreTitle">Explore the platform</h2>
     <div class="exgrid">
+      <a class="excard" href="#research"><b>From prototype to science</b><span>The research programme: three workstreams, the first pilot, the validation ladder, and what we ask of partners.</span></a>
+      <a class="excard" href="#challenge"><b>Decision challenge</b><span>A 90-second exercise: a rail corridor may close in 72 hours. What would you do?</span></a>
       <a class="excard" href="#methods"><b>Methodology</b><span>How the stress test works: categories, scoring, transmission channels, models, and the full shock register.</span></a>
       <a class="excard" href="#scenarios"><b>Compound scenarios</b><span>Storylines that combine stresses from different categories, at home and abroad.</span></a>
       <a class="excard" href="#updates"><b>Recent developments</b><span>The dated, sourced events behind the current signals, and the planned data feeds.</span></a>
@@ -328,7 +374,7 @@ a.excard:hover { border-color: var(--act); }
   </section>
 
   <footer>
-    <div>Arrell Food Institute, University of Guelph. Illustrative prototype for discussion, not a forecast. Situation snapshot reviewed <span id="snapDate"></span>.</div>
+    <div>Arrell Food Institute, University of Guelph. Prototype v<span id="verNo"></span> for discussion, not a forecast. Situation snapshot reviewed <span id="snapDate"></span>; sources checked <span id="chkDate"></span>.</div>
   </footer>
 </div>
 
@@ -745,6 +791,15 @@ SCEN["workforce"] = {
   ]
 };
 const MODELLED = ["drought", "avian-flu", "export", "phosphate", "rail", "cyber", "workforce"];
+const MODEL_CARDS = {
+  drought: { q: "How much does sourcing and moving feed early reduce forced herd sales in a Prairie drought?", counts: "Losses from feed shortfalls (forced sales of breeding herds and related supply-chain losses) and the cost of sourcing feed.", omits: "Crop losses from the drought itself, price effects on consumers, regional differences, and the chance that rain arrives.", data: "Canadian Drought Monitor, Statistics Canada crop and livestock data, feed prices, and records of 2021 herd sales." },
+  "avian-flu": { q: "How much does an earlier, coordinated response limit spread between poultry farms?", counts: "Losses from infected and destroyed flocks, and the cost of surveillance and control.", omits: "Trade-zone effects in detail, wild-bird dynamics, compensation transfers, and premises-level contact networks.", data: "CFIA outbreak records by premises and date, farm density, and control timelines from past waves." },
+  export: { q: "How much does early diversification and storage support reduce losses when a major buyer closes its market?", counts: "Value lost on exports that find no buyer, the discount on redirected sales, and the response cost.", omits: "World price feedbacks, retaliation and negotiation, exchange rates, and effects on processors.", data: "Statistics Canada trade data, the 2025–26 canola dispute, and farm-gate prices before and after duties." },
+  phosphate: { q: "By when must alternative phosphate supply be ordered so it reaches farms before seeding?", counts: "Yield losses from under-applied phosphorus and the extra cost of replacement supply.", omits: "Dealer inventories, soil phosphorus variation between fields, and substitution between nutrients.", data: "Fertilizer import data, dealer stocks, soil-test summaries, and yield-response trials." },
+  rail: { q: "How much does a contingency plan save when a rail or port corridor closes, and how fast must it start?", counts: "Net losses from freight not moving (after recovered sales) and the cost of rerouting and priority movement.", omits: "Carrier-level capacity, route detail, contract penalties by firm, and how long the closure really lasts.", data: "Canadian Grain Commission weekly grain statistics, port and rail performance data, and the 2023–24 stoppages." },
+  cyber: { q: "How much does a ready-made response plan reduce empty shelves after a cyberattack on a distributor?", counts: "Lost sales and spoilage while ordering systems are down, and the cost of manual operations and mutual aid.", omits: "Ransom decisions, insurance, regional differences, and how long recovery really takes.", data: "Incident reports and recovery timelines from distributors and grocers, shared under confidentiality agreements." },
+  workforce: { q: "How much do earlier workplace protections limit lost beef processing capacity during an outbreak?", counts: "Lost processing value not recovered later and the cost of protective measures.", omits: "Cattle prices and backlogs in detail, plant-by-plant differences, and worker welfare beyond attendance.", data: "Plant capacity and attendance in 2020, cattle-on-feed and slaughter statistics, and public health records." }
+};
 const MODEL_CAT = { drought: "climate", "avian-flu": "health", export: "trade", phosphate: "inputs", rail: "logistics", cyber: "logistics", workforce: "people" };
 
 /* ---------- Canada-centred shock register ---------- */
@@ -771,7 +826,7 @@ const REG = [
   ["Fertilizer supply cut", "inputs", "outside", "inputs", "Imports from a few suppliers through a few ports", "Under-fertilized crops, lower yields", "No domestic phosphate fertilizer; the 2026 Strait of Hormuz closure lifted urea prices about 40%", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/", 4, 4, 3, 4, 1, "flat", "Medium", "phosphate"],
   ["Cyberattack on food distribution or processing", "logistics", "both", "digital", "Ordering, routing and cold-chain systems", "Empty shelves, spoiled food, lost sales", "2025 attack on a North American grocery distributor cost up to US$400M; the 2026 cyber security law does not cover food", "https://cyberscoop.com/united-natural-foods-cyberattack-400-million/", 4, 3, 5, 4, 1, "up", "Low", "cyber"],
   ["Energy and fuel price spike", "inputs", "outside", "inputs", "Diesel, natural gas and fertilizer costs", "Higher farm, transport and food costs", "The Strait of Hormuz carries about 20% of world oil and liquefied natural gas", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/", 4, 3, 4, 5, 1, "flat", "Medium", ""],
-  ["Highly pathogenic avian influenza", "health", "both", "prod", "Dense barns, shared trucks, a few hatcheries", "Lost birds, egg and poultry shortfalls, trade limits", "17.3 million poultry on 639 premises since 2021", "https://search.open.canada.ca/qpnotes/record/aafc-aac%2CCFIA-2026-QP-00012", 5, 3, 4, 3, 1, "up", "High", "avian-flu"],
+  ["Highly pathogenic avian influenza", "health", "both", "prod", "Dense barns, shared trucks, a few hatcheries", "Lost birds, egg and poultry shortfalls, trade limits", "17.3 million poultry on 639 premises by early 2026 (CFIA); new commercial outbreaks in British Columbia in November 2026", "https://search.open.canada.ca/qpnotes/record/aafc-aac%2CCFIA-2026-QP-00012", 5, 3, 4, 3, 1, "up", "High", "avian-flu"],
   ["Prairie drought and heat", "climate", "inside", "prod", "Rain-fed cropland, hay and pasture", "Smaller crops, feed shortfalls, herd sell-offs", "2021: canola output −35.4%, wheat −38.5%", "https://www150.statcan.gc.ca/n1/daily-quotidien/211203/dq211203b-eng.htm", 4, 4, 2, 4, 0, "flat", "High", "drought"],
   ["Flood or wildfire on transport corridors", "climate", "inside", "logistics", "Mountain rail and highway corridors", "Stranded exports and supplies", "2021 floods halted all rail traffic in and out of the Port of Vancouver", "https://www.cbc.ca/1.6250554", 4, 3, 5, 4, 0, "flat", "Medium", "rail"],
   ["Drought or heat in other grain-exporting regions", "climate", "outside", "exports", "World grain and oilseed prices", "Price swings for farmers and food buyers", "Compound climate and other shocks strain global grain supplies (Verschuur et al., 2026)", DOI("10.1371/journal.pclm.0000825"), 4, 3, 2, 4, 0, "flat", "Low", ""],
@@ -792,15 +847,19 @@ REG.slice().sort(byScore).forEach((r, i) => r.rankAll = i + 1);
 CATS.forEach(c => REG.filter(r => r.cat === c.id).sort(byScore).forEach((r, i) => r.rankCat = i + 1));
 
 /* Recent developments: real, dated, linked. Signal effects are the authors' demonstration settings. */
-const SNAPSHOT = "11 November 2026";
+const SNAPSHOT = "12 November 2026";
+const VERSION = "0.3";
+const CHECKED = "12 November 2026";
 const UPDATES = [
+  ["2026-11-06", "health", "both", "News", "Avian influenza was detected in a British Columbia commercial poultry flock for the first time this autumn season.", "https://www.ctvnews.ca/vancouver/article/avian-flu-detected-in-bc-poultry-flock-for-first-time-this-season/", "Avian influenza trend set to rising (seasonal)"],
+  ["2026-07", "", "inside", "Official", "Federal, provincial and territorial agriculture ministers welcomed the renewed Emergency Management Framework for Agriculture in Canada, which takes an all-hazards approach.", "https://www.canada.ca/en/agriculture-agri-food/news/2026/07/backgrounder-summary-of-items-from-the-2026-annual-meeting-of-federal-provincial-and-territorial-fpt-ministers-of-agriculture.html", "Context for playbooks and partners"],
   ["2026-07-01", "trade", "outside", "Official", "The United States declined to extend the Canada-United States-Mexico Agreement; the three countries now review it every year.", "https://www.canada.ca/en/global-affairs/news/2026/07/statement-by-minister-leblanc-following-trilateral-cusma-joint-review-meeting.html", "Trade with the United States set to Ready"],
   ["2026-06-16", "logistics", "inside", "Official", "Canada's new cyber security law received Royal Assent. It covers finance, telecommunications, energy and transportation, not food.", "https://www.canada.ca/en/public-safety-canada/news/2026/06/government-of-canada-strengthens-cyber-security-and-critical-infrastructure-with-royal-assent-of-bill-c8.html", "Cyberattack risk trend set to rising"],
   ["2026-06-11", "", "inside", "Official", "The National Food Security Strategy was launched, with more than $3 billion over ten years.", "https://www.pm.gc.ca/en/news/news-releases/2026/06/11/prime-minister-carney-launches-national-food-security-strategy", "Context for playbooks and funding"],
   ["2026-05-01", "logistics", "inside", "Industry analysis", "One week of rail and port disruption at peak export season could cost the grain sector up to $540 million.", "https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx", "Rail model assumptions updated"],
   ["2026-03-04", "trade", "outside", "Official", "China cut its duties on Canadian canola seed to 14.9%, down from almost 85%. Canola oil still faces a 100% tariff.", "https://www.canada.ca/en/global-affairs/news/2026/03/canada-secures-renewed-market-access-with-china-to-boost-exports-and-strengthen-economic-collaboration.html", "Export market closure trend set to easing"],
   ["2026", "inputs", "outside", "News", "The closure of the Strait of Hormuz lifted urea fertilizer prices about 40% just before spring planting.", "https://www.producer.com/daily/iran-war-disrupts-global-fertilizer-markets-spring-planting/", "Fertilizer and energy stresses held at Watch"],
-  ["2026", "health", "both", "Official", "Avian influenza has affected 17.3 million poultry on 639 premises since 2021. Autumn migration is a high-risk season.", "https://search.open.canada.ca/qpnotes/record/aafc-aac%2CCFIA-2026-QP-00012", "Avian influenza trend set to rising (seasonal)"],
+  ["2026", "health", "both", "Official", "Avian influenza had affected 17.3 million poultry on 639 premises by early 2026. CFIA's status page has the current total.", "https://search.open.canada.ca/qpnotes/record/aafc-aac%2CCFIA-2026-QP-00012", "Context for the avian influenza model"],
   ["2026", "", "outside", "Report", "The 2026 Global Report on Food Crises was published by the Food and Agriculture Organization, the World Food Programme and partners.", DOI("10.4060/cd9424en"), "Global context"]
 ];
 const NOTES = {
@@ -836,7 +895,7 @@ const STORIES = [
 let view = "home", mode = "home", catSel = "", storySel = "";
 const state = {};
 Object.keys(SCEN).forEach(k => { state[k] = {}; SCEN[k].params.forEach(p => state[k][p.id] = p.value); });
-const integ = { set: MODELLED.slice(), kappa: 8, penalty: 5, playbook: false, delay: 28 };
+const integ = { set: MODELLED.slice(), kappa: 8, penalty: 5, playbook: false };
 const regFilter = { cat: "all", origin: "all", path: "all", sort: "cat" };
 let pathSel = "Trade disruption with the United States";
 const catModels = (id) => [...new Set(REG.filter(r => r.cat === id).map(r => r.model).filter(Boolean))];
@@ -913,10 +972,14 @@ function lineChart(el, tipEl, cfg) {
   el.querySelectorAll("svg").forEach(n => n.remove());
   el.insertAdjacentHTML("afterbegin", s);
   const hit = $(el.id + "-hit"), xl = $(el.id + "-x");
-  hit.addEventListener("mousemove", (ev) => {
+  const nPts = cfg.series[0].data.length;
+  el.tabIndex = 0;
+  el.setAttribute("role", "group");
+  el.setAttribute("aria-label", cfg.aria + ". Use the left and right arrow keys to read values; the data table below lists them all.");
+  const show = (xi) => {
+    xi = clamp(xi, 0, nPts - 1);
+    el.dataset.xi = xi;
     const r = el.getBoundingClientRect(); const scale = W / r.width;
-    const px = (ev.clientX - r.left) * scale;
-    const xi = clamp(Math.round(((px - m.l) / iw) * xMax / cfg.dx), 0, cfg.series[0].data.length - 1);
     const xv = xi * cfg.dx;
     xl.setAttribute("x1", X(xv)); xl.setAttribute("x2", X(xv)); xl.setAttribute("visibility", "visible");
     tipEl.innerHTML = `<b>${cfg.xFmt(xv, true)}</b><br>` + cfg.series.map(sr => `<span style="color:${sr.color}">●</span> ${sr.name}: ${cfg.yFmt(sr.data[xi], true)}`).join("<br>");
@@ -924,12 +987,26 @@ function lineChart(el, tipEl, cfg) {
     const tx = X(xv) / scale; const tw = tipEl.offsetWidth;
     tipEl.style.left = (tx + 12 + tw > r.width ? tx - tw - 12 : tx + 12) + "px";
     tipEl.style.top = (m.t / scale) + "px";
-  });
-  hit.addEventListener("mouseleave", () => { tipEl.style.display = "none"; xl.setAttribute("visibility", "hidden"); });
+  };
+  const hide = () => { tipEl.style.display = "none"; xl.setAttribute("visibility", "hidden"); };
+  const fromEvent = (ev) => { const r = el.getBoundingClientRect(); const px = (ev.clientX - r.left) * (W / r.width); return clamp(Math.round(((px - m.l) / iw) * xMax / cfg.dx), 0, nPts - 1); };
+  hit.addEventListener("pointermove", (ev) => show(fromEvent(ev)));
+  hit.addEventListener("pointerdown", (ev) => show(fromEvent(ev)));
+  hit.addEventListener("pointerleave", (ev) => { if (ev.pointerType === "mouse") hide(); });
+  el.onkeydown = (ev) => {
+    if (ev.key !== "ArrowLeft" && ev.key !== "ArrowRight" && ev.key !== "Home" && ev.key !== "End") return;
+    ev.preventDefault();
+    const cur = el.dataset.xi === undefined ? 0 : +el.dataset.xi;
+    const step = Math.max(1, Math.round(nPts / 30));
+    show(ev.key === "Home" ? 0 : ev.key === "End" ? nPts - 1 : clamp(cur + (ev.key === "ArrowRight" ? step : -step), 0, nPts - 1));
+  };
+  el.onfocus = () => show(el.dataset.xi === undefined ? 0 : +el.dataset.xi);
+  el.onblur = hide;
 }
 
 /* Grouped horizontal bars: rows × cases, every bar labelled with its value */
 function barChart(el, tipEl, cfg) {
+  el.onkeydown = el.onfocus = el.onblur = null; el.removeAttribute("tabindex"); el.removeAttribute("role"); el.removeAttribute("aria-label"); delete el.dataset.xi;
   const W = Math.max(320, el.clientWidth);
   const lw = W < 560 ? 120 : 190, bh = 11, gap = 3, rowGap = 16, padT = 8;
   const nC = cfg.cases.length;
@@ -939,7 +1016,7 @@ function barChart(el, tipEl, cfg) {
   const max = niceMax(Math.max(...cfg.rows.flatMap(r => r.values)) * 1.02);
   const X = (v) => lw + (v / max) * iw;
   const muted = css("--muted"), line = css("--line"), ink = css("--ink");
-  let s = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="${cfg.aria}">`;
+  let s = `<svg viewBox="0 0 ${W} ${Hh}" role="group" aria-label="${cfg.aria}">`;
   const baseY = padT + cfg.rows.length * (rowH + rowGap);
   ticks(max, 4).forEach(v => {
     s += `<line x1="${X(v)}" x2="${X(v)}" y1="${padT - 4}" y2="${baseY - rowGap / 2}" stroke="${line}"/>`;
@@ -972,11 +1049,17 @@ function barChart(el, tipEl, cfg) {
     rect.addEventListener("mouseleave", () => tipEl.style.display = "none");
     const r = cfg.rows[+rect.dataset.r]; if (r.go) rect.addEventListener("click", r.go);
   });
-  el.querySelectorAll("text[data-go]").forEach(t => t.addEventListener("click", cfg.rows[+t.dataset.go].go));
+  el.querySelectorAll("text[data-go]").forEach(t => {
+    t.setAttribute("tabindex", "0"); t.setAttribute("role", "link");
+    t.addEventListener("click", cfg.rows[+t.dataset.go].go);
+    t.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); cfg.rows[+t.dataset.go].go(); } });
+  });
 }
 
 /* ---------- integrated stress test (pure) ---------- */
-function integrated(cfg, delayAfterReady, withPlaybook) {
+/* when: null = no response (boundary case); "react" = each shock acted on at its action signal
+   (stand-in for current practice); a number = days after each readiness signal */
+function integrated(cfg, when, withPlaybook) {
   const keys = cfg.set;
   const n = keys.length;
   const pen = withPlaybook ? 0 : cfg.penalty * Math.max(0, n - 1);
@@ -984,19 +1067,21 @@ function integrated(cfg, delayAfterReady, withPlaybook) {
   let standalone = 0, lossSum = 0, costSum = 0;
   const per = keys.map(k => {
     const s = SCEN[k], p = state[k];
-    const ready = Math.max(0, s.signals(s.run(p, Infinity))[1][1]);
-    if (delayAfterReady === null) { const r = s.run(p, Infinity); standalone += r.total; lossSum += r.loss; return { k, solo: r.total }; }
-    const solo = s.run(p, ready + delayAfterReady);
-    const joint = s.run(p, ready + delayAfterReady + pen);
+    const sg = s.signals(s.run(p, Infinity));
+    if (when === null) { const r = s.run(p, Infinity); standalone += r.total; lossSum += r.loss; return { k, solo: r.total }; }
+    const start = when === "react" ? Math.max(0, sg[2][1]) : Math.max(0, sg[1][1]) + when;
+    const solo = s.run(p, start);
+    const joint = s.run(p, start + pen);
     standalone += solo.total; lossSum += joint.loss; costSum += joint.cost;
     return { k, solo: solo.total };
   });
   const combined = lossSum * (1 + kap) + costSum;
-  return { per, standalone, combined, overlap: combined - standalone, n };
+  return { per, standalone, combined, overlap: combined - standalone, n, cost: costSum, loss: lossSum * (1 + kap) };
 }
 
 /* ---------- UI build ---------- */
-const sigBadge = (n) => `<span class="sig s${n}">${SIG[n]}</span>`;
+const sigBadge = (n) => `<span class="sig s${n}" title="Demonstration signal set by the authors, not a live reading">${SIG[n]}</span>`;
+const DEMO = `<span class="ev ev-demo" title="Signal levels are set by the authors for demonstration. In the full platform analysts would update them after each review.">Demonstration signals</span>`;
 const orgBadge = (o) => `<span class="org">${ORIGIN[o]}</span>`;
 const catName = (id) => (CATS.find(c => c.id === id) || { name: "General" }).name;
 const CHANNEL = "Transmission channel";
@@ -1023,12 +1108,12 @@ function showParts(kind) {
 }
 function renderPlaybook(pb, title) {
   $("pbTitle").textContent = title;
-  $("pb").innerHTML = [["Trigger", pb.trigger], ["Action and lead", pb.action], ["Money", pb.money], ["Learning", pb.learning]]
-    .map(([k, v]) => `<div><div class="k">${k}</div>${esc(v)}</div>`).join("");
+  $("pb").innerHTML = [["Trigger", pb.trigger, false], ["Action and lead", pb.action, true], ["Money", pb.money, true], ["Learning", pb.learning, false]]
+    .map(([k, v, prop]) => `<div><div class="k">${k} ${prop ? '<span class="ev ev-prop">Proposed</span>' : ""}</div>${esc(v)}</div>`).join("");
 }
 function assumpTable(rows) {
-  return "<thead><tr><th>Parameter</th><th>Value</th><th>Basis</th><th>Source or note</th></tr></thead><tbody>" +
-    rows.map(([n, v, k, note, url]) => `<tr><td>${n}</td><td>${v}</td><td><span class="tag ${k}">${k === "src" ? "Sourced" : "Illustrative"}</span></td><td>${url ? `<a href="${url}">${note}</a>` : note}</td></tr>`).join("") + "</tbody>";
+  return "<thead><tr><th>Parameter</th><th>Value</th><th>Status</th><th>Source or note</th></tr></thead><tbody>" +
+    rows.map(([n, v, k, note, url]) => `<tr><td>${n}</td><td>${v}</td><td><span class="tag ${k}">${k === "src" ? "Observed" : "Illustrative"}</span></td><td>${url ? `<a href="${url}">${note}</a>` : note}</td></tr>`).join("") + "</tbody>";
 }
 function setParams(obj) {
   const s = SCEN[view];
@@ -1072,7 +1157,19 @@ function buildScenario() {
     $("questions").appendChild(b);
   });
   $("assump").innerHTML = assumpTable(s.assumptions);
-  renderPlaybook(s.playbook, "Pre-agreed playbook: " + s.tab.toLowerCase());
+  renderPlaybook(s.playbook, "Proposed playbook: " + s.tab.toLowerCase());
+  $("mcard").classList.remove("hidden");
+  const mc = MODEL_CARDS[view];
+  $("mcardBody").innerHTML = `<dl>
+    <dt>Model and version</dt><dd>${s.tab}, prototype v${VERSION} (${CHECKED})</dd>
+    <dt>Validation level</dt><dd>V0, demonstration: assumptions and equations disclosed, internal logic checked. Not calibrated or back-tested. See the <a href="#research">validation ladder</a>.</dd>
+    <dt>Question it explores</dt><dd>${mc.q}</dd>
+    <dt>What it counts</dt><dd>${mc.counts}</dd>
+    <dt>What it leaves out</dt><dd>${mc.omits}</dd>
+    <dt>Comparison cases</dt><dd>No response (boundary case); reactive response at the action signal (assumed current practice); your chosen start date.</dd>
+    <dt>Data to calibrate it</dt><dd>${mc.data}</dd>
+    <dt>Sources checked</dt><dd>${CHECKED}. Every input is listed under "Assumptions and sources for this view" and marked observed or illustrative.</dd>
+  </dl>`;
   const linked = REG.filter(r => r.model === view);
   $("after").innerHTML = `<div class="sechead"><h3>Stresses in the register that this model represents</h3></div>
     <div class="scards">${linked.map(r => stressCard(r, false)).join("")}</div>`;
@@ -1081,45 +1178,47 @@ function buildScenario() {
 /* ----- integrated stress test (home, category, storyline) ----- */
 function intControls() {
   $("ctrlTitle").textContent = "Set the test";
+  $("mcard").classList.add("hidden");
   $("controls").innerHTML = `
-    <div class="ctrl"><label for="in-delay">Late response: delay after readiness<output id="out-delay"></output></label>
-      <input type="range" id="in-delay" min="7" max="56" step="7" value="${integ.delay}"><div class="hint">Used for the "act late" case.</div></div>
-    <label class="check" for="in-play"><input type="checkbox" id="in-play" ${integ.playbook ? "checked" : ""}> Pre-agreed joint playbook in place</label>
+    <label class="check" for="in-play"><input type="checkbox" id="in-play" ${integ.playbook ? "checked" : ""}> Joint playbook agreed in advance</label>
+    <div class="hint">Removes the extra response delay when crises overlap. The "value of a joint playbook" tile compares with and without it whichever way this box is set.</div>
     <details class="more"><summary>More assumptions</summary>
       <div class="ctrl" style="margin-top:10px"><label for="in-kappa">Compounding from shared buffers<output id="out-kappa"></output></label>
-        <input type="range" id="in-kappa" min="0" max="40" step="5" value="${integ.kappa}"><div class="hint">Extra loss per additional overlapping shock.</div></div>
+        <input type="range" id="in-kappa" min="0" max="40" step="1" value="${integ.kappa}"><div class="hint">Extra loss per additional overlapping shock.</div></div>
       <div class="ctrl" style="margin-top:10px"><label for="in-pen">Response delay when crises overlap<output id="out-pen"></output></label>
         <input type="range" id="in-pen" min="0" max="21" step="1" value="${integ.penalty}"><div class="hint">Added days per additional shock, unless a joint playbook exists.</div></div>
     </details>
     <div class="hint">Each shock uses the settings from its own stress test.</div>`;
-  $("in-delay").addEventListener("input", e => { integ.delay = +e.target.value; update(); });
   $("in-kappa").addEventListener("input", e => { integ.kappa = +e.target.value; update(); });
   $("in-pen").addEventListener("input", e => { integ.penalty = +e.target.value; update(); });
   $("in-play").addEventListener("change", e => { integ.playbook = e.target.checked; update(); });
   $("questions").innerHTML = "";
-  const qs = [["every response waits eight weeks?", () => { integ.delay = 56; }], ["a joint playbook is agreed in advance?", () => { integ.playbook = true; }]];
-  if (integ.set.length > 1) qs.push(["shared buffers make overlap twice as costly?", () => { integ.kappa = 30; }]);
+  const qs = [["a joint playbook is agreed in advance?", () => { integ.playbook = true; }]];
+  if (integ.set.length > 1) qs.push(["shared buffers make overlap twice as costly?", () => { integ.kappa = Math.min(40, integ.kappa * 2); }], ["each extra crisis delays every response by two weeks?", () => { integ.penalty = 14; }]);
   qs.forEach(([q, fn]) => {
     const b = document.createElement("button"); b.className = "q"; b.type = "button"; b.textContent = q;
     b.addEventListener("click", () => { fn(); intControls(); update(); }); $("questions").appendChild(b);
   });
   $("assump").innerHTML = assumpTable([
     ["Shocks in the test", integ.set.map(k => SCEN[k].tab).join("; "), "ill", "Each uses the settings and assumptions of its own stress test", ""],
-    ["Compounding from shared buffers", integ.kappa + "% extra loss per additional overlapping shock", "ill", "Assumed; to be estimated from co-occurring 2020–26 events", ""],
+    ["Reactive response", "Each shock acted on at its action signal", "ill", "Assumed stand-in for current practice, to be documented with partners", ""],
+    ["Early action", "Each shock acted on at its readiness signal", "ill", "Definition", ""],
+    ["No response", "No action on any shock", "ill", "Boundary case for comparison only", ""],
+    ["Compounding from shared buffers", integ.kappa + "% extra loss per additional overlapping shock", "ill", "Assumed multiplier; the research would model shared resources and timing explicitly", ""],
     ["Response delay when crises overlap", integ.penalty + " days per additional shock without a joint playbook", "ill", "Assumed", ""],
-    ["Early response", "Each shock acted on at its readiness signal", "ill", "Definition", ""],
-    ["Late response", "Each shock acted on " + integ.delay + " days after its readiness signal", "ill", "Definition (adjustable)", ""]
+    ["Timing of overlap", "All shocks assumed to fall in the same year, each on its own timeline", "ill", "Simplification; calendars and co-occurrence are a research question", ""]
   ]);
   renderPlaybook({ trigger: "Each shock's own readiness and action signals, watched together in one place.",
     action: "One joint plan that says which agency leads each shock and who steps in when several overlap. Proposed convenor: Agriculture and Agri-Food Canada with Public Safety Canada.",
     money: "A shared contingency fund agreed before the year begins, released by trigger rather than by negotiation during the crisis (to be designed).",
-    learning: "An annual national report on readiness and an after-action review of every overlap." }, "Pre-agreed joint playbook");
+    learning: "An annual national report on readiness and an after-action review of every overlap." }, "Proposed joint playbook");
 }
 function stressCard(r, withCat) {
   return `<div class="scard ${r.model ? "modelled" : ""}">
     <div class="row">${sigBadge(r.sig)}<b>${esc(r.name)}</b></div>
     <div class="row">${orgBadge(r.origin)}${withCat ? `<span class="org">${catName(r.cat)}</span>` : ""}<span class="org">${PATHS[r.path]}</span></div>
-    <div>${esc(r.outcome)}. <a href="${r.url}">${esc(r.ev)}</a></div>
+    <div>${esc(r.outcome)}.</div>
+    <div><span class="ev ev-obs">Observed</span> <a href="${r.url}">${esc(r.ev)}</a></div>
     <div>${r.model ? `<a class="go" href="#${r.model}">Open stress test: ${esc(SCEN[r.model].tab.toLowerCase())} →</a>` : `<span class="snap">Model planned for Phase 1</span>`}</div></div>`;
 }
 function catTiles() {
@@ -1135,11 +1234,11 @@ function buildHome() {
   mode = "home"; integ.set = MODELLED.slice();
   showParts("home");
   $("page").innerHTML = `
-    <div class="sechead"><h2>Where is the pressure now?</h2>
+    <div class="sechead"><div class="row"><h2>Where is the pressure now?</h2>${DEMO}</div>
       <p class="snap">Every stress, from inside and outside Canada, sorted into six categories. Each tile shows the highest signal in the category. Choose a category to open its stress test. Snapshot reviewed ${SNAPSHOT}.</p></div>
     ${catTiles()}
     <div class="sechead" style="margin-top:10px"><h2>What a severe year would cost Canada</h2>
-      <p class="snap">The integrated stress test runs a modelled shock from every category in the same year and compares doing nothing, acting late and acting early. Choose a category in the chart to open it.</p></div>`;
+      <p class="snap">The integrated stress test runs a modelled shock from every category in the same year and compares early action with a reactive response and with no response. Choose a category in the chart to open it.</p></div>`;
   intControls();
 }
 function buildCategory() {
@@ -1150,7 +1249,7 @@ function buildCategory() {
   setCrumbs([["Home", "#"], [c.name, ""]]);
   const rows = st.rows.slice().sort(byScore);
   $("page").innerHTML = `
-    <div class="sechead"><div class="row"><h2>${c.name}: integrated stress test</h2>${sigBadge(st.top)}</div>
+    <div class="sechead"><div class="row"><h2>${c.name}: integrated stress test</h2>${sigBadge(st.top)}${DEMO}</div>
       <p class="snap">${NOTES[c.id]} ${st.elevated} of ${st.rows.length} stresses above normal. Snapshot reviewed ${SNAPSHOT}.</p></div>
     <h3>Stresses in this category, ranked</h3>
     <div class="scards">${rows.map(r => stressCard(r, false)).join("")}</div>
@@ -1177,7 +1276,7 @@ function renderRegister() {
   const chip = (group, val, label) => `<button class="chip" type="button" data-f="${group}" data-v="${val}" aria-pressed="${regFilter[group] === val}">${label}</button>`;
   const rows = REG.filter(r => (regFilter.cat === "all" || r.cat === regFilter.cat) && (regFilter.origin === "all" || r.origin === regFilter.origin || (regFilter.origin !== "both" && r.origin === "both")) && (regFilter.path === "all" || r.path === regFilter.path));
   const rowHtml = (r) => `<tr><td class="rank" data-l="Rank">${regFilter.sort === "cat" ? r.rankCat : r.rankAll}</td><td data-l="Stress"><b>${esc(r.name)}</b><div class="snap">${regFilter.sort === "cat" ? "" : catName(r.cat)}</div></td><td data-l="Origin">${orgBadge(r.origin)}</td><td data-l="Channel">${PATHS[r.path]}</td><td data-l="Evidence"><a href="${r.url}">${esc(r.ev)}</a></td>
-    <td data-l="Priority"><span class="scorebar" title="Priority ${r.score.toFixed(1)} of 25 (L ${r.L}, I ${r.I}, S ${r.S}, R ${r.R})"><i style="width:${Math.round(r.score / 25 * 80)}px"></i>${r.band}</span></td><td data-l="Confidence">${r.conf}</td><td class="sigcell" data-l="Signal">${sigBadge(r.sig)} <span class="trend">${TREND[r.trend][0]} ${TREND[r.trend][1]}</span></td>
+    <td data-l="Priority"><span class="scorebar" tabindex="0" title="Priority ${r.score.toFixed(1)} of 25 (L ${r.L}, I ${r.I}, S ${r.S}, R ${r.R})" aria-label="${r.band} priority: ${r.score.toFixed(1)} of 25; likelihood ${r.L}, impact ${r.I}, speed ${r.S}, reach ${r.R}"><i style="width:${Math.round(r.score / 25 * 80)}px"></i>${r.band}</span></td><td data-l="Confidence">${r.conf}</td><td class="sigcell" data-l="Signal">${sigBadge(r.sig)} <span class="trend">${TREND[r.trend][0]} ${TREND[r.trend][1]}</span></td>
     <td data-l="Stress test">${r.model ? `<a class="tag mod" href="#${r.model}">Open</a>` : `<span class="tag ill">Planned</span>`}</td></tr>`;
   const head = `<thead><tr><th>${regFilter.sort === "cat" ? "Rank in category" : "Rank overall"}</th><th>Stress</th><th>Origin</th><th>${CHANNEL}</th><th>Recent evidence</th><th>Priority band</th><th>Confidence</th><th>Signal</th><th>Stress test</th></tr></thead>`;
   let body = "";
@@ -1219,18 +1318,31 @@ function buildMethods(anchor) {
   $("page").innerHTML = `
     <div class="prose">
       <h2>Methodology</h2>
+      <p class="snap">Prototype v${VERSION}. Sources checked ${CHECKED}. See also <a href="#research">From prototype to science</a> for the validation ladder and research plan.</p>
       <p>The stress test puts Canada's food system at the centre. It gathers stresses from inside and outside Canada into one register, sorts them into six categories, ranks them, and traces how each reaches Canada's food system. Priority stresses are modelled, and the models are run one at a time and together to show the cost of acting early, acting late or doing nothing.</p>
       <h3>Six categories</h3>
       <p>${CATS.map(c => c.name).join("; ")}. Each stress is tagged by origin (inside Canada, outside Canada, or both) and by its transmission channel: how it reaches Canada's food system (${Object.values(PATHS).join(", ").toLowerCase()}).</p>
       <h3>Scoring and signals</h3>
       <p>Each stress is scored 1 to 5 on likelihood over the next five years (L), national impact (I), speed of onset (S) and reach across sectors (R). Priority = L × I × (S + R) ÷ 10, out of 25, shown as a band: high (12 or more), moderate (6 to 12) or low (under 6). Confidence reflects the strength of the evidence. Signal levels (normal, watch, ready, act) and trends are the authors' demonstration settings; in the full platform analysts would update them each month. A category shows the highest signal among its stresses, not an average, so a single serious stress is never hidden. These are first judgements; Phase 1 of the program replaces them with a structured expert ranking.</p>
+      <h3>How confidence is rated</h3>
+      <p><b>High:</b> official statistics or several independent sources, and a record of the event in Canada. <b>Medium:</b> one credible source, or good evidence from similar events elsewhere. <b>Low:</b> limited or secondary evidence, or no Canadian precedent. Confidence describes the evidence behind a stress, not how likely it is.</p>
       <h3>How the models work</h3>
-      <p>Each stress test moves a shock through a chokepoint into the buffers that absorb it (stocks, inventory, storage, soil reserves, feed, other buyers, spare crews). Losses begin when buffers run out. Early action slows the shock, refills a buffer or reallocates it, at a cost that is counted. Watch, readiness and action signals mark when thresholds are crossed on the no-action path. The decision window closes at the last start that still avoids half of the avoidable loss.</p>
+      <p>Each stress test moves a shock through a chokepoint into the buffers that absorb it (stocks, inventory, storage, soil reserves, feed, other buyers, spare crews). Losses begin when buffers run out. Early action slows the shock, refills a buffer or reallocates it, at a cost that is counted. Watch, readiness and action signals mark when thresholds are crossed on the no-response path.</p>
+      <p>Each test compares three cases: <b>no response</b>, a boundary case; a <b>reactive response</b> that starts at the action signal, an assumed stand-in for current practice until real response timelines are documented with partners; and <b>early action</b> at a chosen date. Three dates summarize timing: the <b>best start</b> (lowest total cost), the last start that keeps <b>half the possible benefit</b>, and <b>break-even</b>, the last start at which acting still costs less than no response. Each test also shows the cost of a <b>false alarm</b>: what early action would cost if the shock never arrived.</p>
       <p>The integrated stress test runs several modelled shocks in the same year. It adds extra loss when they draw on shared buffers and delays each response when agencies face several crises at once, unless a joint playbook is agreed in advance. The full program will replace these stylized equations with calibrated models, back-tested against 2020–26 Canadian events, and feed them with reviewed satellite, market, official and news data (see the <a href="guide.html#platform">user guide</a>).</p>
+      <h3>Limits of this prototype</h3>
+      <ul>
+        <li>All models are at validation level V0: their equations and assumptions are disclosed, but they are not calibrated or back-tested. Dollar figures are illustrative, not estimates.</li>
+        <li>The priority score is an ordinal heuristic from the authors' judgement. It is not a probability or an expected loss, and rankings have not been tested for sensitivity to the scores.</li>
+        <li>The overlap cost in integrated tests is a simple multiplier per extra shock, and all shocks are assumed to fall in the same year on their own timelines. The research would model shared resources, calendars and co-occurrence explicitly.</li>
+        <li>Models count losses differently (lost sales, destroyed production, recovered value, response spending). A common loss-accounting standard is part of the research programme.</li>
+        <li>The reactive response is an assumed stand-in for current practice. Real response timelines and authorities would be documented through interviews and records.</li>
+        <li>Signal levels and trends are set by hand for demonstration. Playbook leads and funding are proposals that no agency has agreed to.</li>
+      </ul>
       <h3>Stress tests available</h3>
       <p>${MODELLED.map(k => `<a href="#${k}">${SCEN[k].tab}</a> (${catName(MODEL_CAT[k]).toLowerCase()})`).join(" · ")}.</p>
     </div>
-    <div class="sechead" id="register"><h2>Shock register</h2><p class="snap">All ${REG.length} stresses, ranked within each category. Hover over a priority band to see the scores.</p></div>
+    <div class="sechead" id="register"><div class="row"><h2>Shock register</h2>${DEMO}</div><p class="snap">All ${REG.length} stresses, ranked within each category. Hover over or focus a priority band to see the scores. Evidence is observed and linked; sources checked ${CHECKED}.</p></div>
     <div id="regBox"></div>
     <div class="sechead" id="channels"><h2>Transmission channels</h2><p class="snap" style="max-width:90ch">How each stress reaches Canada's food system. Pick a stress to trace it from the event to the Canadian chokepoint and the outcome. Stresses that share a channel draw on the same buffers, which is why they compound when they overlap.</p></div>
     <div id="chanBox"></div>`;
@@ -1256,7 +1368,7 @@ function buildScenarios() {
 function buildUpdates() {
   mode = "info"; showParts("info");
   setCrumbs([["Home", "#"], ["Recent developments", ""]]);
-  const fmtDate = (d) => d.length === 4 ? d : new Date(d + "T12:00:00Z").toLocaleDateString("en-CA", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+  const fmtDate = (d) => d.length === 4 ? d : d.length === 7 ? new Date(d + "-15T12:00:00Z").toLocaleDateString("en-CA", { month: "long", year: "numeric", timeZone: "UTC" }) : new Date(d + "T12:00:00Z").toLocaleDateString("en-CA", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
   $("page").innerHTML = `
     <div class="sechead"><h2>Recent developments</h2>
     <p class="snap" style="max-width:90ch">The dated, sourced events behind the current signals, curated by the authors and last reviewed ${SNAPSHOT}. Not a live feed. In the full platform, analysts would review new evidence each month, and at once for fast shocks.</p></div>
@@ -1269,126 +1381,268 @@ function buildUpdates() {
     </ul>`;
 }
 
+/* ----- 90-second decision challenge (built on the rail model) ----- */
+const CH = {
+  opts: [
+    { id: "essential", name: "Move essential freight first", what: "Ask the railways and shippers to give food, feed and fertilizer priority as soon as the notice is served.", a: 1, eff: 35, costMult: 1 },
+    { id: "reroute", name: "Book trucks and other routes now", what: "Pay to pre-book trucking and space through other ports before the stoppage starts.", a: 1, eff: 55, costMult: 1.15 },
+    { id: "wait", name: "Wait for clearer information", what: "Hold off until the stoppage is real and elevators fill, then respond (the reactive response).", a: 13, eff: 45, costMult: 1 }
+  ],
+  step: 0, pick: "", pick2: ""
+};
+function chRun(opt, complicated) {
+  const p = { dur: complicated ? 28 : 14, eff: opt.eff };
+  const r = railRun(p, opt.a);
+  const cost = r.cost * opt.costMult * (complicated ? 1.5 : 1);
+  let cum = 0, fill = -1, left10 = 10;
+  r.y.forEach((v, t) => { if (t >= 3) { cum += 1 - v / 100; if (fill < 0 && cum >= 10) fill = t; } if (t === 13) left10 = Math.max(0, 10 - cum); });
+  return { total: r.loss + cost, loss: r.loss, cost, fill, left10, low: Math.min(...r.y) };
+}
+function buildChallenge() {
+  mode = "info"; showParts("info");
+  setCrumbs([["Home", "#"], ["Decision challenge", ""]]);
+  const steps = ["The situation", "Your choice", "What happens", "A complication", "Debrief"];
+  const dots = `<div class="stepdots" aria-label="Step ${CH.step + 1} of ${steps.length}">${steps.map((_, i) => `<i class="${i <= CH.step ? "on" : ""}"></i>`).join("")}<span>Step ${CH.step + 1} of ${steps.length}: ${steps[CH.step]}</span></div>`;
+  const ill = `<span class="ev ev-ill">Illustrative</span>`;
+  const optBtns = (key) => `<div class="opts">${CH.opts.map(o => `<button class="opt" type="button" data-pick="${o.id}" data-key="${key}" aria-pressed="${CH[key] === o.id}"><b>${o.name}</b><span>${o.what}</span></button>`).join("")}</div>`;
+  const meter = (r) => `<div class="meter" role="img" aria-label="${r.left10.toFixed(1)} of 10 days of elevator space left on day 13"><i style="width:${r.left10 * 10}%"></i></div>`;
+  const resultLine = (o, r) => `<p class="tnote">${ill} With <b>${o.name.toLowerCase()}</b>, agri-food freight falls to ${Math.round(r.low)}% of normal at worst. Prairie elevators ${r.fill >= 0 ? `fill on day ${r.fill}` : "do not fill"}. Total cost in the model: <b>${fmtM(r.total)}</b> (losses ${fmtM(r.loss)} + response ${fmtM(r.cost)}).</p>`;
+  let body = "";
+  if (CH.step === 0) {
+    body = `<p class="scene">A strike notice says Canada's two main railways may stop in 72 hours. It is October, peak export season. Grain, canola, feed and next spring's fertilizer all move by rail.</p>
+      <p class="tnote"><span class="ev ev-obs">Observed</span> About <a href="https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx">94% of Canada's grain exports move by rail</a>, and one week of rail and port disruption at peak season could cost the grain sector up to $540 million. In past stoppages, <a href="https://www.producer.com/news/n-american-farm-groups-ask-govts-to-act-on-rail-dispute/">Prairie elevators filled in about 10 days</a>.</p>
+      <div><button class="btn primary" type="button" data-next>Start the challenge</button></div>`;
+  } else if (CH.step === 1) {
+    body = `<p class="scene">You have 72 hours. What would you prioritize?</p>${optBtns("pick")}
+      <p class="snap">There is no single right answer. Each choice has costs and limits.</p>
+      <div><button class="btn primary" type="button" data-next ${CH.pick ? "" : "disabled"}>See what happens</button></div>`;
+  } else if (CH.step === 2) {
+    const o = CH.opts.find(x => x.id === CH.pick), r = chRun(o, false), w = chRun(CH.opts[2], false);
+    body = `<p class="scene">The stoppage begins on day 3 and lasts two weeks.</p>
+      <div><b>Elevator space left on day 13</b> (when elevators fill without action): ${r.left10.toFixed(1)} of 10 days ${meter(r)}</div>
+      ${resultLine(o, r)}
+      ${o.id !== "wait" ? `<p class="tnote">Compared with waiting and reacting once elevators are full, your choice ${r.total <= w.total ? `costs about <b>${fmtM(w.total - r.total)} less</b>` : `costs about <b>${fmtM(r.total - w.total)} more</b>`} in this model.</p>` : `<p class="tnote">Waiting keeps response spending low but lets storage fill before anything moves.</p>`}
+      <p class="snap">Why: rerouting and priority access take time to arrange, so acting before storage fills protects deliveries. That is the model's logic, not a guaranteed effect.</p>
+      <div><button class="btn primary" type="button" data-next>Continue</button></div>`;
+  } else if (CH.step === 3) {
+    body = `<p class="scene">Day 5: talks break down. The stoppage may now last four weeks, and diesel prices jump, making trucking half as expensive again. Would your response still work?</p>
+      ${optBtns("pick2")}
+      <div><button class="btn primary" type="button" data-next ${CH.pick2 ? "" : "disabled"}>Compare the options</button></div>`;
+  } else {
+    const rowsFor = (comp) => CH.opts.map(o => { const r = chRun(o, comp); return { o, r }; });
+    const a = rowsFor(false), b = rowsFor(true);
+    const bestB = b.slice().sort((x, y) => x.r.total - y.r.total)[0];
+    const mine = b.find(x => x.o.id === CH.pick2);
+    body = `<p class="scene">How the three options compare</p>
+      <div class="tablewrap"><table class="cmp"><thead><tr><th>Option</th><th>Two-week stoppage</th><th>Four weeks, dearer trucking</th><th>Elevators fill (four weeks)</th></tr></thead><tbody>
+        ${CH.opts.map((o, i) => `<tr class="${o.id === CH.pick2 ? "mine" : ""}"><td>${o.name}${o.id === CH.pick2 ? " (your final choice)" : ""}${o.id === "wait" ? "<br><span class='snap'>Reactive response</span>" : ""}</td><td>${fmtM(a[i].r.total)}</td><td>${fmtM(b[i].r.total)}</td><td>${b[i].r.fill >= 0 ? "Day " + b[i].r.fill : "Do not fill"}</td></tr>`).join("")}
+      </tbody></table></div>
+      <p class="tnote">${ill} In this model, <b>${bestB.o.name.toLowerCase()}</b> costs least when the stoppage drags on${mine && mine.o.id !== bestB.o.id ? `; your final choice costs about ${fmtM(mine.r.total - bestB.r.total)} more` : ", and that was your final choice"}. Timing and spare capacity matter more than any single action, and the answer changes as the situation changes.</p>
+      <div class="two">
+        <div class="item"><h3>What we know</h3><div>How much grain moves by rail, how fast elevators filled in past stoppages, and industry estimates of the cost of a week's disruption. These are observed and linked.</div></div>
+        <div class="item"><h3>What is illustrative</h3><div>How much freight each option keeps moving, what it costs, and how long a stoppage lasts. These are assumptions, not estimates.</div></div>
+      </div>
+      <div class="item"><h3>What the research would test</h3><div>With the Canadian Grain Commission's <a href="https://www.canada.ca/en/grain-commission/services/statistics/grain-statistics-weekly.html">weekly grain statistics</a> and partners in rail, ports and government, the first pilot would rebuild past stoppages, document what agencies and shippers actually did, and test which options are feasible and when early action is worth its cost.</div></div>
+      <div class="btnrow"><a class="btn primary" href="#research" style="text-decoration:none">See the research programme</a><a class="btn" href="#rail" style="text-decoration:none">Open the full rail stress test</a><button class="btn" type="button" data-restart>Start again</button></div>`;
+  }
+  $("page").innerHTML = `<div class="chal"><div class="sechead"><h2>Decision challenge: a rail corridor may close in 72 hours</h2></div>${dots}${body}</div>`;
+  $("page").querySelectorAll("[data-pick]").forEach(b => b.addEventListener("click", () => { CH[b.dataset.key] = b.dataset.pick; if (b.dataset.key === "pick" && !CH.pick2) CH.pick2 = b.dataset.pick; buildChallenge(); }));
+  $("page").querySelector("[data-next]")?.addEventListener("click", () => { CH.step++; buildChallenge(); $("page").scrollIntoView({ block: "start" }); });
+  $("page").querySelector("[data-restart]")?.addEventListener("click", () => { CH.step = 0; CH.pick = CH.pick2 = ""; buildChallenge(); });
+}
+
+/* ----- research programme page ----- */
+function buildResearch() {
+  mode = "info"; showParts("info");
+  setCrumbs([["Home", "#"], ["From prototype to science", ""]]);
+  const ladder = [
+    ["V0: Demonstration", "Assumptions and equations disclosed; internal logic checked", "Qualitative trade-offs only", "This prototype"],
+    ["V1: Plausibility", "Expert review; unit, monotonicity and extreme-case checks", "Reasonable demonstration of mechanisms", ""],
+    ["V2: Historical fit", "Model reproduces observed stocks, flows or outbreak data", "Bounded description of past events", "Pilot target"],
+    ["V3: Predictive skill", "Out-of-sample back-tests with calibrated uncertainty", "Quantified conditional forecasts", "Pilot target"],
+    ["V4: Decision usefulness", "Tabletop and user trials against a documented current-practice baseline", "Evidence that the tool improves a defined decision", "Pilot target"],
+    ["V5: Operational governance", "Approvals, safeguards, maintenance and named owners", "Controlled use within a defined scope", "Later phase"]
+  ];
+  $("page").innerHTML = `
+    <div class="prose">
+      <h2>From prototype to science</h2>
+      <p>This prototype shows the decisions that a food system stress test could support. It is a demonstration: its numbers are illustrative and its signals are set by hand. The next step is to build the evidence. That means mapping real vulnerabilities and buffers, modelling feasible actions, testing warning signals, and checking whether the tool improves decisions in realistic exercises with government and industry.</p>
+      <h3>The question</h3>
+      <p>Canada monitors many risks to food and agriculture. What is not yet tested is whether information collected in separate systems turns into timely, coordinated action across an interconnected food system, and when acting early or acting together is worth its cost.</p>
+      <h3>Where it fits</h3>
+      <p>The programme would support existing policy, not replace it: the <a href="https://www.pm.gc.ca/en/news/news-releases/2026/06/11/prime-minister-carney-launches-national-food-security-strategy">National Food Security Strategy</a> (June 2026); the <a href="https://www.canada.ca/en/agriculture-agri-food/news/2026/07/backgrounder-summary-of-items-from-the-2026-annual-meeting-of-federal-provincial-and-territorial-fpt-ministers-of-agriculture.html">renewed Emergency Management Framework for Agriculture in Canada</a>, which takes an all-hazards approach; and Agriculture and Agri-Food Canada's <a href="https://agriculture.canada.ca/en/sector/emergency-management">Food System Preparedness and Response Plan</a>, which prepares for significant events affecting the whole food system. A stress test could give these plans evidence on timing, buffers and coordination, and a tool for exercises.</p>
+    </div>
+    <div class="sechead"><h2>Three linked workstreams</h2></div>
+    <div class="ws">
+      <div class="item"><h3>A. Evidence, vulnerabilities and buffers</h3><div><b>Question:</b> Where does Canada's food system depend on fragile chokepoints, and how long can buffers absorb a disruption?</div><div><b>Outputs:</b> a reviewed shock register with uncertainty, buffer indicators (storage days, spare capacity, alternative routes), a versioned event database and a data dictionary.</div></div>
+      <div class="item"><h3>B. Decisions, timing and coordination</h3><div><b>Question:</b> When do earlier warnings or plans agreed in advance change outcomes, given the competing goals of agencies and firms?</div><div><b>Outputs:</b> a documented current-practice baseline, an interview-based catalogue of feasible actions, break-even and decision-threshold analyses, and draft playbook templates.</div></div>
+      <div class="item"><h3>C. Validation, use and governance</h3><div><b>Question:</b> Does a transparent, validated stress test improve real decisions compared with standard briefs and exercises?</div><div><b>Outputs:</b> back-tests, tabletop experiments, usability and accessibility evidence, model cards, data-sharing agreements and a plan for who would run the platform.</div></div>
+    </div>
+    <div class="prose">
+      <h3>First pilot: Prairie grain transport</h3>
+      <p>How long can the Prairie grain supply chain absorb a rail or port disruption, and what is acting earlier worth? This pilot is narrow enough to test: the Canadian Grain Commission publishes <a href="https://www.canada.ca/en/grain-commission/services/statistics/grain-statistics-weekly.html">weekly data</a> on grain movement from farms to domestic processing and export, and on stocks in commercial facilities. The pilot would rebuild past stoppages, hold back at least one event to test the model, compare documented current practice with feasible alternatives, and report delivery continuity, backlogs and costs rather than gross "savings". A second, policy-facing application would test fresh-food continuity and affordability, which depends on partners sharing detailed supply data.</p>
+    </div>
+    <div class="sechead"><h2>Validation ladder</h2><p class="snap">What each level of evidence would make credible. Model results stay labelled "illustrative" until they pass the level they claim.</p></div>
+    <div class="card"><div class="tablewrap"><table class="ladder"><thead><tr><th>Level</th><th>Evidence required</th><th>What becomes credible</th><th>Status</th></tr></thead><tbody>
+      ${ladder.map(([l, e, c, st]) => `<tr><td class="${st === "This prototype" ? "here" : ""}">${l}</td><td>${e}</td><td>${c}</td><td class="${st === "This prototype" ? "here" : ""}">${st}</td></tr>`).join("")}
+    </tbody></table></div></div>
+    <div class="prose">
+      <h3>Timeline</h3>
+      <p><b>2027, build:</b> partnership and steering committee, data agreements, current-practice interviews, the pilot model and a costed proposal. <b>2028–2029, test:</b> calibration, back-tests, decision experiments and joint exercises with partners. <b>2030 onward, report and expand:</b> a first national readiness report, a second sector, and expansion only where data, user value and an institutional owner are in place.</p>
+      <h3>What we will not claim</h3>
+      <p>No real-time national prediction service in the first phase, no automated policy triggers, and no dollar benefits presented as estimates until a model has passed historical and decision tests.</p>
+      <h3>What we ask of partners</h3>
+      <p>Help define one urgent decision problem; share suitable data under agreements that protect sensitive information; open access to preparedness exercises; and support scoped research funding.</p>
+      <p><b>Contact:</b> Professor Evan Fraser, Executive Director, Arrell Food Institute, University of Guelph; Dr. Md Bodrud-Doza, Postdoctoral Scholar, University of Guelph, <a href="mailto:mbodrudd@uoguelph.ca?subject=Canada%20Food%20System%20Stress%20Test%20research%20programme">mbodrudd@uoguelph.ca</a>.</p>
+    </div>`;
+}
+
 /* ---------- update ---------- */
+const tinfo = (text) => `<details class="tinfo"><summary>About this number</summary>${text}</details>`;
+const modelNote = (k) => `Model: ${k ? SCEN[k].tab.toLowerCase() + ", " : ""}prototype v${VERSION}, validation level V0 (demonstration). Canadian dollars. Sources checked ${CHECKED}.`;
+function evRow(extra) {
+  $("evrow").innerHTML = `<span class="ev ev-ill">Illustrative</span><span>Stylized model results, not forecasts. "Reactive response" acts at the action signal and stands in for current practice until that is documented with partners.</span>${extra || ""}`;
+}
 function update() {
   if (!SCEN[view]) return (mode === "home" || mode === "cat" || mode === "run") ? updateIntegrated() : undefined;
   const s = SCEN[view], st = state[view];
   s.params.forEach(p => $("out-" + p.id).textContent = p.fmt(st[p.id]));
   const base = s.run(st, Infinity), act = s.run(st, st.a);
   const sig = s.signals(base);
+  const actDay = Math.max(0, sig[2][1]);
+  const react = s.run(st, actDay);
   const days = [], curve = [];
   for (let d = 0; d <= s.aMax; d++) { days.push(d); curve.push(s.run(st, d).total); }
-  const best = Math.min(...curve), maxAvoid = base.loss - best;
-  let closeDay = -1;
-  curve.forEach((c, d) => { if (base.loss - c >= 0.5 * maxAvoid && maxAvoid > 0) closeDay = d; });
-  const saved = base.loss - act.total;
-  const pct = base.loss > 0 ? Math.round(100 * saved / base.loss) : 0;
+  const best = Math.min(...curve), bestDay = curve.indexOf(best), maxAvoid = base.loss - best;
+  let halfDay = -1, breakDay = -1;
+  curve.forEach((c, d) => { if (maxAvoid > 0 && base.loss - c >= 0.5 * maxAvoid) halfDay = d; if (c < base.loss) breakDay = d; });
   const dayFmt = (d) => fmtDay(s, d);
+  const diff = react.total - act.total;
+  const pct = react.total > 0 ? Math.round(100 * diff / react.total) : 0;
+  const breakTxt = breakDay < 0 ? "acting never beats no response here" : breakDay === s.aMax ? "acting still pays at the end of the tested range" : "acting stops paying after " + dayFmt(breakDay);
+  evRow();
   $("tiles").innerHTML = `
-    <div class="tile base"><span class="l">Projected loss, no early action</span><span class="n">${fmtM(base.loss)}</span><span class="s">${s.endLabel(base)}</span></div>
-    <div class="tile act"><span class="l">With action from ${dayFmt(st.a)}</span><span class="n">${fmtM(act.total)}</span><span class="s">Loss ${fmtM(act.loss)} + response ${fmtM(act.cost)}</span></div>
-    <div class="tile save"><span class="l">Net loss avoided</span><span class="n">${saved >= 0 ? fmtM(saved) : "−" + fmtM(-saved)}</span><span class="s">${saved >= 0 ? pct + "% of the no-action loss" : "Acting this late costs more than it saves"}</span></div>
-    <div class="tile win"><span class="l">Decision window closes</span><span class="n">${closeDay >= 0 ? dayFmt(closeDay) : "—"}</span><span class="s">Last start that still avoids half of the avoidable loss</span></div>`;
+    <div class="tile react"><span class="l">Reactive response</span><span class="n">${fmtM(react.total)}</span><span class="s">Acts at the action signal (${dayFmt(actDay)}). No response at all: ${fmtM(base.loss)}</span>
+      ${tinfo("Losses plus response costs if the response starts only when the action signal is reached. This is an assumed stand-in for current practice; the research would document real response timelines with partners. " + modelNote(view))}</div>
+    <div class="tile act"><span class="l">Your choice: act from ${dayFmt(st.a)}</span><span class="n">${fmtM(act.total)}</span><span class="s">Loss ${fmtM(act.loss)} + response ${fmtM(act.cost)}</span>
+      ${tinfo("Losses plus response costs with the settings on the left. Response costs and effects are assumed values listed under Assumptions and sources. " + modelNote(view))}</div>
+    <div class="tile save"><span class="l">${diff >= 0 ? "Lower than the reactive response by" : "Higher than the reactive response by"}</span><span class="n">${fmtM(Math.abs(diff))}</span><span class="s">${diff >= 0 ? pct + "% less than reacting at the action signal" : "Starting this late costs more than reacting"}</span>
+      ${tinfo("Reactive response total minus your choice. A positive value means your timing costs less in this illustrative model. " + modelNote(view))}</div>
+    <div class="tile win"><span class="l">Best start in this model</span><span class="n">${dayFmt(bestDay)}</span><span class="s">Half the possible benefit kept until ${halfDay >= 0 ? dayFmt(halfDay) : "—"}; ${breakTxt}</span>
+      ${tinfo("Best start: the start date with the lowest total cost. Half the possible benefit: the last start that still avoids at least half of the largest avoidable loss, compared with no response. Break-even: the last start at which acting still costs less than no response. " + modelNote(view))}</div>`;
+  $("tnote").innerHTML = `<b>If the warning proves false:</b> acting from ${dayFmt(st.a)} would cost about ${fmtM(act.cost)} in response spending with nothing gained. A reactive response would cost nothing, because the action signal would never be reached.`;
   const yMax1 = s.refLine ? 125 : niceMax(Math.max(...base.y, ...act.y) * 1.08);
-  const colors = { base: css("--base"), act: css("--act") };
+  const colors = { base: css("--base"), act: css("--act"), react: css("--late") };
   const sigCols = [css("--watch"), css("--ready"), css("--alert")];
   const xStep = s.H <= 40 ? 5 : s.H <= 60 ? 10 : s.H <= 120 ? 20 : 30;
   $("c1sub").textContent = s.c1sub;
-  $("legend1").innerHTML = `<span><i class="sw" style="border-top:2px dashed ${colors.base}"></i>No early action</span><span><i class="sw" style="border-color:${colors.act}"></i>With action from ${dayFmt(st.a)}</span><span><i class="sw" style="border-top:2px dashed ${sigCols[0]}"></i>Watch · Ready · Act signals</span>`;
+  $("legend1").innerHTML = `<span><i class="sw" style="border-top:2px dashed ${colors.base}"></i>No response (boundary case)</span><span><i class="sw" style="border-color:${colors.react}"></i>Reactive response</span><span><i class="sw" style="border-color:${colors.act}"></i>Your choice</span><span><i class="sw" style="border-top:2px dashed ${sigCols[0]}"></i>Demonstration signals</span>`;
   lineChart($("chart1"), $("tip1"), {
-    aria: s.y.label + " over time, with and without early action",
+    aria: s.y.label + " over time under no response, a reactive response and your choice",
     xMax: s.H, dx: 1, yMax: yMax1, yTicks: s.refLine ? 5 : 4,
     xTicks: Array.from({ length: Math.floor(s.H / xStep) + 1 }, (_, i) => i * xStep),
     xFmt: (v, long) => s.dates !== undefined ? dayToDate(v, s.dates) : (long ? "Day " + v : v),
     yFmt: (v, long) => long ? s.y.fmt(v) + (view === "avian-flu" ? " premises" : "") : s.y.fmt(v),
     xLabel: s.xLabel, band: s.band, ref: s.refLine,
-    fillBetween: [base.y, act.y],
-    vlines: [...sig.map(([lab, d], i) => [d, lab, sigCols[i], "sig"]), [st.a, "Response starts", colors.act, "resp"]],
-    series: [{ name: "No early action", data: base.y, color: colors.base, dash: "6 4", label: true },
-             { name: "With early action", data: act.y, color: colors.act, label: true }]
+    fillBetween: [react.y, act.y],
+    vlines: [...sig.map(([lab, d], i) => [d, lab, sigCols[i], "sig"]), [st.a, "Your choice starts", colors.act, "resp"]],
+    series: [{ name: "No response", data: base.y, color: colors.base, dash: "6 4" },
+             { name: "Reactive response", data: react.y, color: colors.react, label: true },
+             { name: "Your choice", data: act.y, color: colors.act, label: true }]
   });
-  $("insight1").innerHTML = `Signals on the no-action path: ${sig.map(([lab, d, why]) => `${lab} (${dayFmt(Math.max(0, d))}: ${why})`).join(", ")}. Shaded area: the part of the shock that early action prevents.`;
+  $("insight1").innerHTML = `Demonstration signals on the no-response path: ${sig.map(([lab, d, why]) => `${lab} (${dayFmt(Math.max(0, d))}: ${why})`).join(", ")}. Shaded area: the difference between your choice and the reactive response.`;
   const yMax2 = niceMax(Math.max(base.loss, ...curve) * 1.05);
-  $("legend2").innerHTML = `<span><i class="sw" style="border-top:2px dashed ${colors.base}"></i>No early action</span><span><i class="sw" style="border-color:${colors.act}"></i>Total cost if action starts on that day</span>`;
+  $("c2sub").textContent = "Total cost (losses plus response costs) for every possible start date, compared with the reactive response and with no response.";
+  $("legend2").innerHTML = `<span><i class="sw" style="border-top:2px dashed ${colors.base}"></i>No response</span><span><i class="sw" style="border-top:2px dashed ${colors.react}"></i>Reactive response</span><span><i class="sw" style="border-color:${colors.act}"></i>Total cost if action starts on that day</span>`;
   const step2 = s.aMax <= 30 ? 3 : s.aMax <= 90 ? 15 : 30;
   lineChart($("chart2"), $("tip2"), {
-    aria: "Total cost by response start day compared with no early action",
+    aria: "Total cost by response start date compared with the reactive response and no response",
     xMax: s.aMax, dx: 1, yMax: yMax2,
     xTicks: Array.from({ length: Math.floor(s.aMax / step2) + 1 }, (_, i) => i * step2),
     xFmt: (v, long) => s.dates !== undefined ? dayToDate(v, s.dates) : (long ? "Start on day " + v : v),
     yFmt: (v) => fmtM(v),
     xLabel: s.dates !== undefined ? "Date the response starts" : "Day the response starts",
-    vlines: closeDay >= 0 ? [[closeDay, "Window closes", css("--ready"), "sig"]] : [],
-    series: [{ name: "No early action", data: days.map(() => base.loss), color: colors.base, dash: "6 4" },
+    vlines: [...(halfDay >= 0 ? [[halfDay, "Half benefit", css("--ready"), "sig"]] : []), ...(breakDay >= 0 && breakDay < s.aMax ? [[breakDay, "Break-even", css("--alert"), "sig"]] : [])],
+    series: [{ name: "No response", data: days.map(() => base.loss), color: colors.base, dash: "6 4" },
+             { name: "Reactive response", data: days.map(() => react.total), color: colors.react, dash: "3 3" },
              { name: "Act on that day", data: curve, color: colors.act }],
     points: [[st.a, curve[st.a], colors.act, "Your choice"]]
   });
   const a2 = Math.min(s.aMax, st.a + 7);
-  const perWeek = curve[a2] - curve[st.a];
-  $("insight2").innerHTML = perWeek > 0.5
-    ? `From ${dayFmt(st.a)}, each further week of delay adds about <b>${fmtM(perWeek)}</b> in losses and response costs.`
-    : `Around ${dayFmt(st.a)}, a week's delay changes little; the costly delays come ${closeDay >= 0 && st.a < closeDay ? "later, as the window closes" : "earlier"}.`;
+  const dW = curve[a2] - curve[st.a];
+  $("insight2").innerHTML = a2 === st.a ? `Your choice is at the end of the tested range.`
+    : Math.abs(dW) < 0.5 ? `Delaying the start from ${dayFmt(st.a)} to ${dayFmt(a2)} barely changes the modelled total cost.`
+    : dW > 0 ? `Delaying the start from ${dayFmt(st.a)} to ${dayFmt(a2)} raises the modelled total cost by about <b>${fmtM(dW)}</b>. This is the change for that week only, not a fixed weekly rate.`
+    : `Delaying the start from ${dayFmt(st.a)} to ${dayFmt(a2)} lowers the modelled total cost by about <b>${fmtM(-dW)}</b>, because starting this early spends more than it saves.`;
   const stepT = s.H <= 60 ? 1 : 5;
   let rows = "";
-  for (let i = 0; i <= s.H; i += stepT) rows += `<tr><td>${fmtDay(s, i)}</td><td>${s.y.fmt(base.y[i])}</td><td>${s.y.fmt(act.y[i])}</td></tr>`;
-  $("datatable").innerHTML = `<thead><tr><th>${s.dates !== undefined ? "Date" : "Day"}</th><th>No early action (${s.y.unit})</th><th>With early action (${s.y.unit})</th></tr></thead><tbody>${rows}</tbody>`;
+  for (let i = 0; i <= s.H; i += stepT) rows += `<tr><td>${fmtDay(s, i)}</td><td>${s.y.fmt(base.y[i])}</td><td>${s.y.fmt(react.y[i])}</td><td>${s.y.fmt(act.y[i])}</td></tr>`;
+  $("datatable").innerHTML = `<thead><tr><th>${s.dates !== undefined ? "Date" : "Day"}</th><th>No response (${s.y.unit})</th><th>Reactive response (${s.y.unit})</th><th>Your choice (${s.y.unit})</th></tr></thead><tbody>${rows}</tbody>`;
 }
 
-
 function updateIntegrated() {
-  $("out-delay").textContent = integ.delay + " days";
   $("out-kappa").textContent = integ.kappa + "%";
   $("out-pen").textContent = integ.penalty + " days";
   const none = integrated(integ, null, false);
-  const late = integrated(integ, integ.delay, integ.playbook);
+  const react = integrated(integ, "react", integ.playbook);
   const early = integrated(integ, 0, integ.playbook);
-  const earlyPB = integrated(integ, 0, true);
+  const earlyNoPB = integrated(integ, 0, false), earlyPB = integrated(integ, 0, true);
   const multi = none.n > 1;
-  const saved = none.combined - early.combined;
+  const diff = react.combined - early.combined;
+  evRow(integ.playbook ? `<span class="ev ev-prop">Joint playbook assumed</span>` : "");
+  const note = (t) => tinfo(t + " " + modelNote(""));
   $("tiles").innerHTML = `
-    <div class="tile base"><span class="l">Do nothing</span><span class="n">${fmtM(none.combined)}</span><span class="s">${multi ? none.n + " overlapping shocks, " + fmtM(none.overlap) + " from overlap" : SCEN[integ.set[0]].tab}</span></div>
-    <div class="tile act"><span class="l">Act early, at each readiness signal</span><span class="n">${fmtM(early.combined)}</span><span class="s">Act ${integ.delay / 7} weeks late instead: ${fmtM(late.combined)}</span></div>
-    <div class="tile save"><span class="l">Net loss avoided by acting early</span><span class="n">${fmtM(saved)}</span><span class="s">${Math.round(100 * saved / none.combined)}% of the do-nothing loss</span></div>
-    ${multi ? `<div class="tile win"><span class="l">Value of a joint playbook</span><span class="n">${fmtM(early.combined - earlyPB.combined)}</span><span class="s">${integ.playbook ? "Playbook on: overlap adds no response delay" : "Saved by removing overlap delays when acting early"}</span></div>`
-            : `<div class="tile win"><span class="l">Cost of waiting ${integ.delay / 7} weeks</span><span class="n">${fmtM(late.combined - early.combined)}</span><span class="s">Acting late instead of at the readiness signal</span></div>`}`;
-  const cases = [{ name: "Do nothing", color: css("--base") }, { name: `Act ${integ.delay / 7} weeks late`, color: css("--late") }, { name: "Act early", color: css("--act") }];
+    <div class="tile react"><span class="l">Reactive response</span><span class="n">${fmtM(react.combined)}</span><span class="s">Each shock acted on at its action signal. No response at all: ${fmtM(none.combined)}</span>
+      ${note("Sum of losses and response costs when every response starts at its action signal, an assumed stand-in for current practice." + (multi ? " Includes the extra cost when shocks overlap." : ""))}</div>
+    <div class="tile act"><span class="l">Early action, at each readiness signal</span><span class="n">${fmtM(early.combined)}</span><span class="s">Loss ${fmtM(early.loss)} + response ${fmtM(early.cost)}</span>
+      ${note("Sum of losses and response costs when every response starts at its readiness signal, using each shock's own assumptions.")}</div>
+    <div class="tile save"><span class="l">Lower than the reactive response by</span><span class="n">${fmtM(diff)}</span><span class="s">${react.combined > 0 ? Math.round(100 * diff / react.combined) : 0}% less than reacting at the action signals</span>
+      ${note("Reactive response total minus early-action total, under the same assumptions.")}</div>
+    ${multi ? `<div class="tile win"><span class="l">Value of a joint playbook</span><span class="n">${fmtM(earlyNoPB.combined - earlyPB.combined)}</span><span class="s">Early action without versus with a joint playbook, all else equal</span>
+      ${note("The same early-action scenario run twice: once with the response delays that overlapping crises cause, once without them. It does not depend on the checkbox.")}</div>`
+            : `<div class="tile win"><span class="l">If the warning proves false</span><span class="n">${fmtM(early.cost)}</span><span class="s">Response spending with nothing gained</span>
+      ${note("Cost of acting at the readiness signal when the shock never arrives.")}</div>`}`;
+  $("tnote").innerHTML = multi ? `<b>If the warnings prove false:</b> acting early on every shock would cost about ${fmtM(early.cost)} in response spending with nothing gained.` : "";
+  const cases = [{ name: "No response", color: css("--base") }, { name: "Reactive response", color: css("--late") }, { name: "Early action", color: css("--act") }];
   let rows;
   if (mode === "home") {
     rows = CATS.map(c => {
       const idx = none.per.map((p, i) => MODEL_CAT[p.k] === c.id ? i : -1).filter(i => i >= 0);
       const sum = (r) => idx.reduce((a, i) => a + r.per[i].solo, 0);
-      return { label: c.name, values: [sum(none), sum(late), sum(early)], go: () => go("cat/" + c.id) };
+      return { label: c.name, values: [sum(none), sum(react), sum(early)], go: () => go("cat/" + c.id) };
     });
   } else {
-    rows = none.per.map((p, i) => ({ label: SCEN[p.k].tab, values: [p.solo, late.per[i].solo, early.per[i].solo], go: () => go(p.k) }));
+    rows = none.per.map((p, i) => ({ label: SCEN[p.k].tab, values: [p.solo, react.per[i].solo, early.per[i].solo], go: () => go(p.k) }));
   }
-  if (multi) rows.push({ label: "Overlap effects|(shared buffers + delays)", values: [Math.max(0, none.overlap), Math.max(0, late.overlap), Math.max(0, early.overlap)], strong: true });
+  if (multi) rows.push({ label: "Overlap effects|(shared buffers + delays)", values: [Math.max(0, none.overlap), Math.max(0, react.overlap), Math.max(0, early.overlap)], strong: true });
   $("c1title").textContent = mode === "home" ? "Where the losses come from, by category" : "Where the losses come from";
   $("c1sub").textContent = (mode === "home" ? "Each category's modelled shocks on their own" : "Each shock on its own") + (multi ? ", plus the extra cost when they overlap" : "") + ". Costs include losses and the cost of responding. Select a " + (mode === "home" ? "category" : "shock") + " to open it.";
   $("legend1").innerHTML = cases.map(c => `<span><i class="sq" style="background:${c.color}"></i>${c.name}</span>`).join("");
-  barChart($("chart1"), $("tip1"), { aria: "Cost under three response choices", rows, cases });
-  const biggest = rows.filter(r => !r.strong).slice().sort((a, b) => b.values[0] - a.values[0])[0];
-  $("insight1").innerHTML = `Without action, <b>${biggest.label.toLowerCase()}</b> is the largest single cost` + (multi ? `, and overlap adds <b>${fmtM(none.overlap)}</b> to the shocks taken one at a time. ` + (integ.playbook ? "With a joint playbook, overlap costs only what shared buffers add." : "Without a joint playbook, overlap stays costly even when everyone acts early, because crowded agencies start each response later.") : ".");
+  barChart($("chart1"), $("tip1"), { aria: "Cost under no response, a reactive response and early action", rows, cases });
+  const biggest = rows.filter(r => !r.strong).slice().sort((a, b) => b.values[1] - a.values[1])[0];
+  $("insight1").innerHTML = `Under a reactive response, <b>${biggest.label.toLowerCase()}</b> is the largest single cost` + (multi ? `, and overlap adds <b>${fmtM(react.overlap)}</b> to the shocks taken one at a time. The overlap cost comes from a simple multiplier; the research would model shared resources over time.` : ".");
   const ds = [], withPB = [], withoutPB = [];
   for (let d = 0; d <= 60; d += 1) { ds.push(d); withPB.push(integrated(integ, d, true).combined); withoutPB.push(integrated(integ, d, false).combined); }
-  const yMax2 = niceMax(Math.max(none.combined, ...withoutPB) * 1.05);
+  const yMax2 = niceMax(Math.max(none.combined, react.combined, ...withoutPB) * 1.05);
   $("c2title").textContent = "The cost of waiting";
-  $("c2sub").textContent = multi ? "Total cost as every response waits longer after its readiness signal. A pre-agreed joint playbook removes the extra delay that overlapping crises cause." : "Total cost as the response waits longer after its readiness signal.";
-  $("legend2").innerHTML = `<span><i class="sw" style="border-top:2px dashed ${css("--base")}"></i>Do nothing</span>` + (multi ? `<span><i class="sw" style="border-color:${css("--late")}"></i>Without a joint playbook</span><span><i class="sw" style="border-color:${css("--act")}"></i>With a joint playbook</span>` : `<span><i class="sw" style="border-color:${css("--act")}"></i>Act after that delay</span>`);
-  const series = [{ name: "Do nothing", data: ds.map(() => none.combined), color: css("--base"), dash: "6 4" }];
-  if (multi) series.push({ name: "Without a joint playbook", data: withoutPB, color: css("--late"), label: true }, { name: "With a joint playbook", data: withPB, color: css("--act"), label: true });
-  else series.push({ name: "Act after that delay", data: withPB, color: css("--act"), label: true });
+  $("c2sub").textContent = "Total cost as every response waits longer after its readiness signal, compared with the reactive response and with no response." + (multi ? " A joint playbook removes the extra delay that overlapping crises cause." : "");
+  const series = [{ name: "No response", data: ds.map(() => none.combined), color: css("--base"), dash: "6 4" },
+                  { name: "Reactive response", data: ds.map(() => react.combined), color: css("--late"), dash: "3 3" }];
+  if (multi) series.push({ name: "Waiting, without a joint playbook", data: withoutPB, color: css("--muted"), label: true }, { name: "Waiting, with a joint playbook", data: withPB, color: css("--act"), label: true });
+  else series.push({ name: "Act after that wait", data: withPB, color: css("--act"), label: true });
+  $("legend2").innerHTML = `<span><i class="sw" style="border-top:2px dashed ${css("--base")}"></i>No response</span><span><i class="sw" style="border-top:2px dashed ${css("--late")}"></i>Reactive response</span>` + (multi ? `<span><i class="sw" style="border-color:${css("--muted")}"></i>Without a joint playbook</span><span><i class="sw" style="border-color:${css("--act")}"></i>With a joint playbook</span>` : `<span><i class="sw" style="border-color:${css("--act")}"></i>Act after that wait</span>`);
   lineChart($("chart2"), $("tip2"), {
-    aria: "Total cost by days of delay after readiness signals",
+    aria: "Total cost by days of waiting after readiness signals",
     xMax: 60, dx: 1, yMax: yMax2, xTicks: [0, 7, 14, 21, 28, 35, 42, 49, 56],
     xFmt: (v, long) => long ? v + " days after readiness" : v, yFmt: (v) => fmtM(v),
-    xLabel: "Days each response waits after its readiness signal", series,
-    points: [[integ.delay, (integ.playbook || !multi ? withPB : withoutPB)[integ.delay], integ.playbook || !multi ? css("--act") : css("--late"), "Late case"]]
+    xLabel: "Days each response waits after its readiness signal", series
   });
-  $("insight2").innerHTML = `The first week of delay adds about <b>${fmtM(withoutPB[7] - withoutPB[0])}</b>` + (multi ? "; a joint playbook keeps overlapping crises from pushing every response later." : ".");
+  const cur = multi && !integ.playbook ? withoutPB : withPB;
+  const w1 = cur[7] - cur[0];
+  $("insight2").innerHTML = (Math.abs(w1) < 0.5 ? "Waiting one week after the readiness signals barely changes the modelled total." : `Waiting one week after the readiness signals instead of acting at once ${w1 > 0 ? "raises" : "lowers"} the modelled total by about <b>${fmtM(Math.abs(w1))}</b>.`) + (multi ? " A joint playbook keeps overlapping crises from pushing every response later." : "");
   let tr = "";
-  for (let d = 0; d <= 56; d += 7) tr += `<tr><td>${d}</td><td>${fmtM(none.combined)}</td><td>${fmtM(withoutPB[d])}</td><td>${fmtM(withPB[d])}</td></tr>`;
-  $("datatable").innerHTML = `<thead><tr><th>Days after readiness</th><th>Do nothing</th><th>Without joint playbook</th><th>With joint playbook</th></tr></thead><tbody>${tr}</tbody>`;
+  for (let d = 0; d <= 56; d += 7) tr += `<tr><td>${d}</td><td>${fmtM(none.combined)}</td><td>${fmtM(react.combined)}</td><td>${fmtM(withoutPB[d])}</td><td>${fmtM(withPB[d])}</td></tr>`;
+  $("datatable").innerHTML = `<thead><tr><th>Days after readiness</th><th>No response</th><th>Reactive response</th><th>Without joint playbook</th><th>With joint playbook</th></tr></thead><tbody>${tr}</tbody>`;
 }
 
 /* ---------- routing ---------- */
@@ -1401,6 +1655,8 @@ function route() {
   else if (["methods", "register", "pathways", "channels"].includes(head)) { view = "methods"; buildMethods(head === "methods" ? "" : head === "pathways" ? "channels" : head); }
   else if (head === "scenarios" || head === "compound") { view = "scenarios"; buildScenarios(); }
   else if (head === "updates") { view = "updates"; buildUpdates(); }
+  else if (head === "challenge") { view = "challenge"; buildChallenge(); }
+  else if (head === "research") { view = "research"; buildResearch(); }
   else { view = "home"; buildHome(); }
   update();
   if (!["methods"].includes(view)) window.scrollTo(0, 0);
@@ -1409,17 +1665,17 @@ function viewTitle() {
   if (SCEN[view]) return "Stress test: " + SCEN[view].tab;
   if (view === "cat") return catName(catSel) + ": integrated stress test";
   if (view === "run") return "Compound scenario: " + STORIES.find(x => x.id === storySel).title;
-  return { home: "National integrated stress test", methods: "Methodology", scenarios: "Compound scenarios", updates: "Recent developments" }[view];
+  return { home: "National integrated stress test", methods: "Methodology", scenarios: "Compound scenarios", updates: "Recent developments", challenge: "Decision challenge", research: "From prototype to science" }[view];
 }
-$("snapDate").textContent = SNAPSHOT;
+$("snapDate").textContent = SNAPSHOT; $("verNo").textContent = VERSION; $("chkDate").textContent = CHECKED;
 $("exModels").innerHTML = MODELLED.map(k => `<a href="#${k}">${SCEN[k].tab}</a>`).join(" · ");
 $("printBrief").addEventListener("click", () => window.print());
 window.addEventListener("beforeprint", () => {
   const today = new Date().toLocaleDateString("en-CA", { day: "numeric", month: "long", year: "numeric" });
   let settings = "";
   if (SCEN[view]) settings = "Settings: " + SCEN[view].params.map(p => p.label + " " + p.fmt(state[view][p.id])).join("; ") + ".";
-  else if (["home", "cat", "run"].includes(view)) settings = "Settings: shocks " + integ.set.map(k => SCEN[k].tab.toLowerCase()).join(", ") + "; late response " + integ.delay + " days after readiness; compounding " + integ.kappa + "%; overlap delay " + integ.penalty + " days; joint playbook " + (integ.playbook ? "on" : "off") + ".";
-  $("briefHead").innerHTML = `<b>Decision brief: ${esc(viewTitle())}</b><br>${settings ? esc(settings) + "<br>" : ""}Printed ${today} from ${esc(location.href)}. Situation snapshot last reviewed ${SNAPSHOT}. Illustrative prototype: signal levels are demonstration settings and model results are not forecasts.`;
+  else if (["home", "cat", "run"].includes(view)) settings = "Settings: shocks " + integ.set.map(k => SCEN[k].tab.toLowerCase()).join(", ") + "; reactive response at each action signal; early action at each readiness signal; compounding " + integ.kappa + "%; overlap delay " + integ.penalty + " days; joint playbook " + (integ.playbook ? "on" : "off") + ".";
+  $("briefHead").innerHTML = `<b>Decision brief: ${esc(viewTitle())}</b> · Canada Food System Stress Test, prototype v${VERSION}<br>${settings ? esc(settings) + "<br>" : ""}<b>Evidence status:</b> events and statistics are observed and sourced; model results are illustrative (validation level V0, not forecasts); signal levels are demonstration settings; playbook leads and funding are proposals, not agreed. Sources checked ${CHECKED}.<br>Printed ${today} from ${esc(location.href)}.`;
   document.querySelectorAll("details").forEach(d => { d.dataset.wasOpen = d.open ? "1" : ""; if (d.id === "assumpWrap") d.open = true; });
 });
 window.addEventListener("afterprint", () => document.querySelectorAll("details").forEach(d => d.open = !!d.dataset.wasOpen));
