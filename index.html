@@ -37,6 +37,7 @@
   --ready: #b45f06;
   --alert: #b3261e;
   --good: #2d6a4f;
+  --k1: #2a6fb8; --k2: #c2552b; --k3: #7b4fa0; --k4: #e3a33b; --k5: #1a9e6e;   /* cost categories (validated for colour-vision deficiency) */
   --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
   --font-body: "Public Sans", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
 }
@@ -47,6 +48,7 @@
     --base: #e0713f; --late: #22a276; --act: #4c90db;
     --band: rgba(76,144,219,0.16); --band-warm: rgba(224,160,60,0.16);
     --watch: #e2c25a; --ready: #f0a050; --alert: #ff8a80; --good: #7cc7a0;
+    --k1: #4c90db; --k2: #e0713f; --k3: #a57fd0; --k4: #b0882a; --k5: #22a276;
   }
 }
 :root[data-theme="dark"] {
@@ -55,6 +57,7 @@
   --base: #e0713f; --late: #22a276; --act: #4c90db;
   --band: rgba(76,144,219,0.16); --band-warm: rgba(224,160,60,0.16);
   --watch: #e2c25a; --ready: #f0a050; --alert: #ff8a80; --good: #7cc7a0;
+    --k1: #4c90db; --k2: #e0713f; --k3: #a57fd0; --k4: #b0882a; --k5: #22a276;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
@@ -250,6 +253,24 @@ fieldset.opts { border: 0; padding: 0; margin: 0; }
 .pmark { flex: 0 0 56px; height: 56px; border-radius: 8px; border: 1px dashed var(--muted); display: grid; place-items: center; text-align: center; color: var(--muted); font-size: 11px; line-height: 1.2; padding: 4px; }
 .pbody { display: grid; gap: 4px; font-size: 13.5px; }
 .pstat { justify-self: start; font-size: 12px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.opt .cost { color: var(--ink); font-weight: 600; }
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+.kpis div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: grid; gap: 2px; }
+.kpis span { font-size: 12.5px; color: var(--muted); } .kpis b { font-size: 20px; }
+.costhead { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); border-left: 5px solid var(--good); background: var(--surface); font-size: 14px; }
+.costhead.neg { border-left-color: var(--alert); }
+.costhead b { font-size: 22px; }
+.cbars { display: grid; gap: 10px; }
+.cbrow { display: grid; grid-template-columns: 150px 1fr; gap: 10px; align-items: center; }
+.cblab { display: grid; font-size: 13px; } .cblab span { color: var(--muted); }
+.cbbar { display: flex; height: 26px; gap: 2px; }
+.cbbar i { display: block; height: 100%; min-width: 2px; }
+.cbbar i:first-child { border-radius: 4px 0 0 4px; } .cbbar i:last-child { border-radius: 0 4px 4px 0; }
+.legend .sq { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.verdict { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--act); border-radius: 8px; padding: 12px 16px; }
+.verdict h3 { margin: 0 0 6px; font-size: 18px; } .verdict p { margin: 6px 0; font-size: 14.5px; }
+table.cmp tr.tot td { border-top: 2px solid var(--ink); }
+a.ext::after { content: "\2197"; font-size: .8em; margin-left: 2px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .chal .stepdots { display: flex; gap: 6px; font-size: 12.5px; color: var(--muted); align-items: center; }
 .chal .stepdots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); display: inline-block; }
@@ -269,7 +290,7 @@ fieldset.opts { border: 0; padding: 0; margin: 0; }
 .ladder td.here { font-weight: 700; color: var(--act); }
 .ws { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
 .ws .item h3 { font-family: var(--font-display); font-size: 16px; }
-@media (max-width: 760px) { .opts, .ws, .three { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .opts, .ws, .three, .kpis { grid-template-columns: 1fr; } .cbrow { grid-template-columns: 1fr; } }
 .hero h1 { font-size: clamp(32px, 5vw, 48px); }
 .tagline { font-family: var(--font-display); font-size: clamp(19px, 2.4vw, 24px); line-height: 1.3; margin: 0; max-width: 52ch; color: var(--ink); }
 .subhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
@@ -888,7 +909,7 @@ CATS.forEach(c => REG.filter(r => r.cat === c.id).sort(byScore).forEach((r, i) =
 
 /* Recent developments: real, dated, linked. Signal effects are the authors' demonstration settings. */
 const SNAPSHOT = "12 November 2026";
-const VERSION = "0.4";
+const VERSION = "0.5";
 const CHECKED = "12 November 2026";
 const UPDATES = [
   ["2026-11-06", "health", "both", "News", "Avian influenza was detected in a British Columbia commercial poultry flock for the first time this autumn season.", "https://www.ctvnews.ca/vancouver/article/avian-flu-detected-in-bc-poultry-flock-for-first-time-this-season/", "Avian influenza trend set to rising (seasonal)"],
@@ -1421,8 +1442,10 @@ function buildUpdates() {
     </ul>`;
 }
 
-/* ----- Decision challenge: joint grain-transport exercise (stateful stock-and-flow) ----- */
-const GX = { H: 35, arr: 100, cap: 2000, s0: 1000, prio: 15, budget: 8, close0: 3 };
+/* ----- Decision challenge: joint grain-transport exercise (stateful stock-and-flow with costs) ----- */
+const GX = { H: 35, arr: 100, cap: 2000, s0: 1000, prio: 15, close0: 3, surplus: 20, tailCap: 30 };
+/* Cost assumptions, Canadian dollars. Illustrative values anchored to published figures (see GCOST_SRC). */
+const GC = { monitor: 0.2, standby: 3.0, coordFee: 0.3, resRate: 50, spotRate: 70, storage: 20, delay: 4, refused: 40, feed: 100 };
 const GPATHS = {
   long: { name: "Long closure", dur: 28, resolved: false, conf: 0.6, fuel: 1.5,
     info: "Talks have broken down and the closure may last several weeks. Operators can confirm only 60% of any trucking requested. Diesel prices have risen, so transport activated from today costs 50% more." },
@@ -1431,72 +1454,101 @@ const GPATHS = {
   resolved: { name: "Warning resolves", dur: 0, resolved: true, conf: 1, fuel: 1,
     info: "A deal was reached on Day 2 and no closure occurred. Commitments already made cannot be refunded." }
 };
+const GWORST = { name: "Closure beyond Day 35", dur: 40, resolved: false, conf: 1, fuel: 1 };   // only for cost ranges shown at Day 0
 const GPLANS0 = {
-  monitor: { name: "Monitor with a deadline", units: 1, facts: ["1 unit now", "Capacity report by Day 1"], up: "Keeps the budget free while the warning is uncertain.", risk: "Trucking booked later is scarcer, dearer and slower to arrive." },
-  reserve: { name: "Reserve limited alternatives", units: 3, facts: ["3 units now, 2 more if the closure begins", "30 kt a day requested; confirmed by Day 2"], up: "Alternative transport can start soon after a closure.", risk: "The 3 reservation units are spent even if talks succeed." },
-  coord: { name: "Coordinate priority and storage", units: 4, facts: ["4 units now", "From Day 2, feed and food get first call, with 10 kt a day of existing trucking redirected to them", "300 kt more storage from Day 3"], up: "Feed and food deliveries are protected, and storage fills later.", risk: "Other freight waits longer; little new transport capacity." }
+  monitor: { name: "Monitor with a deadline", facts: ["Capacity report by Day 1", "No transport or storage committed"], up: "Spends almost nothing while the warning is uncertain.", risk: "Trucking booked later is scarcer, dearer and slower to arrive." },
+  reserve: { name: "Reserve limited alternatives", facts: ["30 kt a day of trucking requested; confirmed by Day 2", `$${GC.standby.toFixed(1)}M standby fee now, then $${GC.resRate} a tonne moved`], up: "Alternative transport can start one day into a closure, at a price agreed in advance.", risk: "The standby fee is spent even if talks succeed." },
+  coord: { name: "Coordinate priority and storage", facts: ["From Day 2, feed and food get first call, with 10 kt a day of existing trucking redirected to them", "300 kt more storage from Day 3"], up: "Feed and food deliveries are protected, and storage fills later.", risk: "Storage is paid for even if talks succeed; other freight waits longer." }
 };
-const gUnits0 = (p0, path) => GPLANS0[p0].units + (p0 === "reserve" && !GPATHS[path].resolved ? 2 : 0);
+const fmtCM = (v) => "$" + (Math.abs(v) >= 100 ? Math.round(v).toLocaleString("en-CA") : v.toFixed(1)) + "M";
 function gOpts5(p0, path) {
-  const P = GPATHS[path], f = P.fuel;
-  const o = [{ id: "keep", name: "Keep the current plan", units: 0, desc: "No new commitment. Actions already taken continue." }];
-  if (p0 === "reserve") o.push({ id: "transport", name: "Expand the reservation", units: Math.ceil(2 * f), desc: `Ask the same operators for 20 kt a day more; ${Math.round(20 * P.conf)} kt a day can be confirmed, from Day 7.` });
-  else o.push({ id: "transport", name: "Book trucking now", units: Math.ceil(4 * f), desc: `Without a reservation, trucks are scarcer: ${Math.round(25 * P.conf)} kt a day can be confirmed, from Day 9.` });
-  if (p0 === "coord") o.push({ id: "priority", name: "Add more temporary storage", units: 2, desc: "300 kt more room, ready on Day 8." });
-  else o.push({ id: "priority", name: "Prioritize feed and food, add storage", units: 4, desc: "Feed and food get first call from Day 6 (operator approval needed), with 10 kt a day of trucking redirected to them from Day 7. Storage gains 300 kt from Day 8. Other freight waits longer." });
-  const used = gUnits0(p0, path);
-  o.forEach(x => { x.ok = used + x.units <= GX.budget; });
+  const P = typeof path === "string" ? GPATHS[path] : path, f = P.fuel;
+  const o = [{ id: "keep", name: "Keep the current plan", cost: "No new spending", desc: "No new commitment. Actions already taken continue." }];
+  if (p0 === "reserve") o.push({ id: "transport", name: "Expand the reservation", cost: `$${Math.round(GC.resRate * f)} a tonne moved`, desc: `Ask the same operators for 20 kt a day more; ${Math.round(20 * P.conf)} kt a day can be confirmed, from Day 7.` });
+  else o.push({ id: "transport", name: "Book trucking now", cost: `$${Math.round(GC.spotRate * f)} a tonne moved`, desc: `Without a reservation, trucks are scarcer and dearer: ${Math.round(25 * P.conf)} kt a day can be confirmed, from Day 9.` });
+  if (p0 === "coord") o.push({ id: "priority", name: "Add more temporary storage", cost: `$${(300 * GC.storage / 1000).toFixed(1)}M`, desc: "300 kt more room, ready on Day 8." });
+  else o.push({ id: "priority", name: "Prioritize feed and food, add storage", cost: `$${(GC.coordFee + 300 * GC.storage / 1000).toFixed(1)}M, plus $${Math.round(GC.resRate * f)} a tonne trucked`, desc: "Feed and food get first call from Day 6 (operator approval needed), with 10 kt a day of trucking redirected to them from Day 7. Storage gains 300 kt from Day 8. Other freight waits longer." });
+  o.forEach(x => x.ok = true);
   return o;
 }
-/* plan = { p0, p5, react }. Day 0 choice runs from Day 0; the Day 5 choice can only change Day 5 onward. */
+/* plan = { p0, p5 } | { p0:"monitor", react:true } | { book: d }.
+   The Day 0 choice runs from Day 0; a Day 5 choice can change only Day 5 onward.
+   Costs: response spending (fixed fees, storage, a premium per tonne moved by alternatives) and losses
+   (export delay per tonne-day of backlog, the backlog still waiting at Day 35, farm deliveries turned away, unmet feed and food). */
 function gSim(plan, path) {
-  const P = GPATHS[path], H = GX.H, closeEnd = GX.close0 + P.dur;
-  const ev = [], alt = [], store = [];
-  let units = 0, prioFrom = Infinity, transportUnits = 0;
-  const spend = (d, u, what, transport) => { units += u; if (transport) transportUnits += u; ev.push([d, `${what}: ${u} unit${u === 1 ? "" : "s"}`]); };
-  const pl = GPLANS0[plan.p0];
-  spend(0, pl.units, pl.name);
-  if (plan.p0 === "monitor") ev.push([1, "Capacity report received"]);
-  if (plan.p0 === "reserve") {
-    ev.push([2, `Operators confirm ${Math.round(30 * P.conf)} kt a day of trucking`]);
-    if (!P.resolved) { spend(3, 2, "Reservation activated as the closure begins", true); alt.push([4, 30 * P.conf]); ev.push([4, `Reserved trucking starts: ${Math.round(30 * P.conf)} kt a day`]); }
+  const P = typeof path === "string" ? GPATHS[path] : path, H = GX.H, closeEnd = GX.close0 + P.dur;
+  const ev = [], alt = [], store = [], fees = [];
+  let resp = 0, prioFrom = Infinity;
+  const fee = (d, m, what) => { resp += m; fees.push([d, m]); if (m > 0) ev.push([d, `${what}: ${fmtCM(m)}`]); };
+  const addAlt = (d, cap, rate, what) => { alt.push({ d, cap, rate, used: 0 }); ev.push([d, `${what}: ${Math.round(cap)} kt a day at $${Math.round(rate)} a tonne`]); };
+  if (plan.book !== undefined) {   // "book alternative transport on Day d" (used for the cost-of-waiting curve)
+    const d = plan.book;
+    if (d < GX.close0) { fee(0, d === 0 ? 0 : GC.monitor, "Monitoring"); if (!(P.resolved && d >= 2)) { fee(d, GC.standby, "Standby fee for reserved trucking"); if (!P.resolved) addAlt(Math.max(d + 2, GX.close0 + 1), 30 * P.conf, GC.resRate, "Reserved trucking starts"); } }
+    else { fee(0, GC.monitor, "Monitoring"); if (!P.resolved) addAlt(d + 4, 25 * P.conf, GC.spotRate * (d >= 5 ? P.fuel : 1), "Trucking booked at short notice starts"); }
+  } else {
+    const pl = GPLANS0[plan.p0];
+    if (plan.p0 === "monitor") { fee(0, GC.monitor, pl.name); ev.push([1, "Capacity report received"]); }
+    if (plan.p0 === "reserve") {
+      fee(0, GC.standby, "Standby fee for reserved trucking");
+      ev.push([2, `Operators confirm ${Math.round(30 * P.conf)} kt a day of trucking`]);
+      if (!P.resolved) addAlt(GX.close0 + 1, 30 * P.conf, GC.resRate, "Reserved trucking starts");
+    }
+    if (plan.p0 === "coord") {
+      fee(0, GC.coordFee, "Coordination and approvals"); prioFrom = 2;
+      addAlt(2, 10, GC.resRate, "Existing trucking redirected to feed and food");
+      fee(3, 300 * GC.storage / 1000, "Temporary storage ready (+300 kt)"); store.push([3, 300]);
+    }
+    if (!P.resolved && plan.p5 && plan.p5 !== "keep") {
+      const f = P.fuel;
+      if (plan.p5 === "transport") { if (plan.p0 === "reserve") addAlt(7, 20 * P.conf, GC.resRate * f, "Expanded reservation starts"); else addAlt(9, 25 * P.conf, GC.spotRate * f, "Trucking booked on Day 5 starts"); }
+      else if (plan.p0 === "coord") { fee(8, 300 * GC.storage / 1000, "More temporary storage ready (+300 kt)"); store.push([8, 300]); }
+      else { fee(6, GC.coordFee, "Priority allocation approved"); prioFrom = Math.min(prioFrom, 6); addAlt(7, 10, GC.resRate * f, "Trucking redirected to feed and food"); fee(8, 300 * GC.storage / 1000, "Temporary storage ready (+300 kt)"); store.push([8, 300]); }
+    }
   }
-  if (plan.p0 === "coord") { prioFrom = 2; alt.push([2, 10]); store.push([3, 300]); ev.push([2, "Priority allocation approved; 10 kt a day of trucking redirected to feed and food"]); ev.push([3, "Temporary storage ready (+300 kt)"]); }
-  ev.push(P.resolved ? [2, "Deal reached; no closure"] : [3, "Rail closure begins"]);
-  if (!P.resolved && plan.p5 && plan.p5 !== "keep") {
-    const o = gOpts5(plan.p0, path).find(x => x.id === plan.p5);
-    if (o && o.ok) {
-      if (o.id === "transport") { spend(5, o.units, o.name, true); const a = plan.p0 === "reserve" ? [7, 20 * P.conf] : [9, 25 * P.conf]; alt.push(a); ev.push([a[0], `${Math.round(a[1])} kt a day more trucking starts`]); }
-      else if (plan.p0 === "coord") { spend(5, o.units, o.name); store.push([8, 300]); ev.push([8, "More temporary storage ready (+300 kt)"]); }
-      else { spend(5, o.units, o.name); prioFrom = Math.min(prioFrom, 6); alt.push([7, 10]); store.push([8, 300]); ev.push([6, "Priority allocation approved"]); ev.push([7, "10 kt a day of trucking redirected to feed and food"]); ev.push([8, "Temporary storage ready (+300 kt)"]); }
-    } else if (o) ev.push([5, `${o.name} not possible within the budget`]);
-  }
-  let S = GX.s0, delivered = 0, prioUnmet = 0, refused = 0, firstFull = -1, reacted = false;
-  const head = [], disp = [], prioMet = [], stock = [], capA = [], railA = [];
+  ev.push(P.resolved ? [2, "Deal reached; no closure"] : [GX.close0, "Rail closure begins"]);
+  let S = GX.s0, delivered = 0, prioUnmet = 0, refused = 0, firstFull = -1, reacted = false, backlogDays = 0;
+  const head = [], disp = [], prioMet = [], stock = [], capA = [], railA = [], cumResp = [], cumLoss = [];
   for (let t = 0; t <= H; t++) {
     const closed = !P.resolved && t >= GX.close0 && t < closeEnd;
     let rail = 100;
     if (closed) rail = 0;
     else if (!P.resolved && t >= closeEnd) { rail = Math.min(120, 60 + 15 * (t - closeEnd)); if (S <= GX.s0) rail = Math.min(rail, 100); }
     const capT = GX.cap + store.filter(([d]) => t >= d).reduce((a, [, c]) => a + c, 0);
-    const accepted = Math.min(GX.arr, Math.max(0, capT - S));   // start of day: farm deliveries accepted while there is room
+    const accepted = Math.min(GX.arr, Math.max(0, capT - S));   // farm deliveries accepted while there is room
     refused += GX.arr - accepted; S += accepted;
-    head.push(capT - S); stock.push(S); capA.push(capT);   // free space once the day's farm deliveries are in
+    head.push(capT - S); stock.push(S); capA.push(capT);
     if (accepted < GX.arr && firstFull < 0) { firstFull = t; ev.push([t, "Elevators full; farm deliveries turned away"]); }
     if (plan.react && !reacted && closed && accepted < GX.arr) {   // comparator: book trucking once storage is full
-      reacted = true; const u = Math.ceil(4 * P.fuel); spend(t, u, "Trucking booked once storage is full", true); alt.push([t + 4, 25 * P.conf]); ev.push([t + 4, `${Math.round(25 * P.conf)} kt a day of trucking starts`]);
+      reacted = true; addAlt(t + 4, 25 * P.conf, GC.spotRate * (t >= 5 ? P.fuel : 1), `Trucking booked on Day ${t}, once storage is full, starts`);
     }
-    const altCap = closed ? alt.filter(([d]) => t >= d).reduce((a, [, c]) => a + c, 0) : 0;
+    const act = closed ? alt.filter(a => t >= a.d) : [];
+    const altCap = act.reduce((s, a) => s + a.cap, 0);
     const dispatch = Math.min(S, rail + altCap);
+    const byAlt = Math.max(0, dispatch - rail);   // tonnes moved by alternatives, shared in proportion to capacity
+    act.forEach(a => a.used += byAlt * a.cap / altCap);
     const pm = t >= prioFrom ? Math.min(GX.prio, dispatch) : Math.min(GX.prio, dispatch * GX.prio / 100);
     prioUnmet += GX.prio - pm; S -= dispatch; delivered += dispatch;
+    backlogDays += Math.max(0, GX.arr * (t + 1) - delivered);   // kt-days of export shipments running late
     disp.push(dispatch); prioMet.push(pm); railA.push(Math.min(rail, dispatch));
+    cumResp.push(fees.filter(([d]) => d <= t).reduce((s, [, m]) => s + m, 0) + alt.reduce((s, a) => s + a.used * a.rate, 0) / 1000);
+    cumLoss.push((backlogDays * GC.delay + refused * GC.refused + prioUnmet * GC.feed) / 1000);
   }
   if (!P.resolved) ev.push([closeEnd, "Rail line reopens; backlog clears at up to 120 kt a day"]);
   ev.sort((a, b) => a[0] - b[0]);
-  return { head, disp, prioMet, stock, capA, railA, delivered, cont: 100 * delivered / ((H + 1) * GX.arr), prioUnmet, refused, units, transportUnits, firstFull, ev, closeEnd, path };
+  const truckCost = alt.reduce((s, a) => s + a.used * a.rate, 0) / 1000;   // kt × $/t = $ thousand → $M
+  const backlog = Math.max(0, GX.arr * (H + 1) - delivered);
+  const c = {
+    resp: resp + truckCost,
+    delay: backlogDays * GC.delay / 1000,
+    tail: backlog * Math.min(backlog / (2 * GX.surplus), GX.tailCap) * GC.delay / 1000,   // backlog left at Day 35 waits on average half its clearing time (20 kt a day above normal), at most 30 days
+    refused: refused * GC.refused / 1000,
+    feed: prioUnmet * GC.feed / 1000
+  };
+  c.loss = c.delay + c.tail + c.refused + c.feed; c.total = c.resp + c.loss;
+  return { head, disp, prioMet, stock, capA, railA, cumResp, cumLoss, delivered, cont: 100 * delivered / ((H + 1) * GX.arr), prioUnmet, refused, backlog, firstFull, ev, closeEnd, path: typeof path === "string" ? path : "worst", c, trucked: alt.reduce((s, a) => s + a.used, 0) };
 }
 const GCOMP = { p0: "monitor", p5: "keep", react: true };
+const GNONE = { p0: "monitor", p5: "keep" };
 const CH = { step: 0, p0: "", p5: "", path: "long", cmp: "comp" };
 function gPlanName(pl) { return pl.react ? "Monitor, then book trucking once storage is full" : GPLANS0[pl.p0].name + (pl.p5 && pl.p5 !== "keep" ? " + " + gOpts5(pl.p0, "long").find(x => x.id === pl.p5).name.toLowerCase() : ""); }
 
@@ -1559,15 +1611,50 @@ function timelineSVG(sim, upto, marks) {
   (marks || []).forEach(([d, lab]) => s += `<circle cx="${X(d)}" cy="34" r="6" fill="${ink}"/><text x="${X(d)}" y="${lab.length > 0 ? 50 : 0}" text-anchor="middle" font-size="11" font-weight="700" fill="${ink}">${lab}</text>`);
   return s + `</svg>`;
 }
-function budgetStrip(used, pending) {
-  const cells = Array.from({ length: GX.budget }, (_, i) => `<i class="${i < used ? "used" : i < used + pending ? "pend" : ""}"></i>`).join("");
-  return `<div class="budget" role="img" aria-label="${used} of ${GX.budget} exercise units committed${pending ? ", " + pending + " more selected" : ""}"><span class="lab">Budget</span><span class="cells">${cells}</span><span>${used} of ${GX.budget} units committed${pending ? ` · ${pending} selected` : ""}</span></div>`;
-}
+const GCAT = [["resp", "Response spending", "--k1"], ["delay", "Late exports to Day 35", "--k2"], ["tail", "Backlog still waiting after Day 35", "--k3"], ["refused", "Farm deliveries turned away", "--k4"], ["feed", "Feed and food shortfall", "--k5"]];
+const GCOST_SRC = [
+  ["Late exports", `$${GC.delay} per tonne per day of backlog`, `Demurrage, contract extensions and penalties. Grain shippers reported delays costing up to $10 million a day while ships waited for 2.5 million tonnes (<a href="https://www.pressreader.com/canada/calgary-herald/20200305/281646782190327">Calgary Herald, 2020</a>); demurrage alone runs about <a href="https://www.producer.com/?p=254338">$10,000 to $30,000 a day per ship</a>.`],
+  ["Backlog after Day 35", "Same rate, average wait up to 30 days", "Assumption: the backlog then clears at 20 kt a day above normal."],
+  ["Farm deliveries turned away", `$${GC.refused} per tonne`, `Delayed cash flow and a wider gap between port and elevator prices. Gray estimated that export capacity limits cut farm incomes by about $63 per tonne sold in 2013–15 (<a href="https://www.cfa-fca.ca/wp-content/uploads/2016/09/The-Economic-Impacts-Of-Elevated-Export-Basis-Levels-On-Western-Canadian-Grain-Producers-2012-2015.pdf">Gray, 2015</a>); a short event is assumed to cost less.`],
+  ["Feed and food shortfall", `$${GC.feed} per tonne`, "Assumption: replacement supply trucked from farther away. Animal welfare and food price effects are not counted."],
+  ["Alternative transport", `$${GC.resRate} a tonne reserved, $${GC.spotRate} at short notice, plus 50% if activated after fuel prices rise`, `Premium over rail. Rail freight to Vancouver is about <a href="https://www.producer.com/?p=296779">$50 to $70 a tonne</a>; long-haul trucking has been quoted at <a href="https://openparliament.ca/committees/international-trade/42-1/61/william-miller-5/only">50% to 65% more than rail</a>.`],
+  ["Temporary storage", `$${GC.storage} per tonne of space`, `Grain bagging was estimated at <a href="https://www1.agric.gov.ab.ca/$department/newslett.nsf/all/agnw28201">$0.58 a bushel</a> of added storage, about $21 a tonne.`],
+  ["Fees", `Standby $${GC.standby.toFixed(1)}M; coordination $${GC.coordFee}M; monitoring $${GC.monitor}M`, "Assumptions."]
+];
 function gMetrics(sim) {
-  return [["Freight delivered", Math.round(sim.delivered).toLocaleString("en-CA") + " kt", Math.round(sim.cont) + "% of normal"],
+  return [["Total cost", fmtCM(sim.c.total), "response plus losses", true],
+          ["Response spending", fmtCM(sim.c.resp), sim.trucked > 0 ? Math.round(sim.trucked) + " kt moved by alternatives" : "no alternative transport"],
+          ["Losses", fmtCM(sim.c.loss), "late exports, farms, feed and food"],
+          ["Freight delivered", Math.round(sim.delivered).toLocaleString("en-CA") + " kt", Math.round(sim.cont) + "% of normal"],
           ["Feed and food deliveries unmet", Math.round(sim.prioUnmet).toLocaleString("en-CA") + " kt", "priority demand 15 kt a day"],
-          ["Farm deliveries turned away", Math.round(sim.refused).toLocaleString("en-CA") + " kt", sim.firstFull >= 0 ? "storage full from Day " + sim.firstFull : "storage never full"],
-          ["Exercise units spent", sim.units + " of " + GX.budget, sim.transportUnits ? sim.transportUnits + " on transport" : "none on transport"]];
+          ["Farm deliveries turned away", Math.round(sim.refused).toLocaleString("en-CA") + " kt", sim.firstFull >= 0 ? "storage full from Day " + sim.firstFull : "storage never full"]];
+}
+function costBars(rows) {   // rows: [[label, sim], ...] → stacked horizontal bars of the cost breakdown
+  const max = Math.max(...rows.map(([, m]) => m.c.total), 1);
+  return `<div class="cbars">` + rows.map(([lab, m]) => `<div class="cbrow"><div class="cblab"><b>${esc(lab)}</b><span>${fmtCM(m.c.total)}</span></div>
+    <div class="cbbar" role="img" aria-label="${esc(lab)}: total ${fmtCM(m.c.total)}; ${GCAT.map(([k, n]) => n.toLowerCase() + " " + fmtCM(m.c[k])).join(", ")}">${GCAT.map(([k, n, v]) => m.c[k] > 0.05 ? `<i style="width:${(100 * m.c[k] / max).toFixed(2)}%;background:var(${v})" title="${n}: ${fmtCM(m.c[k])}"></i>` : "").join("")}</div></div>`).join("") +
+    `<div class="legend">${GCAT.map(([, n, v]) => `<span><i class="sq" style="background:var(${v})"></i>${n}</span>`).join("")}</div></div>`;
+}
+function gDebrief(plan) {   // tailored message about the choices made, from the long-closure run the user experienced
+  const L = gSim(plan, "long"), C = gSim(GCOMP, "long"), N = gSim(GNONE, "long");
+  const net = C.c.total - L.c.total, avoided = N.c.loss - L.c.loss, extra = L.c.resp - N.c.resp;
+  const early = plan.p0 === "reserve" || plan.p0 === "coord", d5 = plan.p5 && plan.p5 !== "keep", idle = !early && !d5;
+  const all = []; Object.keys(GPLANS0).forEach(p0 => gOpts5(p0, "long").forEach(o => all.push({ p0, p5: o.id, t: gSim({ p0, p5: o.id }, "long").c.total })));
+  all.sort((a, b) => a.t - b.t); const rank = all.findIndex(x => x.p0 === plan.p0 && x.p5 === (plan.p5 || "keep")) + 1;
+  const verdict = idle ? "Waiting was the most expensive choice." : net > 0 && early ? "Acting early paid off." : net > 0 ? "Acting on Day 5 helped, but less than acting on Day 0 would have." : "This plan did not beat the reactive comparator.";
+  const out = [`Under the long closure your plan cost <b>${fmtCM(L.c.total)}</b> in total: ${fmtCM(L.c.resp)} of response spending and ${fmtCM(L.c.loss)} of losses. That is <b>${fmtCM(Math.abs(net))} ${net >= 0 ? "less" : "more"}</b> than the reactive comparator (${fmtCM(C.c.total)}), and ranks ${rank} of ${all.length} possible plans.`];
+  if (extra > 0.05) out.push(`Compared with doing nothing, it spent ${fmtCM(extra)} more and avoided ${fmtCM(avoided)} of losses: <b>about $${(avoided / extra).toFixed(1)} of losses avoided for every $1 spent</b>.`);
+  else out.push(`Doing nothing kept spending to ${fmtCM(L.c.resp)}, but the closure then cost ${fmtCM(L.c.loss)} in losses.`);
+  const b = (d) => gSim({ book: d }, "long").c.total;
+  out.push(`Timing matters most. Booking the same kind of alternative transport on Day 5 instead of before the closure adds <b>${fmtCM(b(5) - b(0))}</b> to the total cost under the long closure; waiting until elevators fill on Day ${C.firstFull} adds <b>${fmtCM(b(C.firstFull) - b(0))}</b>.`);
+  const nets = Object.keys(GPATHS).map(k => gSim(GCOMP, k).c.total - gSim(plan, k).c.total);
+  const Nc = (nets[0] + nets[1]) / 2, Nr = nets[2];
+  const R = gSim(plan, "resolved");
+  let be = Nr >= 0 ? "it never costs more than the reactive comparator" : Nc <= 0 ? "it does not beat the reactive comparator at any chance of closure" : `it beats the reactive comparator whenever the chance of a closure is above <b>${Math.max(1, Math.round(100 * -Nr / (Nc - Nr)))}%</b>`;
+  out.push(`If the warning had resolved, your plan would have cost ${fmtCM(R.c.resp)} with nothing gained: the price of insurance. Counting long and short closures as equally likely, ${be}.`);
+  const best = all[0];
+  if (rank > 1) out.push(`The lowest-cost plan here under the long closure was <i>${esc(gPlanName({ p0: best.p0, p5: best.p5 }))}</i> (${fmtCM(best.t)}).`);
+  return { verdict, out, L, C, N };
 }
 function buildChallenge(focusHead) {
   mode = "info"; showParts("info");
@@ -1576,54 +1663,54 @@ function buildChallenge(focusHead) {
   const ill = `<span class="ev ev-ill">Illustrative</span>`;
   const dots = `<ol class="stepper" aria-label="Progress">${steps.map((n, i) => `<li class="${i === CH.step ? "cur" : i < CH.step ? "done" : ""}" ${i === CH.step ? 'aria-current="step"' : ""}>${n}</li>`).join("")}</ol>`;
   const plan = { p0: CH.p0, p5: CH.p5 || "keep" };
-  let body = "";
+  let body = "", after = null;
   if (CH.step === 0) {
-    const preview = gSim({ p0: "monitor", p5: "keep" }, "short");
+    const preview = gSim(GNONE, "short");
     body = `<p class="scene">Day 0. An operator warns that the main rail line from the Prairies to the Port of Vancouver may close in 72 hours. It is October, peak export season.</p>
       <div class="corr">${corridorSVG(preview, 0, "Day 0: before the closure")}</div>
       <div class="three">
         <div class="item"><h3>Your role</h3><div>You advise a joint coordination table of governments, railways, shippers and grain companies. You recommend a plan; the members decide whether to approve it.</div></div>
-        <div class="item"><h3>Your objective</h3><div>Keep feed and food deliveries moving (15 kt a day) and limit farm deliveries turned away, within a budget of ${GX.budget} exercise units.</div></div>
+        <div class="item"><h3>Your objective</h3><div>Keep the total cost of the disruption as low as possible: what the response spends plus the losses from late exports, farm deliveries turned away and feed and food shortfalls (15 kt a day of priority demand).</div></div>
         <div class="item"><h3>What is uncertain</h3><div>Whether the closure happens, how long it lasts, and how much trucking operators can confirm.</div></div>
       </div>
-      <p class="tnote">${ill} The corridor, volumes (kt = thousand tonnes), budget units, lead times and capacities are assumptions chosen to show the mechanism, not estimates. <span class="ev ev-obs">Observed</span> About <a href="https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx">94% of Canada's grain exports move by rail</a>, and in past stoppages <a href="https://www.producer.com/news/n-american-farm-groups-ask-govts-to-act-on-rail-dispute/">Prairie elevators filled in about 10 days</a>; the exercise starts with 10 days of storage room to match.</p>
+      <p class="tnote">${ill} The corridor, volumes (kt = thousand tonnes), lead times, capacities and costs (Canadian dollars) are assumptions chosen to show the mechanism; cost rates are anchored to published figures listed in the debrief. <span class="ev ev-obs">Observed</span> About <a href="https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx">94% of Canada's grain exports move by rail</a>, and in past stoppages <a href="https://www.producer.com/news/n-american-farm-groups-ask-govts-to-act-on-rail-dispute/">Prairie elevators filled in about 10 days</a>; the exercise starts with 10 days of storage room to match.</p>
       <div class="btnrow"><button class="btn primary" type="button" data-next>Choose a plan</button></div>`;
   } else if (CH.step === 1) {
     const sel = CH.p0 ? GPLANS0[CH.p0] : null;
+    const rng = (k) => [gSim({ p0: k, p5: "keep" }, "resolved").c.resp, gSim({ p0: k, p5: "keep" }, GWORST).c.resp];
     body = `<p class="scene">What would you commit today?</p>
-      ${budgetStrip(0, sel ? sel.units : 0)}
-      <fieldset class="opts"><legend class="sr">Day 0 plan</legend>${Object.entries(GPLANS0).map(([k, o]) => `
+      <fieldset class="opts"><legend class="sr">Day 0 plan</legend>${Object.entries(GPLANS0).map(([k, o]) => { const [lo, hi] = rng(k); return `
         <label class="opt"><input type="radio" name="p0" value="${k}" ${CH.p0 === k ? "checked" : ""}>
           <b>${o.name}</b>${o.facts.map(f => `<span>${f}</span>`).join("")}
-          <span class="up">+ ${o.up}</span><span class="risk">− ${o.risk}</span></label>`).join("")}</fieldset>
-      <div class="record" id="rec0">${sel ? `Decision record: <b>${sel.name}</b>, ${sel.units} units now. Nothing is known yet about how long a closure would last.` : "Select a plan to see its commitment."}</div>
+          <span class="cost">${lo === hi ? `Costs ${fmtCM(lo)}` : `Costs ${fmtCM(lo)} if talks succeed; up to ${fmtCM(hi)} if the closure runs past Day 35`}</span>
+          <span class="up">+ ${o.up}</span><span class="risk">− ${o.risk}</span></label>`; }).join("")}</fieldset>
+      <div class="record" id="rec0">${sel ? `Decision record: <b>${sel.name}</b>. Committed now: ${fmtCM(gSim({ p0: CH.p0, p5: "keep" }, "resolved").c.resp)}. Nothing is known yet about how long a closure would last.` : "Select a plan to see its commitment."}</div>
       <div class="btnrow"><button class="btn" type="button" data-back>Back</button><button class="btn primary" type="button" data-next ${CH.p0 ? "" : "disabled"}>Commit and advance to Day 5</button></div>`;
   } else if (CH.step === 2) {
     const sim5 = gSim({ p0: CH.p0, p5: "keep" }, CH.path), P = GPATHS[CH.path];
-    const used = gUnits0(CH.p0, CH.path);
     const opts = gOpts5(CH.p0, CH.path);
-    const selO = opts.find(o => o.id === CH.p5);
     body = `<p class="scene">Day 5 update</p>
       <div class="timeline">${timelineSVG(sim5, 5, [[0, "Plan"], [5, "Now"]])}</div>
       <div class="corr">${corridorSVG(sim5, 5, "Day 5: the situation now")}</div>
+      <div class="kpis"><div><span>Spent so far</span><b>${fmtCM(sim5.cumResp[5])}</b></div><div><span>Losses so far</span><b>${fmtCM(sim5.cumLoss[5])}</b></div><div><span>Storage room left</span><b>${Math.round(sim5.head[5])} kt</b></div></div>
       <div class="two">
         <div class="item"><h3>What has happened</h3><ul class="evlog">${sim5.ev.filter(([d]) => d <= 5).map(([d, t]) => `<li><b>Day ${d}</b> ${esc(t)}</li>`).join("")}</ul></div>
         <div class="item"><h3>New information</h3><div>${P.info}</div></div>
       </div>
-      ${budgetStrip(used, selO ? selO.units : 0)}
       ${P.resolved ? `<p class="tnote">There is no closure to respond to. Your Day 0 commitment is already spent.</p>` : `
       <fieldset class="opts"><legend class="sr">Day 5 choice</legend>${opts.map(o => `
-        <label class="opt ${o.ok ? "" : "off"}"><input type="radio" name="p5" value="${o.id}" ${CH.p5 === o.id ? "checked" : ""} ${o.ok ? "" : "disabled"}>
-          <b>${o.name}</b><span>${o.units} unit${o.units === 1 ? "" : "s"}</span><span>${o.desc}</span>${o.ok ? "" : `<span class="risk">Not possible: it would take the plan past ${GX.budget} units.</span>`}</label>`).join("")}</fieldset>`}
+        <label class="opt"><input type="radio" name="p5" value="${o.id}" ${CH.p5 === o.id ? "checked" : ""}>
+          <b>${o.name}</b><span class="cost">${o.cost}</span><span>${o.desc}</span></label>`).join("")}</fieldset>`}
       <p class="snap">Your Day 0 plan and everything it has already done stay in place. A Day 5 choice can only change what happens from Day 5 onward, after its own lead time.</p>
       <div class="btnrow"><button class="btn primary" type="button" data-next ${P.resolved || CH.p5 ? "" : "disabled"}>Commit and run to Day 35</button></div>`;
   } else if (CH.step === 3) {
     const mine = gSim(plan, CH.path), comp = gSim(GCOMP, CH.path);
     const others = [];
-    Object.keys(GPLANS0).forEach(p0 => gOpts5(p0, CH.path).forEach(o => { if (o.ok && !(p0 === CH.p0 && o.id === (CH.p5 || "keep"))) others.push({ p0, p5: o.id }); }));
+    Object.keys(GPLANS0).forEach(p0 => gOpts5(p0, CH.path).forEach(o => { if (!(p0 === CH.p0 && o.id === (CH.p5 || "keep"))) others.push({ p0, p5: o.id }); }));
     const cmpPlan = CH.cmp === "comp" ? GCOMP : others.find(o => o.p0 + "|" + o.p5 === CH.cmp) || GCOMP;
     const alt = gSim(cmpPlan, CH.path);
     const mm = gMetrics(mine), am = gMetrics(alt);
+    const diff = alt.c.total - mine.c.total;
     body = `<p class="scene">Day 35: outcome under the <b>${GPATHS[CH.path].name.toLowerCase()}</b> path</p>
       <div class="pathsel" role="radiogroup" aria-label="Event path">${Object.entries(GPATHS).map(([k, p]) => `<label class="chip"><input type="radio" name="path" value="${k}" ${CH.path === k ? "checked" : ""}> ${p.name}${k === "long" ? " (as experienced)" : ""}</label>`).join("")}</div>
       <p class="snap">Change the event path to see how the same choices perform if the closure is shorter or the warning resolves. Plans use only the information available on the day each choice was made.</p>
@@ -1632,51 +1719,55 @@ function buildChallenge(focusHead) {
         <label for="cmpSel"><b>Compare with</b></label>
         <select id="cmpSel"><option value="comp" ${CH.cmp === "comp" ? "selected" : ""}>Reactive comparator: monitor, then book trucking once storage is full</option>${others.map(o => `<option value="${o.p0}|${o.p5}" ${CH.cmp === o.p0 + "|" + o.p5 ? "selected" : ""}>${esc(gPlanName(o))}</option>`).join("")}</select>
       </div>
+      <div class="costhead ${diff >= 0 ? "pos" : "neg"}"><span>${diff >= 0 ? "Your plan costs" : "Your plan costs"}</span><b>${fmtCM(Math.abs(diff))} ${diff >= 0 ? "less" : "more"}</b><span>than the comparison, in total (response spending plus losses)</span></div>
+      <div class="card"><h2>Where the money goes</h2><p class="sub">Canadian dollars, millions. ${ill} Rates per tonne are listed in the debrief.</p>${costBars([["Your plan", mine], ["Comparison", alt]])}</div>
       <div class="tablewrap"><table class="cmp"><thead><tr><th>Outcome</th><th>Your plan<br><span class="snap">${esc(gPlanName(plan))}</span></th><th>Comparison<br><span class="snap">${esc(gPlanName(cmpPlan))}</span></th></tr></thead><tbody>
-        ${mm.map((m, i) => `<tr><td>${m[0]}</td><td><b>${m[1]}</b><br><span class="snap">${m[2]}</span></td><td><b>${am[i][1]}</b><br><span class="snap">${am[i][2]}</span></td></tr>`).join("")}
+        ${mm.map((m, i) => `<tr class="${m[3] ? "tot" : ""}"><td>${m[0]}</td><td><b>${m[1]}</b><br><span class="snap">${m[2]}</span></td><td><b>${am[i][1]}</b><br><span class="snap">${am[i][2]}</span></td></tr>`).join("")}
       </tbody></table></div>
+      <div class="card"><h2>Cost building up over time</h2><p class="sub">Cumulative response spending plus losses, Canadian dollars, to Day 35. Early action spends sooner and loses less later. The backlog still waiting at Day 35 adds ${fmtCM(mine.c.tail)} for your plan and ${fmtCM(alt.c.tail)} for the comparison.</p>
+        <div class="legend"><span><i class="sw" style="border-color:${css("--act")}"></i>Your plan</span><span><i class="sw" style="border-top:2px dashed ${css("--late")}"></i>Comparison</span></div>
+        <div class="chart" id="gch0"><div class="tip" id="gtip0"></div></div></div>
       <div class="card"><h2>Storage room at the elevators</h2><p class="sub">Thousand tonnes of free space once each day's farm deliveries are in. At zero, further farm deliveries are turned away.</p>
         <div class="legend"><span><i class="sw" style="border-color:${css("--act")}"></i>Your plan</span><span><i class="sw" style="border-top:2px dashed ${css("--late")}"></i>Comparison</span></div>
         <div class="chart" id="gch1"><div class="tip" id="gtip1"></div></div></div>
       <div class="card"><h2>Freight moved each day</h2><p class="sub">Thousand tonnes dispatched by rail, trucks and other routes. Normal is 100 kt a day; after reopening, the backlog clears at up to 120 kt a day.</p>
         <div class="legend"><span><i class="sw" style="border-color:${css("--act")}"></i>Your plan</span><span><i class="sw" style="border-top:2px dashed ${css("--late")}"></i>Comparison</span></div>
         <div class="chart" id="gch2"><div class="tip" id="gtip2"></div></div></div>
-      <details><summary>Data table: storage room and freight by day</summary><div class="tablewrap"><table class="cmp"><thead><tr><th>Day</th><th>Storage room, your plan (kt)</th><th>Storage room, comparison (kt)</th><th>Freight moved, your plan (kt)</th><th>Freight moved, comparison (kt)</th></tr></thead><tbody>${mine.head.map((h, i) => `<tr><td>${i}</td><td>${Math.round(h)}</td><td>${Math.round(alt.head[i])}</td><td>${Math.round(mine.disp[i])}</td><td>${Math.round(alt.disp[i])}</td></tr>`).join("")}</tbody></table></div></details>
+      <details><summary>Data table: cost, storage room and freight by day</summary><div class="tablewrap"><table class="cmp"><thead><tr><th>Day</th><th>Cumulative cost, your plan</th><th>Cumulative cost, comparison</th><th>Storage room, your plan (kt)</th><th>Storage room, comparison (kt)</th><th>Freight moved, your plan (kt)</th><th>Freight moved, comparison (kt)</th></tr></thead><tbody>${mine.head.map((h, i) => `<tr><td>${i}</td><td>${fmtCM(mine.cumResp[i] + mine.cumLoss[i])}</td><td>${fmtCM(alt.cumResp[i] + alt.cumLoss[i])}</td><td>${Math.round(h)}</td><td>${Math.round(alt.head[i])}</td><td>${Math.round(mine.disp[i])}</td><td>${Math.round(alt.disp[i])}</td></tr>`).join("")}</tbody></table></div></details>
       <details><summary>Event log for your plan</summary><ul class="evlog">${mine.ev.map(([d, t]) => `<li><b>Day ${d}</b> ${esc(t)}</li>`).join("")}</ul></details>
       <div class="btnrow"><button class="btn" type="button" data-back>Back to Day 5</button><button class="btn primary" type="button" data-next>Read the debrief</button></div>`;
-    setTimeout(() => {
+    after = () => {
       const band = GPATHS[CH.path].resolved ? null : [GX.close0, Math.min(GX.H, mine.closeEnd), "Rail closed"];
       const base = { xMax: GX.H, dx: 1, xTicks: [0, 5, 10, 15, 20, 25, 30, 35], xFmt: (v, long) => long ? "Day " + v : v, xLabel: "Day", band };
+      const cm = mine.cumResp.map((r, i) => r + mine.cumLoss[i]), ca = alt.cumResp.map((r, i) => r + alt.cumLoss[i]);
+      lineChart($("gch0"), $("gtip0"), { ...base, aria: "Cumulative cost by day, your plan and the comparison", yMax: niceMax(Math.max(...cm, ...ca, 1) * 1.08), yFmt: (v, long) => long ? fmtCM(v) : "$" + Math.round(v) + "M",
+        series: [{ name: "Your plan", data: cm, color: css("--act"), label: true }, { name: "Comparison", data: ca, color: css("--late"), dash: "6 4" }] });
       lineChart($("gch1"), $("gtip1"), { ...base, aria: "Storage room at the elevators by day, your plan and the comparison", yMax: niceMax(Math.max(...mine.head, ...alt.head) * 1.1), yFmt: v => Math.round(v) + " kt",
         series: [{ name: "Your plan", data: mine.head, color: css("--act"), label: true }, { name: "Comparison", data: alt.head, color: css("--late"), dash: "6 4" }] });
       lineChart($("gch2"), $("gtip2"), { ...base, aria: "Freight moved each day, your plan and the comparison", yMax: 125, yTicks: 5, yFmt: v => Math.round(v) + " kt", ref: [100, "Normal"],
         series: [{ name: "Your plan", data: mine.disp, color: css("--act"), label: true }, { name: "Comparison", data: alt.disp, color: css("--late"), dash: "6 4" }] });
-    }, 0);
+    };
   } else {
-    const paths = Object.keys(GPATHS);
-    const rows = paths.map(k => [k, gSim(plan, k), gSim(GCOMP, k)]);
-    const L = rows[0][1], Lc = rows[0][2], R = rows[2][1];
-    const drivers = [];
-    if (CH.p0 === "reserve") drivers.push("The reservation made on Day 0 meant alternative transport could start on Day 4, only a day into the closure.");
-    if (CH.p0 === "reserve" && CH.p5 === "transport") drivers.push(`Expanding the reservation on Day 5 added ${Math.round(20 * GPATHS.long.conf)} kt a day from Day 7, at the higher fuel cost, and used the rest of the budget.`);
-    else if (CH.p5 === "transport") drivers.push("Trucking booked on Day 5 without a reservation arrived on Day 9 and at lower volume, because spare trucks were already scarce.");
-    if (CH.p0 === "coord" || CH.p5 === "priority") drivers.push(`Giving feed and food first call, with trucking redirected to them, cut unmet feed and food deliveries to ${Math.round(L.prioUnmet)} kt (reactive comparator: ${Math.round(Lc.prioUnmet)} kt). It added little capacity, so other freight waited longer.`);
-    else drivers.push(`Without a priority allocation, feed and food shared whatever moved with all other freight; ${Math.round(L.prioUnmet)} kt of their deliveries went unmet (reactive comparator: ${Math.round(Lc.prioUnmet)} kt).`);
-    if (CH.p0 === "coord" || CH.p5 === "priority") drivers.push(`Temporary storage pushed back the day elevators filled (${L.firstFull >= 0 ? "Day " + L.firstFull : "never"} with your plan, Day ${Lc.firstFull} for the reactive comparator).`);
-    if (CH.p0 === "monitor" && (CH.p5 || "keep") === "keep") drivers.push("Keeping the budget free avoided spending if talks had succeeded, but nothing moved during the closure.");
-    drivers.push(R.units > 0 ? `If the warning had resolved, your plan would still have spent ${R.units} unit${R.units === 1 ? "" : "s"} with no closure to respond to.` : "");
+    const D = gDebrief(plan);
+    const rows = Object.keys(GPATHS).map(k => [k, gSim(plan, k), gSim(GCOMP, k)]);
+    const book = { long: [], short: [] }; for (let d = 0; d <= 20; d++) { book.long.push(gSim({ book: d }, "long").c.total); book.short.push(gSim({ book: d }, "short").c.total); }
+    const b0 = { long: book.long[0], short: book.short[0] }; book.long = book.long.map(v => v - b0.long); book.short = book.short.map(v => v - b0.short);   // extra cost of waiting
     body = `<p class="scene">Debrief</p>
-      <div class="item"><h3>What drove your result</h3><ul>${drivers.filter(Boolean).map(d => `<li>${d}</li>`).join("")}</ul>
-        <div class="snap">In this exercise no plan is best on every outcome and every path: reserving transport moves the most freight, coordinating priority protects feed and food, and monitoring spends least if the warning resolves.</div></div>
-      <div class="card"><h2>Would your plan still work?</h2><p class="sub">Your choices under each event path, against the reactive comparator. Same assumptions, same budget, same starting state.</p>
-        <div class="tablewrap"><table class="cmp"><thead><tr><th>Event path</th><th>Feed and food unmet</th><th>Farm deliveries turned away</th><th>Freight delivered</th><th>Units spent</th></tr></thead><tbody>
-        ${rows.map(([k, m, c]) => `<tr><td>${GPATHS[k].name}</td><td><b>${Math.round(m.prioUnmet)} kt</b> <span class="snap">vs ${Math.round(c.prioUnmet)}</span></td><td><b>${Math.round(m.refused)} kt</b> <span class="snap">vs ${Math.round(c.refused)}</span></td><td><b>${Math.round(m.cont)}%</b> <span class="snap">vs ${Math.round(c.cont)}%</span></td><td><b>${m.units}</b> <span class="snap">vs ${c.units}</span></td></tr>`).join("")}
+      <div class="verdict"><h3>${D.verdict}</h3>${D.out.map(t => `<p>${t}</p>`).join("")}</div>
+      <div class="card"><h2>What waiting costs</h2><p class="sub">Extra total cost (response plus losses) of booking alternative transport on a later day instead of before the closure, everything else unchanged. Before the closure, trucks can be reserved at an agreed price; after it starts, they are scarcer and dearer, and from Day 5 fuel costs more under the long closure. ${ill}</p>
+        <div class="legend"><span><i class="sw" style="border-color:${css("--base")}"></i>Long closure</span><span><i class="sw" style="border-top:2px dashed ${css("--act")}"></i>Short closure</span></div>
+        <div class="chart" id="gch3"><div class="tip" id="gtip3"></div></div>
+        <details><summary>Data table: extra cost by booking day</summary><div class="tablewrap"><table class="cmp"><thead><tr><th>Booking day</th><th>Extra cost, long closure</th><th>Extra cost, short closure</th></tr></thead><tbody>${book.long.map((v, d) => `<tr><td>${d}</td><td>${fmtCM(v)}</td><td>${fmtCM(book.short[d])}</td></tr>`).join("")}</tbody></table></div></details></div>
+      <div class="card"><h2>Would your plan still work?</h2><p class="sub">Total cost of your choices under each event path, against the reactive comparator. Same assumptions, same starting state.</p>
+        <div class="tablewrap"><table class="cmp"><thead><tr><th>Event path</th><th>Your plan</th><th>Reactive comparator</th><th>Difference</th><th>Feed and food unmet</th><th>Farm deliveries turned away</th></tr></thead><tbody>
+        ${rows.map(([k, m, c]) => { const d = c.c.total - m.c.total; return `<tr><td>${GPATHS[k].name}</td><td><b>${fmtCM(m.c.total)}</b></td><td>${fmtCM(c.c.total)}</td><td><b>${d >= 0 ? fmtCM(d) + " less" : fmtCM(-d) + " more"}</b></td><td>${Math.round(m.prioUnmet)} kt <span class="snap">vs ${Math.round(c.prioUnmet)}</span></td><td>${Math.round(m.refused)} kt <span class="snap">vs ${Math.round(c.refused)}</span></td></tr>`; }).join("")}
         </tbody></table></div></div>
       <div class="two">
-        <div class="item"><h3><span class="ev ev-obs">Observed</span> What we know</h3><div>How much grain moves by rail and how fast elevators filled in past stoppages, from published sources.</div></div>
-        <div class="item"><h3><span class="ev ev-ill">Illustrative</span> What is assumed</h3><div>Volumes, storage room, spare trucking, lead times, approval delays, budget units and the event paths. The comparator stands in for current practice until real practice is documented.</div></div>
+        <div class="item"><h3><span class="ev ev-obs">Observed</span> What we know</h3><div>How much grain moves by rail, how fast elevators filled in past stoppages, and published costs of delays. Industry groups estimated the 2024 rail stoppage would cost grain farmers <a href="https://panow.com/?p=2299398">over $43 million a day</a> in its first week, and a coalition analysis put one week of peak-season disruption at <a href="https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx">up to $540 million</a>, mostly in lost export sales. With no response, the exercise's long closure costs about ${fmtCM(D.N.c.total / GPATHS.long.dur)} per day of closure: lower, because it leaves out lost sales and price effects.</div></div>
+        <div class="item"><h3><span class="ev ev-ill">Illustrative</span> What is assumed</h3><div>Volumes, storage room, spare trucking, lead times, approval delays, cost rates and the event paths. The comparator stands in for current practice until real practice is documented.</div></div>
       </div>
-      <div class="item"><h3>What the research would test</h3><div>Outcomes in this exercise turn on assumptions about spare trucking capacity, how quickly it can be mobilized, approval delays and storage room at elevators. The <a href="#research">Prairie grain transport pilot</a> would estimate these with the Canadian Grain Commission's <a href="https://www.canada.ca/en/grain-commission/services/statistics/grain-statistics-weekly.html">weekly grain statistics</a>, operator records and interviews, and test whether exercises like this one improve real preparedness decisions.</div></div>
+      <details class="card"><summary><b>How the costs are estimated</b></summary><div class="tablewrap"><table class="cmp"><thead><tr><th>Item</th><th>Rate used</th><th>Basis</th></tr></thead><tbody>${GCOST_SRC.map(([a, b, c]) => `<tr><td>${a}</td><td>${b}</td><td>${c}</td></tr>`).join("")}</tbody></table></div></details>
+      <div class="item"><h3>What the research would test</h3><div>Outcomes in this exercise turn on assumptions about spare trucking capacity, how quickly it can be mobilized, its price, approval delays, storage room and the cost of each day of delay. The <a href="#research">Prairie grain transport pilot</a> would estimate these with the Canadian Grain Commission's <a href="https://www.canada.ca/en/grain-commission/services/statistics/grain-statistics-weekly.html">weekly grain statistics</a>, operator records and interviews, and test whether exercises like this one improve real preparedness decisions.</div></div>
       <div class="btnrow">
         <button class="btn" type="button" data-replay="resolved">Replay: the warning resolves</button>
         <button class="btn" type="button" data-replay="short">Replay: a short closure</button>
@@ -1684,8 +1775,18 @@ function buildChallenge(focusHead) {
         <button class="btn" type="button" data-print>Print a decision brief</button>
         <a class="btn primary" href="#research" style="text-decoration:none">See the research programme</a>
       </div>`;
+    after = () => {
+      const C = gSim(GCOMP, "long");
+      const pts = [[5, book.long[5], css("--base"), `Day 5: +${fmtCM(book.long[5])}`]];
+      if (C.firstFull > 0) pts.push([C.firstFull, book.long[C.firstFull], css("--base"), `Day ${C.firstFull}, elevators full: +${fmtCM(book.long[C.firstFull])}`]);
+      lineChart($("gch3"), $("gtip3"), { xMax: 20, dx: 1, xTicks: [0, 3, 5, 10, 13, 15, 20], xFmt: (v, long) => long ? "Booked on Day " + v : v, xLabel: "Day alternative transport is booked",
+        aria: "Extra cost of booking alternative transport later than before the closure, by booking day, long and short closures", yMax: niceMax(Math.max(...book.long, ...book.short) * 1.15), yFmt: v => "$" + Math.round(v) + "M",
+        vlines: [[GX.close0, "Closure begins", css("--alert")]], points: pts,
+        series: [{ name: "Long closure", data: book.long, color: css("--base") }, { name: "Short closure", data: book.short, color: css("--act"), dash: "6 4" }] });
+    };
   }
   $("page").innerHTML = `<div class="chal"><div class="sechead"><h2 id="chHead" tabindex="-1">Decision challenge: a Prairie grain corridor may close</h2><p class="snap">Joint grain-transport exercise · about 3 minutes · ${ill} research demonstration, not a forecast</p></div>${dots}<div id="chStatus" class="sr" role="status"></div>${body}</div>`;
+  if (after) setTimeout(after, 0);
   const pg = $("page");
   pg.querySelectorAll('input[name="p0"]').forEach(r => r.addEventListener("change", () => { CH.p0 = r.value; CH.p5 = ""; buildChallenge(); pg.querySelector('input[name="p0"]:checked')?.focus(); $("chStatus").textContent = GPLANS0[CH.p0].name + " selected"; }));
   pg.querySelectorAll('input[name="p5"]').forEach(r => r.addEventListener("change", () => { CH.p5 = r.value; buildChallenge(); pg.querySelector('input[name="p5"]:checked')?.focus(); $("chStatus").textContent = "Day 5 choice selected"; }));
@@ -1958,6 +2059,18 @@ function viewTitle() {
   if (view === "run") return "Compound scenario: " + STORIES.find(x => x.id === storySel).title;
   return { home: "National integrated stress test", methods: "Methodology", scenarios: "Compound scenarios", updates: "Recent developments", challenge: "Decision challenge", research: "From prototype to science", partners: "Potential partners" }[view];
 }
+/* ---------- links that leave the prototype open in a new tab ---------- */
+function markExternal(root) {
+  root.querySelectorAll("a[href]").forEach(a => {
+    const h = a.getAttribute("href");
+    if (!h || h.startsWith("#") || h.startsWith("mailto:") || a.dataset.ext) return;
+    a.dataset.ext = "1"; a.target = "_blank"; a.rel = "noopener";
+    if (!a.classList.contains("excard") && !a.classList.contains("btn")) a.classList.add("ext");
+    a.insertAdjacentHTML("beforeend", '<span class="sr"> (opens in a new tab)</span>');
+  });
+}
+markExternal(document);
+new MutationObserver(() => markExternal(document)).observe(document.body, { childList: true, subtree: true });
 $("snapDate").textContent = SNAPSHOT; $("verNo").textContent = VERSION; $("chkDate").textContent = CHECKED;
 $("exModels").innerHTML = MODELLED.map(k => `<a href="#${k}">${SCEN[k].tab}</a>`).join(" · ");
 $("printBrief").addEventListener("click", () => window.print());
