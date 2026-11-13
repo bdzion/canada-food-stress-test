@@ -23,7 +23,7 @@ Below the tabs, **What a bad year could cost** (`#costs`) is interactive. It run
 
 **2. The decision game** (`#challenge`) takes one threat from the dashboard and puts the user in charge: a Prairie grain rail line may close in 72 hours. Choose a plan, get news on Day 5, and see what happened by Day 35 and what it cost in Canadian dollars compared with waiting to react. About three minutes.
 
-Other pages are linked from "More on this site" at the bottom of every page: the research plan (`#research`), how the tests work (`#methods`, including the full list of threats), recent events (`#updates`), potential partners (`#partners`, not finalized), the *Feeding a Fragile World* Substack, the companion [Granary Risk Assessment Dashboard](https://feeding9billion-cmyk.github.io/Granary_Risk_Dashboard/), the user guide, and a printable summary. Links that leave the site open in a new tab.
+Other pages are linked from "More on this site" at the bottom of every page: the research plan (`#research`), how the tests work (`#methods`, including the full list of threats), recent events (`#updates`), potential partners (`#partners`, not finalized), the *Feeding a Fragile World* Substack, the companion [Granary Risk Assessment Dashboard](https://feeding9billion-cmyk.github.io/Granary_Risk_Dashboard/), and the user guide. Links that leave the site open in a new tab.
 
 ## Important caveats
 

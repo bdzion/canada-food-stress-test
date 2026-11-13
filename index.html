@@ -537,7 +537,6 @@ a.excard:hover { border-color: var(--act); }
       <a class="excard" href="https://evandgfraser.substack.com/" rel="noopener"><b>Food system narrative</b><span><i>Feeding a Fragile World</i>, Evan Fraser’s essays on buffers, food and crisis (external site).</span></a>
       <a class="excard" href="guide.html"><b>User guide</b><span>A plain-language guide to every part of this site, with a glossary.</span></a>
       <div class="excard"><b>“What if” tests</b><span id="exModels"></span></div>
-      <div class="excard"><b>Share and comment</b><span><button class="linkbtn" type="button" id="printBrief">Print a summary</button> of the page you are on, or <a href="mailto:mbodrudd@uoguelph.ca?subject=Feedback%3A%20Canada%20Food%20System%20Stress%20Test">send feedback</a> to mbodrudd@uoguelph.ca.</span></div>
     </div>
   </section>
 
@@ -2348,7 +2347,7 @@ markExternal(document);
 new MutationObserver(() => markExternal(document)).observe(document.body, { childList: true, subtree: true });
 $("snapDate").textContent = SNAPSHOT; $("verNo").textContent = VERSION; $("chkDate").textContent = CHECKED;
 $("exModels").innerHTML = MODELLED.map(k => `<a href="#${k}">${SCEN[k].tab}</a>`).join(" · ");
-$("printBrief").addEventListener("click", () => window.print());
+$("printBrief")?.addEventListener("click", () => window.print());
 window.addEventListener("beforeprint", () => {
   const today = new Date().toLocaleDateString("en-CA", { day: "numeric", month: "long", year: "numeric" });
   let settings = "";
