@@ -92,7 +92,7 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
 
   <h1>User guide: Canada Food System Stress Test</h1>
   <p class="lead">The <a href="./">Canada Food System Stress Test</a> is a free, interactive web page that shows how a shock to Canada's food system could unfold, and how the timing of a response could change the outcome. It was built at the Arrell Food Institute (AFI), University of Guelph, as a prototype for a long-term research program on anticipatory decision-making.</p>
-  <p class="note"><b>Prototype v0.5, 12 November 2026.</b> This is a demonstration (validation level V0). Events and statistics are observed and linked to their sources; model results are illustrative, not forecasts; signal levels are demonstration settings; playbook leads and funding are proposals that no agency has agreed to.</p>
+  <p class="note"><b>Prototype v0.6, 13 November 2026.</b> This is a demonstration. Every event and statistic is a fact linked to its source. The results of the tests are examples from simple models, not forecasts. Warning levels are example settings chosen by the authors. Proposed leads and funding are proposals that no agency has agreed to.</p>
 
   <nav class="toc" aria-label="Contents">
     <b>Contents</b>
@@ -100,165 +100,133 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
       <li><a href="#purpose">What the website is for</a></li>
       <li><a href="#views">How the site is organized</a></li>
       <li><a href="#terms">Key terms in plain language</a></li>
-      <li><a href="#results">Reading the results</a></li>
-      <li><a href="#workflow">A decision workflow</a></li>
+      <li><a href="#results">Reading a “what if” test</a></li>
+      <li><a href="#workflow">Using the site to prepare a decision</a></li>
       <li><a href="#backend">Behind the scenes</a></li>
-      <li><a href="#platform">How the full platform will work</a></li>
+      <li><a href="#platform">How the full system would work</a></li>
       <li><a href="#effectiveness">How effective could it be?</a></li>
       <li><a href="#feedback">Feedback and references</a></li>
     </ol>
   </nav>
 
   <h2 id="purpose">1. What the website is for</h2>
-  <p>The site helps people answer three practical questions before a crisis, not after it:</p>
+  <p>Banks are regularly tested against a severe but plausible bad year, so that weak points are fixed before a crisis. This website shows how Canada could do the same for its food system. It helps answer three questions before a crisis, not after it:</p>
   <ol>
-    <li><b>Where is the pressure, and which shocks matter most?</b> 18 real and emerging stresses to Canada's food system, from inside and outside Canada, sorted into six categories and ranked within each, with a current signal level and the transmission channel through which each reaches Canada's food system.</li>
-    <li><b>When do we need to act?</b> For each modelled shock, the site shows the early signs to watch for and the point after which acting early stops paying off.</li>
-    <li><b>What is acting early worth?</b> The site compares early action with a <b>reactive response</b> that starts only when the action signal is reached (an assumed stand-in for current practice), and with no response at all as a boundary case.</li>
+    <li><b>Where is Canada exposed?</b> Which links in the food system depend on one route, one buyer, one supplier or a few plants, and how much spare capacity they have.</li>
+    <li><b>What could go wrong, and when would we know?</b> Eighteen threats from inside and outside Canada, each with the warning signs to watch for.</li>
+    <li><b>Is acting early worth it?</b> For seven threats, a “what if” test compares acting early, waiting to react, and doing nothing.</li>
   </ol>
-  <p><b>Who it is for:</b> officials at Agriculture and Agri-Food Canada (AAFC), the Canadian Food Inspection Agency (CFIA), Public Safety Canada, Global Affairs Canada and the provinces; industry and farm groups; international partners such as IICA; and researchers and students.</p>
-  <p class="note"><b>What it is not:</b> a forecast. Every number comes from a simplified model with stated assumptions, and each scenario lists which inputs come from published sources and which are illustrative. Use it to explore and discuss the logic of early action, not to predict a specific loss.</p>
+  <p><b>Who it is for:</b> officials at Agriculture and Agri-Food Canada, the Canadian Food Inspection Agency, Public Safety Canada, Global Affairs Canada and the provinces; industry and farm groups; international partners; and researchers and students. No background in modelling is needed.</p>
+  <p class="note"><b>What it is not:</b> a forecast. The tests use simple models with stated assumptions, and each one lists which inputs are sourced facts and which are examples. Use it to explore and discuss when acting early makes sense, not to predict a specific loss.</p>
 
   <h2 id="views">2. How the site is organized</h2>
-  <p>The site has three levels, and you move down them by clicking:</p>
+  <p>The front page walks through four steps, in order. Each step builds on the one before.</p>
   <div class="tablewrap"><table>
-    <thead><tr><th>Level</th><th>What it shows</th><th>Question it answers</th></tr></thead>
+    <thead><tr><th>Step</th><th>What it shows</th><th>Question it answers</th></tr></thead>
     <tbody>
-      <tr><td class="wrap1"><a href="./">Front page</a>: the national stress test</td><td>Six category tiles showing where the pressure is now, then the integrated stress test for the whole country: one or more modelled shocks from every category in the same year, comparing early action with a reactive response and with no response, plus the value of a joint playbook</td><td>Where is the pressure, and what would a severe year cost Canada?</td></tr>
-      <tr><td class="wrap1">Category page (click a tile, or a bar in the chart)</td><td>The stresses in that category, ranked, each with its signal, origin, transmission channel and evidence; then the integrated stress test for the category's modelled shocks</td><td>What drives the pressure in this category, and what is acting early worth here?</td></tr>
-      <tr><td class="wrap1">Single-stress test (click "Open stress test")</td><td>One shock in detail: how it unfolds, the warning signs, the cost of waiting, the best start date, the cost of a false alarm, a four-part proposed playbook and a model card. Seven are available: <a href="./#drought">Prairie drought</a>, <a href="./#avian-flu">avian influenza</a>, <a href="./#export">loss of an export market</a>, <a href="./#phosphate">phosphate before seeding</a>, <a href="./#rail">rail or port shutdown</a>, <a href="./#cyber">cyberattack on distribution</a> and <a href="./#workforce">workforce outbreak at meat plants</a></td><td>When must we act on this shock, and what does delay cost?</td></tr>
+      <tr><td class="wrap1"><a href="./#system">1. The system</a></td><td>A simple map of how food moves: farm inputs, farms, transport and ports, processing, and stores and households, with buyers abroad and food from abroad on either side. Each link shows how many indicators and threats affect it. Below the map, our overall view in one paragraph.</td><td>How does the food system fit together, and where can problems start?</td></tr>
+      <tr><td class="wrap1"><a href="./#indicators">2. The indicators</a></td><td>Twelve measured facts that show where Canada is exposed, such as the share of grain exports that move by rail. Each card gives the number, what it means, how serious we judge it, whether it can be fixed, the threats that hit there, and the source. Filter by part of the system.</td><td>Where is Canada exposed, and by how much?</td></tr>
+      <tr><td class="wrap1"><a href="./#threats">3. The threats</a></td><td>Eighteen events that could hit the system, grouped into six types, each with where it starts, what it hits, how serious we judge it, and an example warning level. Seven have a “what if” test.</td><td>What could hit the system, and what would acting early be worth?</td></tr>
+      <tr><td class="wrap1"><a href="./#timelines">4. Possible timelines</a></td><td>Four ways a bad year could unfold when several threats arrive together. Each timeline marks what happens, the windows to act, and the points after which only damage control is possible. A button opens the combined costs.</td><td>When would acting still help, and what happens if we wait?</td></tr>
     </tbody>
   </table></div>
-  <p>A breadcrumb at the top of each page (for example, Home › Climate and weather › Prairie drought) takes you back up a level.</p>
-  <p><b>Explore the platform.</b> A panel at the bottom of every page links to the supporting pages:</p>
+  <p>Below the four steps, <a href="./#challenge">Try it yourself</a> is a three-minute exercise. A Prairie grain rail line may close in 72 hours. You choose a plan, receive news on Day 5 and may change course, then see what happened by Day 35 and what it cost, in Canadian dollars, compared with waiting to react. The lessons page explains what drove the result, the extra cost of waiting, what the plan would have cost if the warning had come to nothing, and the chance of closure above which the plan pays for itself.</p>
+  <p>A panel at the bottom of every page links to the rest of the site:</p>
   <ul>
-    <li><a href="./#challenge">Decision challenge</a>: a three-minute exercise for meetings. The visitor advises a joint coordination table after a warning that the Prairie grain rail line to the Port of Vancouver may close in 72 hours. They commit a Day 0 plan, receive new information on Day 5 and may adapt, then see the outcome on Day 35: a corridor diagram, a timeline, storage and freight charts, the total cost in Canadian dollars (response spending plus losses) and where it goes, and a comparison with a reactive comparator or any other plan. The debrief gives a verdict on the choices made: losses avoided for each dollar spent, the extra cost of waiting, what the plan would cost if the warning resolved, and the chance of a closure above which it pays for itself.</li>
-    <li><a href="./#partners">Potential partners</a>: the universities, companies and international bodies the programme proposes to work with, with their proposed roles. The list is not finalized; listing does not mean an organization has agreed or endorses the prototype, and logos will be added only with permission.</li>
-    <li><a href="https://evandgfraser.substack.com/">Food system narrative</a>: <i>Feeding a Fragile World</i>, Evan Fraser's Substack on buffers, food and crisis (external site).</li>
-    <li><a href="./#research">From prototype to science</a>: the research programme behind the prototype: the question, how it fits the National Food Security Strategy and emergency management in agriculture, three workstreams, the first pilot (Prairie grain transport), the validation ladder, the timeline and what we ask of partners.</li>
-    <li><a href="./#methods">Methodology</a>: how the categories, scoring, signals and models work; the full shock register with filters; and the transmission channels, which trace how each stress reaches Canada's food system.</li>
-    <li><a href="./#scenarios">Compound scenarios</a>: four storylines that combine stresses across categories, each with its most likely path, the events that would change it, and a button to run it.</li>
-    <li><a href="./#updates">Recent developments</a>: the dated, sourced events behind the current signals, and the planned satellite and crop-condition feed.</li>
-    <li>This user guide, and <b>Print a decision brief</b>, which prints the page you are on with its settings, the date and the illustrative-only notice. Choose "Save as PDF" in the print dialogue to share it.</li>
+    <li><a href="./#research">The research plan</a>: how the prototype would become tested science: the question, how it fits the National Food Security Strategy and emergency management in agriculture, three parts of the work, the first pilot on Prairie grain transport, the stages of testing, and what we ask of partners.</li>
+    <li><a href="./#methods">How the tests work</a>: how seriousness is judged, what warning levels mean, how the “what if” tests work and what they cannot do yet, the full list of threats with filters, and a tracer that follows any threat to the part of the system it hits.</li>
+    <li><a href="./#updates">Recent events</a>: dated, sourced news and government decisions behind the example warning levels.</li>
+    <li><a href="./#partners">Potential partners</a>: the organizations we propose to work with. The list is not finalized; being listed does not mean an organization has agreed or endorses the prototype.</li>
+    <li><a href="https://evandgfraser.substack.com/">Food system narrative</a>: <i>Feeding a Fragile World</i>, Evan Fraser’s essays on buffers, food and crisis.</li>
+    <li>This guide, and <b>Print a summary</b>, which prints the page you are on with the date and its settings. Choose “Save as PDF” to share it.</li>
   </ul>
-  <p>Each stress-test view has the same layout: a <b>shock strip</b> across the top (shock, chokepoint, buffers, impact), <b>controls</b> on the left, <b>four result tiles</b> (each with an "About this number" note), a <b>false-alarm line</b>, <b>two charts</b>, a <b>proposed playbook card</b> and a <b>model card</b>. Under these, "Assumptions and sources" lists every input, and "Data table" shows the numbers behind the charts.</p>
+  <p>Links that leave the site open in a new tab, so the page you were reading stays open.</p>
 
   <h2 id="terms">3. Key terms in plain language</h2>
   <div class="tablewrap"><table>
     <thead><tr><th>Term</th><th>Plain meaning</th><th>Example on the site</th></tr></thead>
     <tbody>
-      <tr><td>Shock</td><td>A sudden event that disrupts how food is produced, moved or sold</td><td>A ransomware attack shuts down a grocery distributor</td></tr>
-      <tr><td>Stress</td><td>Any shock or slower pressure on the food system that the register tracks</td><td>An annual review of the trade agreement with the United States</td></tr>
-      <tr><td>Category</td><td>One of six broad groups of stresses: climate and weather; plant and animal health; conflict and trade; markets and inputs; logistics and cyber; people and labour</td><td>Avian influenza sits in plant and animal health</td></tr>
-      <tr><td>Origin</td><td>Where a stress starts: inside Canada, outside Canada, or both</td><td>A war abroad is outside; a rail stoppage is inside; avian influenza is both</td></tr>
-      <tr><td class="wrap1">Transmission channel</td><td>The route by which a stress reaches Canada's food system: domestic production, food imports, imported farm inputs, export markets and prices, transport and shipping, digital systems, or workers</td><td>A Strait of Hormuz closure reaches Canada through imported farm inputs</td></tr>
-      <tr><td>Chokepoint</td><td>A single point that a lot of food or inputs must pass through, so a problem there spreads widely</td><td>Two railways carry most grain and fertilizer; Canada makes no phosphate fertilizer of its own</td></tr>
-      <tr><td>Buffer</td><td>A reserve that absorbs a shock for a while: stocks, storage, spare capacity, alternative suppliers</td><td>Store shelves hold about 3 days of perishables; elevators fill in about 10 days</td></tr>
-      <tr><td>Cascade</td><td>A shock spreading from one part of the system to the next</td><td>Rail stops, then elevators fill, then processing plants shut, then exports are lost</td></tr>
-      <tr><td>Impact</td><td>The harm that results once buffers run out</td><td>Empty shelves, lost crops, culled birds, lost sales</td></tr>
-      <tr><td>Watch signal</td><td>The first sign that something may be going wrong; time to pay attention</td><td>A 72-hour strike notice, or the first infected farm</td></tr>
-      <tr><td>Readiness signal</td><td>Evidence the shock is real and will spread; time to get ready and, ideally, to start acting</td><td>The rail corridor actually closes; five farms are infected</td></tr>
-      <tr><td>Action signal</td><td>The point where buffers are nearly used up; acting now is urgent</td><td>Elevator storage is full; perishables are about to run out</td></tr>
-      <tr><td>Early action</td><td>Responding at or soon after the readiness signal</td><td>Ordering phosphate from other suppliers in January</td></tr>
-      <tr><td class="wrap1">Reactive response</td><td>Responding only when the action signal is reached. The prototype uses it as a stand-in for current practice until real response timelines are documented with partners; it is the main comparison</td><td>Ordering phosphate on 7 March, when imports must land before seeding</td></tr>
-      <tr><td>No response</td><td>No planned response; the shock runs its course. Shown only as a boundary case</td><td>The dashed orange line on each chart</td></tr>
-      <tr><td>Best start</td><td>The start date with the lowest total cost in the model</td><td>The amber tile on each stress test</td></tr>
-      <tr><td class="wrap1">Half the possible benefit</td><td>The last start date that still avoids at least half of the largest avoidable loss, compared with no response</td><td>For the phosphate shock, about 11 April with default settings</td></tr>
-      <tr><td>Break-even</td><td>The last start date at which acting still costs less than no response; after it, acting no longer pays</td><td>Marked on the cost-of-waiting chart</td></tr>
-      <tr><td>False alarm cost</td><td>What early action would cost if the shock never arrived: the response spending, with nothing gained</td><td>The line under the tiles on each test</td></tr>
-      <tr><td>Response cost</td><td>What it costs to act: staff, rerouting, premiums on alternative supply</td><td>Included in every "with action" total, so early action is never shown as free</td></tr>
-      <tr><td class="wrap1">Lower than the reactive response by</td><td>Reactive response total minus the total for your chosen start date (both include response costs)</td><td>The green tile on each view</td></tr>
-      <tr><td>Cost of waiting</td><td>How the total cost changes as the response start moves later. The text reports the change for the next week only, not a fixed weekly rate</td><td>The second chart on each shock view</td></tr>
-      <tr><td>Compound year</td><td>Several shocks hitting in the same year</td><td>Drought, rail shutdown, phosphate shortfall, bird flu and cyberattack together</td></tr>
-      <tr><td class="wrap1">Compounding from shared buffers</td><td>Extra loss when overlapping shocks draw on the same reserves (rail capacity, inventory, staff)</td><td>Default: 8% extra loss for each additional overlapping shock</td></tr>
-      <tr><td class="wrap1">Response delay when crises overlap</td><td>Agencies juggling several crises respond later to each one</td><td>Default: 5 extra days per additional shock</td></tr>
-      <tr><td class="wrap1">Playbook (proposed)</td><td>A written plan, to be agreed in advance, with four parts: the <b>trigger</b> (which signal starts it), the <b>action and lead</b> (what is done and by whom), the <b>money</b> (funding set aside before the crisis) and <b>learning</b> (how results are reviewed). A joint playbook also sets out how agencies coordinate when crises overlap</td><td>The playbook card on each stress test; in the integrated view, ticking the box removes the overlap delay</td></tr>
-      <tr><td>Priority score and band</td><td>How the register ranks stresses: likelihood × impact × (speed + reach) ÷ 10, out of 25. Shown as a band (High 12 or more, Moderate 6 to 12, Low under 6) so it does not look more precise than it is; hover to see the scores</td><td>Rail shutdown and U.S. trade disruption both score 16.0 (High)</td></tr>
-      <tr><td>Confidence</td><td>How sure the authors are about a stress's scores, given the evidence available</td><td>High for Prairie drought, which has a long record; low for cyberattacks</td></tr>
-      <tr><td>Signal level</td><td>A stress's current status: Normal, Watch, Ready or Act. In the prototype these are the authors' demonstration settings, not live readings</td><td>Trade with the United States is set to Ready</td></tr>
-      <tr><td>Trend</td><td>Whether a stress is rising (↑), steady (→) or easing (↓)</td><td>Export market closure is easing after China cut canola seed duties</td></tr>
-      <tr><td class="wrap1">Situation snapshot</td><td>The dated set of signals and recent developments shown on the front page and the Recent developments page, curated by the authors. The full platform would refresh it after each monthly review</td><td>Last reviewed 12 November 2026</td></tr>
-      <tr><td class="wrap1">Compound storyline</td><td>A named combination of stresses from different categories, with a most likely path and the events that would change it</td><td>"Conflict abroad, pressure at home"</td></tr>
-      <tr><td class="wrap1">Evidence labels</td><td><b>Observed</b>: a documented fact with a linked source. <b>Illustrative</b>: an assumed value or a stylized model result, not a forecast. <b>Proposed</b>: a possible action, lead or funding arrangement that no agency has agreed to. <b>Demonstration signals</b>: signal levels set by the authors, not live readings</td><td>Shown as small tags next to results, evidence, playbooks and signals</td></tr>
-      <tr><td class="wrap1">Validation level</td><td>How far a model has been tested, from V0 (demonstration: assumptions disclosed, logic checked) to V5 (approved for controlled operational use). Every model in this prototype is at V0</td><td>See the validation ladder on the research page</td></tr>
-      <tr><td>Model card</td><td>A short summary on each stress test: version, validation level, the question it explores, what it counts and leaves out, and the data needed to calibrate it</td><td>Open "Model card" below the playbook</td></tr>
-      <tr><td>Back-test</td><td>Running a model on a past event to see whether it would have given useful warning</td><td>Planned for the 2020–26 shocks in the full program</td></tr>
+      <tr><td>Stress test</td><td>Asking, before it happens, how a system would cope with a severe but plausible bad year</td><td>Banks do this regularly; this site applies the idea to food</td></tr>
+      <tr><td>Buffer</td><td>Spare capacity that absorbs a shock for a while: stored grain, food on shelves, spare trucks, other suppliers</td><td>Prairie elevators can hold about ten days of deliveries if the trains stop</td></tr>
+      <tr><td>Weak point</td><td>A link that a lot of food or inputs must pass through, so a problem there spreads widely</td><td>About 94% of grain exports move by rail</td></tr>
+      <tr><td>Indicator</td><td>A measured number that shows how exposed a link is, or how much spare capacity it has</td><td>Canada makes no phosphate fertilizer of its own</td></tr>
+      <tr><td>Threat</td><td>An event that could hit the food system, from inside or outside Canada</td><td>A rail shutdown, avian influenza, a trade dispute</td></tr>
+      <tr><td>How serious</td><td>Our judgement of a threat or indicator: <b>High</b>, <b>Raised</b> or <b>Watch</b>. For threats it combines how likely it is, how much harm it would do, how fast it would arrive and how widely it would spread</td><td>The rail shutdown is High</td></tr>
+      <tr><td>Can it be fixed?</td><td>Whether the exposure behind an indicator can be removed, reduced over a few years, only softened, or has no quick fix</td><td>Beef processing in two plants: no quick fix</td></tr>
+      <tr><td>Warning level</td><td>Where a threat stands now: <b>Normal</b>, <b>Watch</b>, <b>Get ready</b> or <b>Act now</b>. On this site they are example settings, not live readings</td><td>Trade with the United States is set to Get ready</td></tr>
+      <tr><td>“Get ready” sign</td><td>Evidence that a threat is real and will spread: time to prepare and, ideally, to start acting</td><td>The rail line actually closes; five farms are infected</td></tr>
+      <tr><td>“Act now” sign</td><td>The point where buffers are nearly used up; acting is urgent</td><td>Elevators are full; fresh food is about to run out</td></tr>
+      <tr><td>Act early</td><td>Responding at or soon after the “get ready” sign</td><td>Ordering phosphate from other suppliers in January</td></tr>
+      <tr><td>Wait and react</td><td>Responding only when the “act now” sign appears. The site uses this as a stand-in for how responses often work today, until real response times are documented with partners</td><td>Ordering phosphate on 7 March, the last date for imports to arrive before seeding</td></tr>
+      <tr><td>Do nothing</td><td>No planned response. Shown only for comparison</td><td>The dashed orange line on each chart</td></tr>
+      <tr><td>Window to act</td><td>The period when early action is still cheap and still works</td><td>The 72 hours’ notice before a rail line closes</td></tr>
+      <tr><td>Too late</td><td>The point after which only damage control is possible</td><td>About ten days into a rail stoppage, when elevators are full</td></tr>
+      <tr><td>Best day to start</td><td>The start date with the lowest total cost in the test</td><td>The fourth tile on each “what if” test</td></tr>
+      <tr><td>Half the possible benefit</td><td>The last start date that still avoids at least half of the largest avoidable loss</td><td>For phosphate, about 11 April with the default settings</td></tr>
+      <tr><td>Break-even</td><td>The last start date at which acting still costs less than doing nothing</td><td>Marked on the cost-of-waiting chart</td></tr>
+      <tr><td>False alarm cost</td><td>What acting early would cost if the threat never arrived</td><td>The line under the tiles on each test</td></tr>
+      <tr><td>Plan agreed in advance</td><td>A short written plan with four parts: <b>when to act</b>, <b>what to do and who leads</b>, <b>money set aside</b> before the crisis, and <b>learning afterwards</b>. A shared plan also says who steps in when several crises overlap. On this site, leads and funding are proposals</td><td>The plan card on each “what if” test</td></tr>
+      <tr><td>Possible timeline</td><td>A way a bad year could unfold when several threats arrive together. Possible, not predicted</td><td>“Conflict abroad, pressure at home”</td></tr>
+      <tr><td>Fact and Example labels</td><td><b>Fact</b>: a documented fact with a linked source. <b>Example figures</b>: an assumed value or a result from a simple model, not a forecast. <b>Proposed</b>: an action, lead or funding arrangement no agency has agreed to</td><td>Small tags next to results, evidence and plans</td></tr>
+      <tr><td>Testing stage</td><td>How far a test has been checked, from a demonstration (this prototype) to something proven against past events and used in real decisions</td><td>See the stages on the research plan page</td></tr>
     </tbody>
   </table></div>
 
-  <h2 id="results">4. Reading the results</h2>
-  <p>Every result updates the moment you move a slider. Hover over or tap a chart to see exact values, or select it and use the arrow keys. "About this number" under each tile explains what it includes and where it comes from.</p>
+  <h2 id="results">4. Reading a “what if” test</h2>
+  <p>Each test opens with its question, for example “What if the main rail line to Vancouver closes?” A strip across the top follows the threat in four steps: <b>what happens</b>, the <b>weak point</b>, <b>what absorbs it</b> and <b>who feels it</b>. Every result updates as soon as you move a slider. Hover over or tap a chart to see exact values, or select it and use the arrow keys. “About this number” under each tile explains what it includes.</p>
   <div class="tablewrap"><table>
-    <thead><tr><th>Element</th><th>What it tells you</th></tr></thead>
+    <thead><tr><th>Part of the page</th><th>What it tells you</th></tr></thead>
     <tbody>
-      <tr><td class="wrap1">Green-topped tile: reactive response</td><td>The cost if the response starts at the action signal (the stand-in for current practice), with the no-response cost shown below it</td></tr>
-      <tr><td class="wrap1">Blue tile: your choice</td><td>The cost if the response starts on the date you chose, split into remaining loss and response cost</td></tr>
-      <tr><td class="wrap1">Green tile: lower than the reactive response by</td><td>How much your timing saves compared with reacting at the action signal. If your choice costs more, it says so</td></tr>
-      <tr><td class="wrap1">Amber tile: best start</td><td>The lowest-cost start date, the last date that keeps half the possible benefit, and the break-even date</td></tr>
-      <tr><td class="wrap1">False-alarm line</td><td>What your choice would cost if the warning proved wrong</td></tr>
-      <tr><td class="wrap1">Chart 1: how the shock unfolds</td><td>The dashed orange line is the no-response path, the green line the reactive response and the blue line your choice. The shaded gap is the difference between your choice and the reactive response. Dashed vertical lines mark the demonstration watch, ready and act signals; the solid blue line marks when your response starts</td></tr>
-      <tr><td class="wrap1">Chart 2: the cost of waiting</td><td>For every possible start date, the total cost of responding then, against the reactive response and no response. "Half benefit" and "Break-even" mark the timing dates; "Your choice" marks your current setting</td></tr>
-      <tr><td class="wrap1">Front page: category tiles</td><td>Each tile shows the highest signal among its stresses, how many are above normal and the overall trend. Click a tile to open that category's stress test</td></tr>
-      <tr><td class="wrap1">Front page: losses by category</td><td>Each category's modelled shocks under the three choices, plus the extra cost when shocks overlap. Click a category name to open it</td></tr>
-      <tr><td class="wrap1">Recent developments</td><td>Real, dated events linked to their sources, each tagged by source type (official, industry analysis, news, report) and with the effect it had on the prototype's signals</td></tr>
-      <tr><td class="wrap1">Playbook card</td><td>The proposed trigger, action and lead, money and learning for the shock. Leads and funding are proposals for discussion</td></tr>
-      <tr><td class="wrap1">Integrated view: tiles</td><td>The reactive response and early action for all the shocks together, the difference between them, and the value of a joint playbook (early action without versus with it, whichever way the checkbox is set). With a single shock, the fourth tile shows the false-alarm cost instead</td></tr>
-      <tr><td class="wrap1">Integrated view: bar chart</td><td>Each shock's (or category's) cost on its own under no response, a reactive response and early action, plus a final bar for the extra cost created by overlap</td></tr>
-      <tr><td class="wrap1">Integrated view: line chart</td><td>The cost of the whole compound year as every response waits longer after its readiness signal, with and without a joint playbook, against the reactive response and no response</td></tr>
+      <tr><td class="wrap1">Sliders on the left</td><td>How bad the threat is, when the response starts and how well it works. “Questions to try” set the sliders for you</td></tr>
+      <tr><td class="wrap1">Tile: Wait and react</td><td>The total cost if the response starts at the “act now” sign, with the cost of doing nothing shown below</td></tr>
+      <tr><td class="wrap1">Tile: Your choice</td><td>The total cost if the response starts on the date you chose, split into remaining losses and the cost of responding</td></tr>
+      <tr><td class="wrap1">Tile: Lower than waiting to react by</td><td>How much your timing saves compared with waiting to react. If your choice costs more, it says so</td></tr>
+      <tr><td class="wrap1">Tile: Best day to start</td><td>The lowest-cost start date, the last date that keeps half the possible benefit, and the break-even date</td></tr>
+      <tr><td class="wrap1">False alarm line</td><td>What your choice would cost if the warning proved wrong</td></tr>
+      <tr><td class="wrap1">Chart: what happens over time</td><td>The dashed orange line is doing nothing, the green line waiting to react and the blue line your choice. Dashed vertical lines mark the example Watch, Get ready and Act now signs</td></tr>
+      <tr><td class="wrap1">Chart: the cost of waiting</td><td>The total cost of starting on each possible date, against waiting to react and doing nothing</td></tr>
+      <tr><td class="wrap1">Plan agreed in advance</td><td>When to act, what to do and who leads, the money set aside, and learning afterwards. Leads and funding are proposals</td></tr>
+      <tr><td class="wrap1">How this test works</td><td>The question, what the test counts and leaves out, the choices it compares, and the data needed to check it</td></tr>
+      <tr><td class="wrap1">Combined costs (from a timeline)</td><td>The same three choices for several threats in one year, plus the extra cost when they overlap and the value of a shared plan agreed in advance</td></tr>
     </tbody>
   </table></div>
 
-  <h2 id="workflow">5. A decision workflow</h2>
-  <div class="figure" role="img" aria-label="From warning sign to agreed action in eight steps">
-    <svg viewBox="0 0 760 324" font-size="11.5" aria-hidden="true">
-      <defs><marker id="wf-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="wf-head"/></marker></defs>
-      <text class="wf-t" x="24" y="28" font-size="15" font-weight="600">From warning sign to agreed action in eight steps</text>
-      <text class="wf-q" x="24" y="48">Steps 1 to 7 use the website; step 8 happens with partners, then the cycle repeats</text>
-      <g class="wf-line">
-        <path d="M208 108H232" marker-end="url(#wf-arrow)"/><path d="M384 108H408" marker-end="url(#wf-arrow)"/><path d="M560 108H584" marker-end="url(#wf-arrow)"/>
-        <path d="M660 144V168H132V192" marker-end="url(#wf-arrow)"/>
-        <path d="M208 228H232" marker-end="url(#wf-arrow)"/><path d="M384 228H408" marker-end="url(#wf-arrow)"/><path d="M560 228H584" marker-end="url(#wf-arrow)"/>
-        <path d="M660 264V300H36V108H56" marker-end="url(#wf-arrow)"/>
-      </g>
-      <rect class="wf-box" x="56" y="72" width="152" height="72" rx="8"/><text class="wf-t" x="68" y="96" font-size="13" font-weight="600">1 · Check pressure</text><text class="wf-t" x="68" y="116">Where is pressure,</text><text class="wf-t" x="68" y="132">and what changed?</text>
-      <rect class="wf-box" x="232" y="72" width="152" height="72" rx="8"/><text class="wf-t" x="244" y="96" font-size="13" font-weight="600">2 · Open category</text><text class="wf-t" x="244" y="116">Ranked stresses</text><text class="wf-t" x="244" y="132">and their channels</text>
-      <rect class="wf-box" x="408" y="72" width="152" height="72" rx="8"/><text class="wf-t" x="420" y="96" font-size="13" font-weight="600">3 · Set scenario</text><text class="wf-t" x="420" y="116">Severity, timing</text><text class="wf-t" x="420" y="132">and effectiveness</text>
-      <rect class="wf-box" x="584" y="72" width="152" height="72" rx="8"/><text class="wf-t" x="596" y="96" font-size="13" font-weight="600">4 · Read signals</text><text class="wf-t" x="596" y="116">Watch, ready and</text><text class="wf-t" x="596" y="132">act dates</text>
-      <rect class="wf-box" x="56" y="192" width="152" height="72" rx="8"/><text class="wf-t" x="68" y="216" font-size="13" font-weight="600">5 · Compare</text><text class="wf-t" x="68" y="236">Early action versus</text><text class="wf-t" x="68" y="252">a reactive response</text>
-      <rect class="wf-box" x="232" y="192" width="152" height="72" rx="8"/><text class="wf-t" x="244" y="216" font-size="13" font-weight="600">6 · Check timing</text><text class="wf-t" x="244" y="236">Best start, break-</text><text class="wf-t" x="244" y="252">even, false alarm</text>
-      <rect class="wf-box" x="408" y="192" width="152" height="72" rx="8"/><text class="wf-t" x="420" y="216" font-size="13" font-weight="600">7 · Test overlap</text><text class="wf-t" x="420" y="236">Run a compound</text><text class="wf-t" x="420" y="252">storyline</text>
-      <rect class="wf-box on" x="584" y="192" width="152" height="72" rx="8"/><text class="wf-t" x="596" y="216" font-size="13" font-weight="600">8 · Agree plan</text><text class="wf-t" x="596" y="236">Triggers and joint</text><text class="wf-t" x="596" y="252">playbook</text>
-      <text class="wf-q" x="348" y="292" text-anchor="middle">Monitor signals and update the register each year</text>
-    </svg>
-  </div>
-  <p>Steps 1 to 7 take about 15 minutes on the website; step 8 is where the results become a commitment that agencies and industry sign up to.</p>
+  <h2 id="workflow">5. Using the site to prepare a decision</h2>
+  <ol>
+    <li><b>Start with the system.</b> Find the link you are responsible for, and choose “See what affects it”.</li>
+    <li><b>Read the indicators.</b> How exposed is that link, how serious is it, and can it be fixed?</li>
+    <li><b>Check the threats.</b> Which threats hit that link, and what are their warning levels?</li>
+    <li><b>Open a “what if” test.</b> Set how bad the threat is, read the warning signs, and compare acting early with waiting to react.</li>
+    <li><b>Check the timing.</b> When is the best day to start, when does acting stop paying, and what would a false alarm cost?</li>
+    <li><b>Look at the timelines.</b> What happens if this threat arrives alongside others?</li>
+    <li><b>Agree a plan.</b> Take the printed summary to partners, and use the plan card as a starting point: when to act, who leads, what money is set aside, and how results will be reviewed.</li>
+  </ol>
   <h3>Worked example: phosphate before seeding</h3>
   <ol>
-    <li>On the <a href="./">front page</a>, markets and inputs is at Watch; <a href="./#updates">Recent developments</a> show the Strait of Hormuz closure lifted urea prices about 40%. Open the <a href="./#cat/inputs">markets and inputs</a> category: fertilizer supply cut ranks first, and its transmission channel is imported farm inputs.</li>
-    <li>Open <a href="./#phosphate">Phosphate before seeding</a>. The shock strip shows the chokepoint: Canada makes no phosphate fertilizer and relies on one main supplier.</li>
+    <li>In <a href="./#system">the system</a>, choose farm inputs. Among <a href="./#indicators">the indicators</a>, Canada makes no phosphate fertilizer of its own, and urea prices jumped about 40% before planting in 2026.</li>
+    <li>Among <a href="./#threats">the threats</a>, “Fertilizer supply cut” is at Watch. Open the test: <a href="./#phosphate">What if phosphate fertilizer imports are cut before seeding?</a></li>
     <li>Set the import shortfall to 50%, sourcing to start on 21 January, and replacement to 70%.</li>
-    <li>Read the signals: watch on 11 January (disruption reported), ready on 16 January (seeding gap projected), act by 7 March (last day for imports to land before seeding).</li>
-    <li>Compare the tiles: a reactive response on 7 March costs about $284M; acting from 21 January costs about $162M, including $55M of response costs, so about $122M less. With no response at all, the loss would be about $805M.</li>
-    <li>Check timing and risk: half the possible benefit is kept until about 11 April, and if the warning proved false, acting in January would have cost about $55M with nothing gained. Click "What if sourcing starts in March?" to see how much of the saving disappears.</li>
-    <li>On <a href="./#scenarios">Compound scenarios</a>, run "Conflict abroad, pressure at home" to see the phosphate shortfall alongside the loss of an export market, a rail shutdown and a cyberattack, and how much a joint playbook is worth.</li>
-    <li>Print a decision brief and take it to partners. Use the playbook card as a starting point: agree that a projected seeding gap triggers alternative sourcing by a named agency, with funding set aside in advance.</li>
+    <li>Read the warning signs: Watch on 11 January (disruption reported), Get ready on 16 January (a gap at seeding is projected), Act now by 7 March (the last day for imports to arrive before seeding).</li>
+    <li>Compare the tiles: waiting to react on 7 March costs about $284M; acting from 21 January costs about $162M, including $55M of response costs, so about $122M less. Doing nothing would cost about $805M.</li>
+    <li>Check timing and risk: half the possible benefit is kept until about 11 April, and a false alarm would have cost about $55M. Choose “What if sourcing starts in March?” to see how much of the saving disappears.</li>
+    <li>In <a href="./#timelines">possible timelines</a>, open “Conflict abroad, pressure at home” to see the fertilizer shortfall alongside a lost export market, a crowded rail system and a cyberattack, and what a shared plan is worth.</li>
   </ol>
-  <p class="note">All figures are illustrative outputs of the prototype with its default settings.</p>
+  <p class="note">All figures are example results from the prototype with its default settings, not estimates.</p>
 
   <h2 id="backend">6. Behind the scenes</h2>
   <h3>How the prototype works today</h3>
-  <p>The prototype is a single web page with no server or database. When you move a slider, small models written in the page itself recalculate everything in your browser. Each model follows the same logic: a shock passes through a chokepoint, draws down buffers, and causes losses once the buffers run out. Acting earlier slows the shock, refills a buffer or reallocates it, at a cost that is counted.</p>
+  <p>The prototype is a single web page with no server or database. When you move a slider, small models written in the page itself recalculate everything in your browser. Each model follows the same logic: a threat passes through a weak point, draws down buffers, and causes losses once the buffers run out. Acting earlier slows the shock, refills a buffer or reallocates it, at a cost that is counted.</p>
   <ul>
     <li><b>Rail or port shutdown:</b> freight capacity drops to zero for the shutdown period, then recovers over two weeks. Losses grow once elevator storage and feed stocks run out.</li>
     <li><b>Phosphate before seeding:</b> tracks phosphate in Canada against the season's need. Replacement shipments take about 55 days and are worth less if they land after seeding. Fields with high soil phosphorus lose less yield.</li>
     <li><b>Cyberattack on distribution:</b> tracks store stock of perishable and shelf-stable food day by day as deliveries stop, including panic buying. Public messaging that dampens panic buying takes effect only once the response starts.</li>
     <li><b>Avian influenza:</b> a simple spread model counts infected farms; a coordinated response slows farm-to-farm spread.</li>
     <li><b>Prairie drought:</b> tracks feed for livestock against winter need as a dry season unfolds. Feed from other regions arrives about 30 days after sourcing starts. The model counts losses from feed shortages, such as forced herd sales; crop losses from the drought itself are not counted, because early action cannot prevent them.</li>
-    <li><b>Integrated test:</b> adds the selected shocks together, then adds extra loss for shared buffers and a response delay when crises overlap. It compares early action (each shock acted on at its readiness signal) with a reactive response (each acted on at its action signal) and with no response. The overlap cost is a simple multiplier, not a model of shared resources over time; that is part of the research programme.</li>
-    <li><b>Decision challenge:</b> a daily stock-and-flow model of one grain corridor, separate from the rail model. Farms deliver 100 thousand tonnes a day to elevators that start with 10 days of storage room, matching how fast elevators filled in past stoppages. Rail, reserved or booked trucking, and temporary storage each have lead times and confirmation rates; feed and food deliveries (15 thousand tonnes a day) either share what moves or get first call. A Day 5 choice can change only what happens from Day 5 onward; higher fuel costs apply only to transport activated from Day 5. Costs are counted in Canadian dollars: response spending (fees, storage at $20 a tonne, and a premium of $50 a tonne for reserved and $70 for short-notice alternative transport) and losses (late exports at $4 a tonne per day of backlog, farm deliveries turned away at $40 a tonne, and feed and food shortfalls at $100 a tonne). These rates are illustrative, anchored where possible to published figures listed in the exercise. The reactive comparator monitors and books trucking only when elevators fill.</li>
+    <li><b>Combined tests:</b> add the selected threats together, then add extra loss for shared buffers and extra delay when agencies are stretched. They compare acting early (each threat acted on at its “get ready” sign) with waiting to react (each acted on at its “act now” sign) and with doing nothing. The overlap cost is a simple multiplier, not a model of shared resources over time; that is part of the research programme.</li>
+    <li><b>Try it yourself (the exercise):</b> a daily stock-and-flow model of one grain corridor, separate from the rail model. Farms deliver 100 thousand tonnes a day to elevators that start with 10 days of storage room, matching how fast elevators filled in past stoppages. Rail, reserved or booked trucking, and temporary storage each have lead times and confirmation rates; feed and food deliveries (15 thousand tonnes a day) either share what moves or get first call. A Day 5 choice can change only what happens from Day 5 onward; higher fuel costs apply only to transport activated from Day 5. Costs are counted in Canadian dollars: response spending (fees, storage at $20 a tonne, and a premium of $50 a tonne for reserved and $70 for short-notice alternative transport) and losses (late exports at $4 a tonne per day of backlog, farm deliveries turned away at $40 a tonne, and feed and food shortfalls at $100 a tonne). These rates are illustrative, anchored where possible to published figures listed in the exercise. The wait-and-react plan monitors and books trucking only when elevators fill.</li>
     <li><b>Loss of an export market:</b> tracks the share of affected exports that still find a buyer after a trading partner imposes prohibitive duties. Planned diversification and storage support redirect sales sooner; redirected sales earn a little less, and unsold stock loses value.</li>
     <li><b>Workforce outbreak at meat plants:</b> tracks national beef processing capacity as an illness spreads through plant workforces. Plants need minimum crews, so capacity falls faster than attendance. Workplace protections reduce absence only after they start, building up over about ten days.</li>
-    <li><b>Register, signals and channels:</b> the stresses, signals and recent developments are stored in the page as a dated snapshot curated by the authors. Nothing is fetched live.</li>
+    <li><b>Indicators, threats and warning levels:</b> the indicators, threats, warning levels and recent events are stored in the page as a dated snapshot chosen by the authors. Nothing is fetched live.</li>
   </ul>
   <p>The page is hosted free on GitHub Pages. Each change is recorded in the <a href="https://github.com/bdzion/canada-food-stress-test">repository</a>, so any earlier version can be restored.</p>
   <h3>Back-end work for the full program</h3>
@@ -269,17 +237,17 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
       <tr><td>Data pipelines</td><td>Pull current indicators automatically, check their quality and keep a dated history</td><td>Statistics Canada, CFIA, AAFC drought and crop-condition monitoring, trade data, grain-handling and port data, weather data, satellite imagery, and retail data under sharing agreements</td></tr>
       <tr><td>Shock models</td><td>Replace the simplified equations with calibrated models for each priority shock</td><td>Disease-spread models, crop yield-response models, inventory and network models of supply chains, and input–output links between sectors</td></tr>
       <tr><td class="wrap1">Uncertainty and back-testing</td><td>Report results as ranges, and test the models on past events</td><td>Many-run simulations; replays of the 2020–26 Canadian shocks using only information available at the time</td></tr>
-      <tr><td class="wrap1">Signal and trigger engine</td><td>Compute watch, readiness and action signals from live data</td><td>Thresholds co-designed with AAFC, CFIA, Public Safety Canada and provinces</td></tr>
-      <tr><td class="wrap1">Shock register updates</td><td>Re-rank shocks each year</td><td>Structured expert elicitation with government, industry and researchers</td></tr>
-      <tr><td>Joint playbooks</td><td>Write down who acts on which signal, with what resources</td><td>Workshops and tabletop exercises with agencies and industry</td></tr>
+      <tr><td class="wrap1">Warning signs</td><td>Work out Watch, Get ready and Act now levels from current data</td><td>Thresholds co-designed with AAFC, CFIA, Public Safety Canada and provinces</td></tr>
+      <tr><td class="wrap1">Threat list updates</td><td>Re-rank threats each year</td><td>Structured expert elicitation with government, industry and researchers</td></tr>
+      <tr><td>Plans agreed in advance</td><td>Write down who acts on which warning sign, with what resources</td><td>Workshops and tabletop exercises with agencies and industry</td></tr>
       <tr><td class="wrap1">Platform and governance</td><td>Keep a public tier (like this site) and a restricted tier for sensitive scenarios such as cyber vulnerabilities</td><td>Secure hosting, access control, documentation, data-sharing agreements</td></tr>
       <tr><td>People</td><td>Run and maintain the system</td><td>Modellers, a data engineer, a policy liaison, graduate students</td></tr>
     </tbody>
   </table></div>
 
-  <h2 id="platform">7. How the full platform will work</h2>
-  <p>The full platform keeps Canada's food system at the centre and watches stresses at home and abroad. Data and news come in; analysts weigh the evidence; each stress in the register is updated; the integrated stress test shows how they combine; and signals and playbooks agreed in advance turn that into decisions. Lessons from each event feed back into the data and models.</p>
-  <div class="figure" role="img" aria-label="Data from satellites, markets, official sources and news is reviewed by analysts, updates the shock register, feeds the integrated stress test, and becomes signals, playbooks and decisions, with lessons feeding back">
+  <h2 id="platform">7. How the full system would work</h2>
+  <p>The full system would keep Canada’s food system at the centre and watch threats at home and abroad. Data and news come in; analysts weigh the evidence; each threat and indicator is updated; combined tests show how threats interact; and warning signs and plans agreed in advance turn that into decisions. Lessons from each event feed back into the data and models.</p>
+  <div class="figure" role="img" aria-label="Data from satellites, markets, official sources and news is reviewed by analysts, updates the list of threats, feeds the combined tests, and becomes warning signs, plans and decisions, with lessons feeding back">
     <svg viewBox="0 0 760 404" font-size="11.5" aria-hidden="true">
       <defs><marker id="pf-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="wf-head"/></marker></defs>
       <g class="wf-line">
@@ -292,10 +260,10 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
       <rect class="wf-box" x="400" y="60" width="160" height="56" rx="8"/><text class="wf-t" x="412" y="84" font-size="13" font-weight="600">Official data</text><text class="wf-q" x="412" y="102">Agencies, partners</text>
       <rect class="wf-box" x="588" y="60" width="160" height="56" rx="8"/><text class="wf-t" x="600" y="84" font-size="13" font-weight="600">News and experts</text><text class="wf-q" x="600" y="102">Dated, reviewed</text>
       <text class="wf-t" x="24" y="40" font-size="15" font-weight="600">From data to decisions</text>
-      <rect class="wf-box" x="24" y="150" width="724" height="40" rx="8"/><text class="wf-t" x="386" y="175" text-anchor="middle" font-size="13" font-weight="600">Analyst review: weigh the evidence and update each stress (monthly, or at once for fast shocks)</text>
-      <rect class="wf-box on" x="24" y="222" width="724" height="48" rx="8"/><text class="wf-t" x="386" y="244" text-anchor="middle" font-size="13" font-weight="600">Shock register: Canada at the centre</text><text class="wf-q" x="386" y="261" text-anchor="middle">Six categories · inside or outside Canada · transmission channel · rank within category · signal · confidence</text>
-      <rect class="wf-box" x="24" y="302" width="220" height="56" rx="8"/><text class="wf-t" x="36" y="326" font-size="13" font-weight="600">Integrated stress test</text><text class="wf-q" x="36" y="344">Shocks combined on shared buffers</text>
-      <rect class="wf-box" x="272" y="302" width="220" height="56" rx="8"/><text class="wf-t" x="284" y="326" font-size="13" font-weight="600">Signals and playbooks</text><text class="wf-q" x="284" y="344">Trigger, action, money, learning</text>
+      <rect class="wf-box" x="24" y="150" width="724" height="40" rx="8"/><text class="wf-t" x="386" y="175" text-anchor="middle" font-size="13" font-weight="600">Analyst review: weigh the evidence and update each threat (monthly, or at once for fast ones)</text>
+      <rect class="wf-box on" x="24" y="222" width="724" height="48" rx="8"/><text class="wf-t" x="386" y="244" text-anchor="middle" font-size="13" font-weight="600">Indicators and threats: Canada at the centre</text><text class="wf-q" x="386" y="261" text-anchor="middle">Six types · inside or outside Canada · where it hits · how serious · warning level · confidence</text>
+      <rect class="wf-box" x="24" y="302" width="220" height="56" rx="8"/><text class="wf-t" x="36" y="326" font-size="13" font-weight="600">Combined tests</text><text class="wf-q" x="36" y="344">Threats that share buffers</text>
+      <rect class="wf-box" x="272" y="302" width="220" height="56" rx="8"/><text class="wf-t" x="284" y="326" font-size="13" font-weight="600">Warning signs and plans</text><text class="wf-q" x="284" y="344">When, what, money, learning</text>
       <rect class="wf-box" x="520" y="302" width="228" height="56" rx="8"/><text class="wf-t" x="532" y="326" font-size="13" font-weight="600">Decisions</text><text class="wf-q" x="532" y="344">Reviewed after each event</text>
       <text class="wf-q" x="386" y="388" text-anchor="middle">↻ Lessons from each event feed back into the data and the models</text>
     </svg>
@@ -305,29 +273,29 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
   <div class="tablewrap"><table>
     <thead><tr><th>Data stream</th><th>Examples</th><th>What it updates</th></tr></thead>
     <tbody>
-      <tr><td class="wrap1">Satellites and weather</td><td>Planet (daily soil water content and crop biomass); RAAPID, founded at NASA Harvest; the GEOGLAM Crop Monitor; the Canadian Drought Monitor; Environment and Climate Change Canada forecasts</td><td>Climate and weather stresses at home and in competing and supplying regions abroad; drought and crop signals</td></tr>
+      <tr><td class="wrap1">Satellites and weather</td><td>Planet (daily soil water content and crop biomass); RAAPID, founded at NASA Harvest; the GEOGLAM Crop Monitor; the Canadian Drought Monitor; Environment and Climate Change Canada forecasts</td><td>Climate and weather threats at home and in competing and supplying regions abroad; drought and crop signals</td></tr>
       <tr><td class="wrap1">Markets and trade</td><td>Statistics Canada trade and price data; the G20 Agricultural Market Information System; fertilizer and fuel prices</td><td>Markets and inputs; conflict and trade</td></tr>
-      <tr><td class="wrap1">Official and partner data</td><td>Canadian Food Inspection Agency disease reports; Agriculture and Agri-Food Canada; grain-handling and port data; industry data under sharing agreements; restricted incident information for cyber stresses</td><td>Plant and animal health; logistics and cyber; people and labour</td></tr>
-      <tr><td class="wrap1">News and expert input</td><td>Curated news, partner reports and expert panels</td><td>Early hints and context. News never changes a signal on its own; an analyst reviews it first</td></tr>
+      <tr><td class="wrap1">Official and partner data</td><td>Canadian Food Inspection Agency disease reports; Agriculture and Agri-Food Canada; grain-handling and port data; industry data under sharing agreements; restricted incident information for cyber threats</td><td>Plant and animal health; logistics and cyber; people and labour</td></tr>
+      <tr><td class="wrap1">News and expert input</td><td>Curated news, partner reports and expert panels</td><td>Early hints and context. News never changes a warning level on its own; an analyst reviews it first</td></tr>
     </tbody>
   </table></div>
   <h3>How the platform stays credible</h3>
   <ul>
-    <li><b>People before alerts.</b> Like established crop-monitoring and famine early-warning systems, signals change only after analysts weigh satellite data, ground reports and expert judgement together.</li>
-    <li><b>A regular cycle.</b> A monthly review updates the register and the front page, with an immediate review for fast shocks such as a cyberattack or a strike notice.</li>
-    <li><b>Visible components.</b> Category status shows the highest signal and the stresses behind it, not a single national score that would double-count shared drivers.</li>
+    <li><b>People before alerts.</b> Like established crop-monitoring and famine early-warning systems, warning levels change only after analysts weigh satellite data, ground reports and expert judgement together.</li>
+    <li><b>A regular cycle.</b> A monthly review updates the indicators, threats and front page, with an immediate review for fast threats such as a cyberattack or a strike notice.</li>
+    <li><b>No single score.</b> Each type of threat shows its highest warning level and the threats behind it, not a single national score that would count shared causes twice.</li>
     <li><b>Two tiers.</b> A public tier like this site, and a restricted tier for sensitive scenarios.</li>
-    <li><b>Learning.</b> Every event is reviewed: did the signals come early enough, did the playbook work, and what would we change?</li>
+    <li><b>Learning.</b> Every event is reviewed: did the warnings come early enough, did the plan work, and what would we change?</li>
   </ul>
 
   <h2 id="effectiveness">8. How effective could it be?</h2>
   <p>The tool's value depends less on predicting shocks than on giving agencies a shared, agreed plan for when and how to act once warning signs appear.</p>
   <p><b>What the evidence supports.</b> In livestock disease, modelling of the 2001 UK foot-and-mouth epidemic showed that the speed of control measures strongly shaped how large the outbreak became (Keeling et al., 2001; Tildesley et al., 2006). In humanitarian work, linking forecasts to pre-agreed triggers and funding lets aid reach people before a disaster peaks (Coughlan de Perez et al., 2015). Households that received cash before the 2017 Bangladesh floods coped better than comparable households that did not (Gros et al., 2019). Research on food supply chains shows how shocks spread through trade and production links, and that diverse supply sources buffer cities against shocks (Laber et al., 2023; Gomez et al., 2021; Davis et al., 2021).</p>
   <p><b>What is still uncertain.</b> Most evidence on anticipatory action comes from humanitarian settings in lower-income countries, not from Canadian supply chains. How much loss early action avoids in Canada has not yet been measured. The program's back-tests on 2020–26 events are designed to answer that.</p>
-  <p><b>Our expectation (to be tested, not yet shown).</b> Early action should pay most where the shock takes time to spread, such as a fertilizer shortfall months before seeding or a disease moving between farms. For fast shocks such as a cyberattack, warning time is short, so most of the value comes from playbooks prepared in advance rather than from prediction.</p>
+  <p><b>Our expectation (to be tested, not yet shown).</b> Early action should pay most where the shock takes time to spread, such as a fertilizer shortfall months before seeding or a disease moving between farms. For fast shocks such as a cyberattack, warning time is short, so most of the value comes from plans prepared in advance rather than from prediction.</p>
   <p><b>Limits to keep in mind:</b></p>
   <ul>
-    <li>The current numbers are illustrative and the models are simplified.</li>
+    <li>The current numbers are examples and the models are simple.</li>
     <li>Large shocks are rare, so models are hard to validate statistically.</li>
     <li>False alarms carry costs and can erode trust.</li>
     <li>Much supply-chain data is held privately.</li>
@@ -335,11 +303,11 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
   </ul>
   <p><b>How effectiveness will be measured in the full program:</b></p>
   <ul>
-    <li><b>Lead time:</b> how much earlier the tool signals trouble than current practice.</li>
-    <li><b>Hits and false alarms:</b> how often signals are followed by real disruption, and how often they are not.</li>
-    <li><b>Avoided loss in back-tests:</b> estimated savings had agencies acted on the tool's signals in past events, reported as ranges.</li>
-    <li><b>Usefulness to decision-makers:</b> whether users find the signals credible, timely and actionable, measured through structured feedback.</li>
-    <li><b>Uptake:</b> whether triggers and playbooks are formally adopted by agencies.</li>
+    <li><b>Lead time:</b> how much earlier the tool warns of trouble than current practice.</li>
+    <li><b>Hits and false alarms:</b> how often warnings are followed by real disruption, and how often they are not.</li>
+    <li><b>Avoided loss in back-tests:</b> estimated savings had agencies acted on the tool’s warnings in past events, reported as ranges.</li>
+    <li><b>Usefulness to decision-makers:</b> whether users find the warnings credible, timely and actionable, measured through structured feedback.</li>
+    <li><b>Uptake:</b> whether warning signs and plans are formally adopted by agencies.</li>
   </ul>
 
   <h2 id="feedback">9. Feedback and references</h2>
@@ -348,7 +316,7 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
   <p>The tool builds on Professor Evan Fraser and colleagues' work on how food systems become vulnerable to shocks, and on wider research on resilience, early warning and anticipatory action. References are grouped by the part of the tool they inform. Every DOI was checked against Crossref in November 2026.</p>
 
   <h4 class="refs-head">Food system vulnerability and shocks: Fraser and colleagues</h4>
-  <p class="refs-note">Informs the shock register, chokepoints, buffers and the way shocks cascade through the system.</p>
+  <p class="refs-note">Informs the list of threats, the weak points, the buffers and the way a problem spreads through the system.</p>
   <ul class="refs">
     <li>Fraser, E. D. G., Mabee, W., &amp; Figge, F. (2005). A framework for assessing the vulnerability of food systems to future shocks. <i>Futures</i>, 37(6), 465–479. <a href="https://doi.org/10.1016/j.futures.2004.10.011">https://doi.org/10.1016/j.futures.2004.10.011</a></li>
     <li>Fraser, E. D. G. (2006). Food system vulnerability: Using past famines to help understand how food systems may adapt to climate change. <i>Ecological Complexity</i>, 3(4), 328–335. <a href="https://doi.org/10.1016/j.ecocom.2007.02.006">https://doi.org/10.1016/j.ecocom.2007.02.006</a></li>
@@ -362,7 +330,7 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
   </ul>
 
   <h4 class="refs-head">Resilience, buffers and how shocks spread</h4>
-  <p class="refs-note">Informs buffers, cascades and the integrated view, where several shocks draw on the same buffers.</p>
+  <p class="refs-note">Informs buffers, knock-on effects and the combined tests, where several threats draw on the same buffers.</p>
   <ul class="refs">
     <li>Tendall, D. M., Joerin, J., Kopainsky, B., et al. (2015). Food system resilience: Defining the concept. <i>Global Food Security</i>, 6, 17–23. <a href="https://doi.org/10.1016/j.gfs.2015.08.001">https://doi.org/10.1016/j.gfs.2015.08.001</a></li>
     <li>Puma, M. J., Bose, S., Chon, S. Y., &amp; Cook, B. I. (2015). Assessing the evolving fragility of the global food system. <i>Environmental Research Letters</i>, 10(2), 024007. <a href="https://doi.org/10.1088/1748-9326/10/2/024007">https://doi.org/10.1088/1748-9326/10/2/024007</a></li>
@@ -387,7 +355,7 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
   </ul>
 
   <h4 class="refs-head">Early warning and anticipatory action</h4>
-  <p class="refs-note">Informs the watch, readiness and action signals, the timing dates and the comparison of early action with a reactive response.</p>
+  <p class="refs-note">Informs the warning levels (Watch, Get ready, Act now), the timing dates and the comparison of acting early with waiting to react.</p>
   <ul class="refs">
     <li>Coughlan de Perez, E., et al. (2015). Forecast-based financing: An approach for catalyzing humanitarian action based on extreme weather and climate forecasts. <i>Natural Hazards and Earth System Sciences</i>, 15, 895–904. <a href="https://doi.org/10.5194/nhess-15-895-2015">https://doi.org/10.5194/nhess-15-895-2015</a></li>
     <li>Gros, C., et al. (2019). Household-level effects of providing forecast-based cash in anticipation of extreme weather events: Quasi-experimental evidence from humanitarian interventions in the 2017 floods in Bangladesh. <i>International Journal of Disaster Risk Reduction</i>, 41, 101275. <a href="https://doi.org/10.1016/j.ijdrr.2019.101275">https://doi.org/10.1016/j.ijdrr.2019.101275</a></li>
@@ -408,7 +376,7 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
   </ul>
 
   <h4 class="refs-head">Data, trust and the science–policy interface</h4>
-  <p class="refs-note">Informs the back-end work: data sharing and governance, and playbooks agreed jointly with decision-makers.</p>
+  <p class="refs-note">Informs the work behind the scenes: data sharing and governance, and plans agreed in advance with decision-makers.</p>
   <ul class="refs">
     <li>Cash, D. W., Clark, W. C., Alcock, F., et al. (2003). Knowledge systems for sustainable development. <i>Proceedings of the National Academy of Sciences</i>, 100(14), 8086–8091. <a href="https://doi.org/10.1073/pnas.1231332100">https://doi.org/10.1073/pnas.1231332100</a></li>
     <li>Twyman, C., Fraser, E. D. G., Stringer, L. C., et al. (2011). Climate science, development practice, and policy interactions in dryland agroecological systems. <i>Ecology and Society</i>, 16(3), Article 14. <a href="https://doi.org/10.5751/ES-04261-160314">https://doi.org/10.5751/ES-04261-160314</a></li>
@@ -420,7 +388,7 @@ footer { margin-top: 48px; font-size: 13.5px; color: var(--muted); border-top: 1
   </ul>
 
   <h4 class="refs-head">Early-warning and anticipatory action systems that informed the design</h4>
-  <p class="refs-note">Informs the front page, the monthly review cycle, compound storylines and the four-part playbook.</p>
+  <p class="refs-note">Informs the front page, the monthly review cycle, the possible timelines and the four-part plan.</p>
   <ul class="refs">
     <li>Famine Early Warning Systems Network. (n.d.). <i>How we make projections</i> [Scenario development, including events that could change the scenario]. <a href="https://fews.net/about/projections">https://fews.net/about/projections</a></li>
     <li>GEOGLAM Crop Monitor. (n.d.). <i>Crop Monitor reports and dashboard</i> [Monthly consensus crop-condition assessments]. <a href="https://www.cropmonitor.org/">https://www.cropmonitor.org/</a></li>

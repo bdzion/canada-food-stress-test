@@ -1,34 +1,37 @@
 # Canada Food System Stress Test
 
-An interactive prototype that puts Canada's food system at the centre: stresses from inside and outside Canada, sorted into six categories, ranked within each, traced to where they hit, and stress-tested alone and together, comparing acting early, acting late and doing nothing.
+Canada grows plenty of food. A few weak links could still turn one bad event into a crisis. Banks are regularly tested against a severe but plausible bad year, so that weak points are fixed before a crisis. This prototype shows how Canada could do the same for its food system.
 
 **Live page:** https://bdzion.github.io/canada-food-stress-test/
 
 **User guide:** https://bdzion.github.io/canada-food-stress-test/guide.html
 
-Developed at the Arrell Food Institute (AFI), University of Guelph, as a discussion prototype for a long-term research program on anticipatory decision-making for food-system shocks. It builds on AFI's 2026 Canada Agri-Food Chokepoint Audit.
+Developed at the Arrell Food Institute (AFI), University of Guelph, as a discussion prototype for a long-term research program on preparing earlier for disruptions to the food system. It builds on AFI's 2026 Canada Agri-Food Chokepoint Audit.
 
 ## What it shows
 
-The site has three levels:
+The front page walks through four steps:
 
-1. **Front page: the national stress test.** Six category tiles show where the pressure is now (climate and weather; plant and animal health; conflict and trade; markets and inputs; logistics and cyber; people and labour). Below them, the integrated stress test runs a modelled shock from every category in the same year and compares doing nothing, acting late and acting early, with the value of a joint playbook.
-2. **Category pages** (`#cat/<id>`). The ranked stresses in a category, each with signal, origin, transmission channel and evidence, and the integrated stress test for that category's modelled shocks.
-3. **Single-stress tests.** Prairie drought, avian influenza, loss of an export market, phosphate before seeding, rail or port shutdown, cyberattack on distribution, and workforce outbreak at meat plants. Each shows warning signs, the cost of waiting, the decision window and a four-part playbook (trigger, action and lead, money, learning).
+1. **The system** (`#system`). A simple map of how food moves: farm inputs, farms, transport and ports, processing, and stores and households, with buyers abroad and food from abroad on either side. Each link shows how many indicators and threats affect it, followed by the authors' overall view.
+2. **The indicators** (`#indicators`). Twelve measured facts that show where Canada is exposed, such as the share of grain exports that move by rail. Each gives the number, what it means, how serious the authors judge it, whether it can be fixed, the threats that hit there, and a linked source.
+3. **The threats** (`#threats`). Eighteen events that could hit the system, in six groups, each with where it starts, what it hits, how serious it is judged to be and an example warning level (Normal, Watch, Get ready, Act now). Seven have a "what if" test: Prairie drought, avian influenza, loss of an export market, phosphate before seeding, a rail or port shutdown, a cyberattack on food distribution, and an outbreak among meat plant workers.
+4. **Possible timelines** (`#timelines`). Four ways a bad year could unfold when several threats arrive together, marking the windows to act and the points after which only damage control is possible. Possible, not predicted.
 
-Every test compares early action with a **reactive response** (acting at the action signal, an assumed stand-in for current practice) and with no response as a boundary case. Results carry evidence labels (observed, illustrative, proposed, demonstration signals), "About this number" notes, a false-alarm cost and a model card. All models are at validation level V0 (demonstration).
+Each "what if" test compares acting early (at the "get ready" sign) with waiting to react (at the "act now" sign, a stand-in for how responses often work today) and with doing nothing. It shows the best day to start, what a false alarm would cost, and a plan agreed in advance: when to act, what to do and who leads, money set aside, and learning afterwards. Proposed leads and funding have not been agreed by any agency.
 
-The header links to a **three-minute decision challenge** (`#challenge`) and to **From prototype to science** (`#research`), the research programme with its workstreams, first pilot and validation ladder. The challenge is a stateful grain-corridor exercise: a Day 0 plan, a Day 5 update, a Day 35 outcome with illustrative costs in Canadian dollars compared with a reactive comparator, and a debrief on cost-effectiveness across three event paths. Links that leave the prototype open in a new tab. Other supporting pages are linked from the "Explore the platform" panel at the bottom of every page: Methodology (`#methods`, including the full shock register and transmission channels), Compound scenarios (`#scenarios`), Recent developments (`#updates`), Potential partners (`#partners`, not finalized), the *Feeding a Fragile World* Substack, the user guide, and a printable decision brief.
+**Try it yourself** (`#challenge`) is a three-minute exercise: a Prairie grain rail line may close in 72 hours. Choose a plan, get news on Day 5, and see what happened by Day 35 and what it cost in Canadian dollars compared with waiting to react.
+
+Other pages are linked from "More on this site" at the bottom of every page: the research plan (`#research`), how the tests work (`#methods`, including the full list of threats), recent events (`#updates`), potential partners (`#partners`, not finalized), the *Feeding a Fragile World* Substack, the user guide, and a printable summary. Links that leave the site open in a new tab.
 
 ## Important caveats
 
-- **Illustrative only.** The models are stylized and use stated assumptions. They are not forecasts.
-- Every assumption is listed in the page's "Assumptions and sources" table and marked as sourced or illustrative.
-- Signal levels are the authors' demonstration settings. Shock rankings are the authors' preliminary judgement. Phase 1 of the program replaces them with a structured expert ranking.
+- **Examples, not forecasts.** The tests use simple models with stated assumptions. Every input is listed in the page's "Assumptions and sources" table and marked as a fact or an example value.
+- Warning levels are example settings chosen by the authors, not live readings. How serious each threat and indicator is reflects the authors' preliminary judgement. The first phase of the research program would replace this with a structured expert ranking.
+- None of the tests has yet been checked against real events.
 
 ## Structure
 
-The site has two self-contained pages with no build step: `index.html` (the interactive stress test) and `guide.html` (the user guide: plain-language definitions, a decision workflow, how the full platform will work, back-end work and evidence on effectiveness). Register entries, recent developments and storylines are plain data arrays near the top of the script in `index.html`, so they are easy to update. `preview.png` is the image shown when the link is shared. Fonts load from Google Fonts. GitHub Pages serves it from the `main` branch root.
+Two self-contained pages with no build step: `index.html` (the site) and `guide.html` (the user guide: plain-language terms, how to use the site to prepare a decision, how the full system would work, and evidence on effectiveness). Indicators, threats, recent events and timelines are plain data arrays in the script in `index.html`, so they are easy to update. `preview.png` is the image shown when the link is shared. Fonts load from Google Fonts. GitHub Pages serves the site from the root of the `main` branch.
 
 ## Feedback
 
