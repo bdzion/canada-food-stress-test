@@ -1,6 +1,6 @@
 # Canada Food System Stress Test
 
-Canada grows plenty of food. A few weak links could still turn one bad event into a crisis. Banks are regularly tested against a severe but plausible bad year, so that weak points are fixed before a crisis. This prototype shows how Canada could do the same for its food system.
+Shocks to Canada's food system are inevitable; crises are not. Whether a shock becomes a crisis depends on buffers: the spare capacity that absorbs it. No one tests how shocks spread, combine or could be stopped early. This prototype shows how a national stress test could.
 
 **Live page:** https://bdzion.github.io/canada-food-stress-test/
 
@@ -10,18 +10,20 @@ Developed at the Arrell Food Institute (AFI), University of Guelph, as a discuss
 
 ## What it shows
 
-The front page walks through four steps:
+The front page has two connected parts.
 
-1. **The system** (`#system`). A simple map of how food moves: farm inputs, farms, transport and ports, processing, and stores and households, with buyers abroad and food from abroad on either side. Each link shows how many indicators and threats affect it, followed by the authors' overall view.
-2. **The indicators** (`#indicators`). Twelve measured facts that show where Canada is exposed, such as the share of grain exports that move by rail. Each gives the number, what it means, how serious the authors judge it, whether it can be fixed, the threats that hit there, and a linked source.
-3. **The threats** (`#threats`). Eighteen events that could hit the system, in six groups, each with where it starts, what it hits, how serious it is judged to be and an example warning level (Normal, Watch, Get ready, Act now). Seven have a "what if" test: Prairie drought, avian influenza, loss of an export market, phosphate before seeding, a rail or port shutdown, a cyberattack on food distribution, and an outbreak among meat plant workers.
-4. **Possible timelines** (`#timelines`). Four ways a bad year could unfold when several threats arrive together, marking the windows to act and the points after which only damage control is possible. Possible, not predicted.
+**1. The risk dashboard** (`#dashboard`) has four tabs:
 
-Each "what if" test compares acting early (at the "get ready" sign) with waiting to react (at the "act now" sign, a stand-in for how responses often work today) and with doing nothing. It shows the best day to start, what a false alarm would cost, and a plan agreed in advance: when to act, what to do and who leads, money set aside, and learning afterwards. Proposed leads and funding have not been agreed by any agency.
+- **The system** (`#system`): a simple map of how food moves, from farm inputs to stores and households, with buyers abroad and food from abroad on either side, and the authors' overall view.
+- **The indicators** (`#indicators`): twelve measured facts that show where Canada is exposed, each with how serious the authors judge it, whether it can be fixed, the threats that hit there and a linked source.
+- **The threats** (`#threats`): eighteen threats in six groups, with the highest example warning level in each group (Normal, Watch, Get ready, Act now), and seven "what if" tests of single threats.
+- **Possible timelines** (`#timelines`): four ways a bad year could unfold when several threats arrive together. Possible, not predicted.
 
-**Try it yourself** (`#challenge`) is a three-minute exercise: a Prairie grain rail line may close in 72 hours. Choose a plan, get news on Day 5, and see what happened by Day 35 and what it cost in Canadian dollars compared with waiting to react.
+Below the tabs, **What a bad year could cost** (`#costs`) is interactive. It runs all seven tested threats, or one of the timelines, in the same year and compares acting early (at each "get ready" sign), waiting to react (at each "act now" sign, a stand-in for how responses often work today) and doing nothing. Sliders set the extra damage when threats overlap and the extra delay when agencies are stretched, and a checkbox adds a shared plan agreed in advance. Each single-threat test also shows the best day to start, what a false alarm would cost, and a plan agreed in advance. Proposed leads and funding have not been agreed by any agency.
 
-Other pages are linked from "More on this site" at the bottom of every page: the research plan (`#research`), how the tests work (`#methods`, including the full list of threats), recent events (`#updates`), potential partners (`#partners`, not finalized), the *Feeding a Fragile World* Substack, the user guide, and a printable summary. Links that leave the site open in a new tab.
+**2. The decision game** (`#challenge`) takes one threat from the dashboard and puts the user in charge: a Prairie grain rail line may close in 72 hours. Choose a plan, get news on Day 5, and see what happened by Day 35 and what it cost in Canadian dollars compared with waiting to react. About three minutes.
+
+Other pages are linked from "More on this site" at the bottom of every page: the research plan (`#research`), how the tests work (`#methods`, including the full list of threats), recent events (`#updates`), potential partners (`#partners`, not finalized), the *Feeding a Fragile World* Substack, the companion [Granary Risk Assessment Dashboard](https://feeding9billion-cmyk.github.io/Granary_Risk_Dashboard/), the user guide, and a printable summary. Links that leave the site open in a new tab.
 
 ## Important caveats
 

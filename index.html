@@ -343,6 +343,31 @@ li.k-later::before { background: var(--line); }
 .sub3 { margin: 20px 0 4px; }
 @media (max-width: 760px) { .stats, .steps { grid-template-columns: 1fr 1fr; } .sysside { grid-template-columns: 1fr; } .arr { display: none; } .tlgrid { grid-template-columns: 1fr; } }
 @media (max-width: 440px) { .stats, .steps { grid-template-columns: 1fr; } }
+.ways { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: stretch; margin: 14px 0; }
+.way { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; row-gap: 4px; align-content: start; background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: 10px; padding: 14px 16px; text-decoration: none; color: var(--ink); }
+.way.game { border-top-color: var(--act); }
+.way .pn { grid-row: span 3; width: 36px; }
+.tryit .pn.light { width: 36px; }
+.way b { font-family: var(--font-display); font-size: 21px; }
+.way span:not(.pn) { font-size: 14.5px; }
+.way .go { font-weight: 700; color: var(--act); }
+.way:hover b, .way:focus-visible b { text-decoration: underline; }
+.ways .link { display: grid; place-items: center; text-align: center; font-size: 12px; color: var(--muted); line-height: 1.25; }
+.ways .link { font-size: 22px; } .ways .link span { font-size: 12px; display: block; }
+.dtabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-bottom: 2px solid var(--line); margin: 14px 0 0; }
+.dtab { font: inherit; text-align: left; background: none; border: 0; border-bottom: 3px solid transparent; margin-bottom: -2px; padding: 10px 12px; cursor: pointer; color: var(--muted); display: grid; gap: 2px; }
+.dtab b { font-size: 15.5px; color: var(--ink); }
+.dtab span { font-size: 12.5px; }
+.dtab[aria-selected="true"] { border-bottom-color: var(--accent); background: var(--surface); }
+.dtab:focus-visible { outline: 2px solid var(--act); outline-offset: -2px; }
+.dpanel { padding: 14px 0 6px; }
+.dpanel:focus-visible { outline: 2px solid var(--act); }
+.costhead { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 16px; }
+.costhead .chips { margin: 8px 0 2px; }
+.costhead .snap b { font: inherit; font-weight: 700; color: var(--ink); }
+.dpanel .sub3 { margin-top: 18px; }
+.tryit .pn.light { background: var(--bg); color: var(--accent); float: left; margin: 2px 12px 0 0; }
+@media (max-width: 760px) { .ways { grid-template-columns: 1fr; } .ways .link { display: none; } .dtabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .chal .stepdots { display: flex; gap: 6px; font-size: 12.5px; color: var(--muted); align-items: center; }
 .chal .stepdots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); display: inline-block; }
@@ -422,27 +447,25 @@ a.excard:hover { border-color: var(--act); }
   <header id="hero" class="hero">
     <div class="eyebrow">Arrell Food Institute · University of Guelph · Prototype for discussion · November 2026</div>
     <h1>Canada Food System Stress Test</h1>
-    <p class="tagline">Canada grows plenty of food. A few weak links could still turn one bad event into a crisis.</p>
-    <p class="dek">Banks are regularly tested against a severe but plausible bad year, so that weak points are fixed before a crisis. This prototype shows how Canada could do the same for its food system. It walks through four steps: how the system works, where it is exposed, what could hit it, and when acting early would still help.</p>
+    <p class="tagline">Shocks to Canada’s food system are inevitable. Crises are not.</p>
+    <p class="dek">Since 2021, drought, floods, avian influenza, a national rail shutdown, trade duties, a cyberattack and a fertilizer price spike have all hit Canada’s food system. Whether a shock becomes a crisis depends on buffers: the spare capacity that absorbs it, such as storage, other transport routes, stocks and plans agreed in advance. Each department and company sees its own part, but no one tests how shocks spread, combine or could be stopped early. This prototype shows how a national stress test could.</p>
     <div class="stats">
       <div><b>94%</b><span>of grain exports move by rail</span><a href="https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx">Source</a></div>
-      <div><b>$540M</b><span>cost to the grain sector of one week of rail and port disruption at harvest time</span><a href="https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx">Source</a></div>
+      <div><b>~10 days</b><span>until Prairie elevators are full if the trains stop, and farmers can no longer deliver</span><a href="https://www.agweb.com/markets/world-markets/canada-rail-stoppage-poised-disrupt-north-american-agriculture">Source</a></div>
+      <div><b>$540M</b><span>cost to the grain sector of one week of rail and port disruption in peak export season</span><a href="https://www.farms.com/news/when-grain-stops-moving-rail-and-port-delays-cost-canada-up-to-540-million-241437.aspx">Source</a></div>
       <div><b>0</b><span>phosphate fertilizer made in Canada; all of it is imported</span><a href="https://www.producer.com/?p=320243">Source</a></div>
-      <div><b>62%</b><span>of agri-food exports go to one country, the United States</span><a href="https://agriculture.canada.ca/en/node/4128">Source</a></div>
     </div>
-    <nav aria-label="The four steps"><ol class="steps">
-      <li><a href="#system"><span class="pn">1</span><b>The system</b><span>How food moves, and where problems start</span></a></li>
-      <li><a href="#indicators"><span class="pn">2</span><b>The indicators</b><span>Measured facts that show where Canada is exposed</span></a></li>
-      <li><a href="#threats"><span class="pn">3</span><b>The threats</b><span>What could hit the system, and “what if” tests</span></a></li>
-      <li><a href="#timelines"><span class="pn">4</span><b>Possible timelines</b><span>How a bad year could unfold, and when to act</span></a></li>
-    </ol></nav>
-    <div class="herobtns"><a class="btn primary" href="#challenge">Try it yourself: a three-minute exercise</a><a class="btn" href="#research">The research plan behind this prototype</a></div>
+    <div class="ways">
+      <a class="way" href="#dashboard"><span class="pn">1</span><b>The risk dashboard</b><span>See where buffers are thin, what could hit them, and what acting early, late or not at all would cost. Move the settings and the results update.</span><span class="go">Open the dashboard ↓</span></a>
+      <div class="link" aria-hidden="true"><span>one threat,<br>up close</span>→</div>
+      <a class="way game" href="#challenge"><span class="pn">2</span><b>The decision game</b><span>A Prairie grain rail line may close in 72 hours. You make the calls and see what they cost by Day 35. About three minutes.</span><span class="go">Play the game →</span></a>
+    </div>
     <div class="notice"><b>Facts and examples.</b><span>Every event and statistic on this site is real and linked to its source. The dollar figures, warning levels and results in the tests are examples, built to show how the method works. They are not forecasts.</span></div>
   </header>
   <header id="subhead" class="subhead hidden">
     <a class="brand" href="#">Canada Food System Stress Test</a>
     <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
-    <nav class="secnav" aria-label="Sections"><a href="#system">1 The system</a><a href="#indicators">2 The indicators</a><a href="#threats">3 The threats</a><a href="#timelines">4 Possible timelines</a><a href="#challenge">Try it yourself</a></nav>
+    <nav class="secnav" aria-label="Sections"><a href="#dashboard">1 The risk dashboard</a><a href="#challenge">2 The decision game</a></nav>
   </header>
   <div id="briefHead"></div>
 
@@ -506,7 +529,8 @@ a.excard:hover { border-color: var(--act); }
     <h2 id="exploreTitle">More on this site</h2>
     <div class="exgrid">
       <a class="excard" href="#research"><b>The research plan</b><span>How this prototype would become tested science: the questions, the first pilot on Prairie grain transport, and how results would be checked.</span></a>
-      <a class="excard" href="#challenge"><b>Try it yourself</b><span>A three-minute exercise: a grain rail line may close in 72 hours. Choose a plan, adapt it, and see what it costs.</span></a>
+      <a class="excard" href="#challenge"><b>The decision game</b><span>A three-minute exercise: a grain rail line may close in 72 hours. Choose a plan, adapt it, and see what it costs.</span></a>
+      <a class="excard" href="https://feeding9billion-cmyk.github.io/Granary_Risk_Dashboard/"><b>Granary Risk Assessment Dashboard</b><span>A companion Arrell Food Institute dashboard that rates weak points in Canada’s agri-food system (external site).</span></a>
       <a class="excard" href="#methods"><b>How the tests work</b><span>How threats are scored, how the “what if” tests work, what they leave out, and the full list of threats.</span></a>
       <a class="excard" href="#updates"><b>Recent events</b><span>Dated, sourced news and government decisions behind the example warning levels.</span></a>
       <a class="excard" href="#partners"><b>Potential partners</b><span>The universities, companies and international bodies we propose to work with. Not finalized.</span></a>
@@ -993,7 +1017,7 @@ CATS.forEach(c => REG.filter(r => r.cat === c.id).sort(byScore).forEach((r, i) =
 
 /* Recent developments: real, dated, linked. Signal effects are the authors' demonstration settings. */
 const SNAPSHOT = "12 November 2026";
-const VERSION = "0.6";
+const VERSION = "0.7";
 const CHECKED = "12 November 2026";
 const UPDATES = [
   ["2026-11-06", "health", "both", "News", "Avian influenza was detected in a British Columbia commercial poultry flock for the first time this autumn season.", "https://www.ctvnews.ca/vancouver/article/avian-flu-detected-in-bc-poultry-flock-for-first-time-this-season/", "Avian influenza trend set to rising (seasonal)"],
@@ -1246,7 +1270,7 @@ function showParts(kind) {
   $("hero").classList.toggle("hidden", !home);
   $("subhead").classList.toggle("hidden", home);
   $("path").classList.toggle("hidden", !stress);
-  ["main", "assumpWrap", "dataWrap"].forEach(id => $(id).classList.toggle("hidden", info || home));
+  ["main", "assumpWrap", "dataWrap"].forEach(id => $(id).classList.toggle("hidden", info));
   $("presetWrap").classList.toggle("hidden", !stress);
   $("after").innerHTML = "";
 }
@@ -1318,6 +1342,7 @@ function buildScenario() {
   const linked = REG.filter(r => r.model === view);
   $("after").innerHTML = `<div class="sechead"><h3>Threats this test represents</h3></div>
     <div class="scards">${linked.map(r => stressCard(r, false)).join("")}</div>`;
+  if (view === "rail") $("after").insertAdjacentHTML("beforeend", `<section class="tryit"><div><h2>Make the call yourself</h2><p>The decision game puts you in charge of this threat: a Prairie grain rail line may close in 72 hours. About three minutes.</p></div><a class="btn primary" href="#challenge" style="text-decoration:none">Play the decision game</a></section>`);
 }
 
 /* ----- integrated stress test (home, category, storyline) ----- */
@@ -1446,15 +1471,21 @@ const nodeThreats = (id) => REG.filter(r => threatNode(r) === id);
 const nodeInd = (id) => INDIC.filter(i => i.node === id);
 const regByName = (n) => REG.find(r => r.name === n);
 const threatLink = (r) => r.model ? `<a href="#${r.model}">${esc(r.name)}</a>` : esc(r.name);
-function buildHome() {
-  mode = "homepage";
-  showParts("home");
+const DTABS = [["system", "The system", "How food moves"], ["indicators", "The indicators", "Where Canada is exposed"], ["threats", "The threats", "What could hit it"], ["timelines", "Possible timelines", "How a bad year could unfold"]];
+let dashTab = "threats", homeSet = "all";
+function catTiles() {
+  return `<div class="cats">${CATS.map(c => { const st = catStatus(c); return `
+    <a class="cat s${st.top}" href="#cat/${c.id}" style="text-decoration:none">
+      <span class="top"><span class="nm">${c.name}</span>${sigBadge(st.top)}</span>
+      <span class="meta">${st.elevated} of ${st.rows.length} threats above normal · <span class="trend">${TREND[st.trend][0]}</span> ${TREND[st.trend][1]}</span>
+      <span class="meta">${NOTES[c.id]}</span>
+      <span class="go">See these threats →</span>
+    </a>`; }).join("")}</div>`;
+}
+function dashPanel(id) {
   const lv = (l) => `<span class="lvl l-${l.toLowerCase()}">${LEVEL[l]}</span>`;
-  const grouped = CATS.map(c => ({ c, rows: REG.filter(r => r.cat === c.id).sort(byScore) }));
-  $("page").innerHTML = `
-  <section class="part" id="sec-system" aria-labelledby="h-system">
-    <div class="parthead"><span class="pn">1</span><div><h2 id="h-system">The system</h2><p class="snap">How food moves from farm inputs to the people who eat it, and where problems can start.</p></div></div>
-    <p class="lede">Canada grows far more food than it eats and sells much of it abroad. To do that, food passes through a chain of links: inputs, farms, transport, processing and stores. Each link has some spare capacity to absorb a shock: stored grain, extra trucks, other suppliers, a few days of stock. We call these <b>buffers</b>. When a buffer runs out, a problem in one link spreads to the next.</p>
+  if (id === "system") return `
+    <p class="lede">Canada grows far more food than it eats and sells much of it abroad. Food passes through a chain of links, and each link has some spare capacity to absorb a shock: stored grain, extra trucks, other suppliers, a few days of stock. These are <b>buffers</b>. When a buffer runs out, a problem in one link spreads to the next.</p>
     <div class="sysmap" role="list">
       ${["inputs", "farms", "transport", "processing", "stores"].map((id, i) => { const n = NODES.find(x => x.id === id); return `${i ? '<div class="arr" aria-hidden="true">→</div>' : ""}
       <div class="node" role="listitem"><b>${n.name}</b><span>${n.what}</span>
@@ -1465,13 +1496,9 @@ function buildHome() {
       ${["exports", "imports"].map(id => { const n = NODES.find(x => x.id === id); return `<div class="node side" role="group" aria-label="${n.name}"><b>${n.name}</b><span>${n.what}</span>
         <span class="nlinks">${nodeInd(id).length} indicator${nodeInd(id).length === 1 ? "" : "s"} · ${nodeThreats(id).length} threat${nodeThreats(id).length === 1 ? "" : "s"}</span><a href="#indicators" data-node="${id}">See what affects it</a></div>`; }).join("")}
     </div>
-    <p class="snap">A simplified picture, not a measured flow diagram. Choose a link to see the indicators and threats that affect it.</p>
-    <div class="overall"><span class="tag">Our overall view</span><p><b>A strong producer with thin buffers.</b> Canada’s capacity to grow food is real. But several links depend on one route, one buyer, one supplier or a few plants. Most threats would be manageable on their own. Two or three at once could overwhelm the people and buffers that respond. This is the authors’ judgement, to be tested by the research.</p></div>
-  </section>
-
-  <section class="part" id="sec-indicators" aria-labelledby="h-indicators">
-    <div class="parthead"><span class="pn">2</span><div><h2 id="h-indicators">The indicators</h2><p class="snap">Twelve measured facts that show where Canada is exposed.</p></div></div>
-    <p class="lede">An indicator is a number that tells us how much spare capacity a link has, or how much it depends on one source. Each card gives the number, what it means, how serious we judge it to be, whether it can be fixed, and its source.</p>
+    <div class="overall"><span class="tag">Our overall view</span><p><b>A strong producer with thin buffers.</b> Canada’s capacity to grow food is real. But several links depend on one route, one buyer, one supplier or a few plants. Most threats would be manageable on their own. Two or three at once could overwhelm the people and buffers that respond. This is the authors’ judgement, to be tested by the research.</p></div>`;
+  if (id === "indicators") return `
+    <p class="lede">Twelve measured facts that show how much spare capacity a link has, or how much it depends on one source. Each gives the number, how serious we judge it, whether it can be fixed, the threats that hit there, and its source.</p>
     <div class="chips" role="group" aria-label="Show indicators for one part of the system">
       <button class="chip" type="button" data-show="all" aria-pressed="true">All parts</button>
       ${NODES.map(n => `<button class="chip" type="button" data-show="${n.id}" aria-pressed="false">${n.name}</button>`).join("")}
@@ -1486,25 +1513,15 @@ function buildHome() {
         <div class="ithr"><b>Threats that hit here:</b> ${i.threats.map(n => { const r = regByName(n); return r ? threatLink(r) : esc(n); }).join("; ")}</div>
         <div class="isrc">Source: <a href="${i.url}">${i.src}</a></div>
       </article>`).join("")}</div>
-    <p class="snap">How serious: <b>High</b> means one failure here would be felt across the country within weeks; <b>Raised</b> means serious for one sector or region; <b>Watch</b> means worth tracking. These levels are the authors’ judgement, not a calculation.</p>
-  </section>
-
-  <section class="part" id="sec-threats" aria-labelledby="h-threats">
-    <div class="parthead"><span class="pn">3</span><div><h2 id="h-threats">The threats</h2><p class="snap">${REG.length} events that could hit the system, and “what if” tests for seven of them.</p></div></div>
-    <p class="lede">Indicators show where the system is exposed. Threats are the events that could hit those weak points: a drought, a disease, a strike, a trade dispute, a cyberattack. Some start in Canada and some abroad. For seven of them we built a simple “what if” test. Each test asks one question: <b>what does it cost to act early, to wait and react, or to do nothing?</b></p>
+    <p class="snap">How serious: <b>High</b> means one failure here would be felt across the country within weeks; <b>Raised</b> means serious for one sector or region. These levels are the authors’ judgement, not a calculation.</p>`;
+  if (id === "threats") return `
+    <p class="lede">${REG.length} threats, from inside and outside Canada, in six groups. Each tile shows the highest warning level in its group. Choose a group to see its threats and test them together.</p>
+    ${catTiles()}
+    <h3 class="sub3">Test one threat: what if…</h3>
     <div class="whatif">${MODELLED.map(k => `<a class="wcard" href="#${k}"><span class="k">What if…</span><b>${SCEN[k].ask}</b><span class="go">Open the test →</span></a>`).join("")}</div>
-    <h3 class="sub3">All ${REG.length} threats, by type</h3>
-    <p class="snap">Each threat shows where it starts, which part of the system it hits, how serious we judge it, and an example warning level. ${DEMO}</p>
-    <div class="tgroups">${grouped.map(({ c, rows }) => `
-      <div class="tgroup"><h4><a href="#cat/${c.id}">${c.name}</a></h4>
-        ${rows.map(r => `<div class="trow"><div><b>${threatLink(r)}</b><div class="snap">${ORIGIN[r.origin]} · hits ${NODES.find(n => n.id === threatNode(r)).name.toLowerCase()}</div></div><div class="tmeta"><span class="lvl l-${r.band === "High" ? "high" : r.band === "Moderate" ? "raised" : "watch"}">${r.band === "High" ? "High" : r.band === "Moderate" ? "Raised" : "Watch"}</span>${sigBadge(r.sig)}</div></div>`).join("")}
-      </div>`).join("")}</div>
-    <p class="snap">How serious combines how likely the threat is over five years, how much harm it would do, how fast it arrives and how widely it spreads. See <a href="#methods">how the tests work</a> for the scoring. Warning levels (Normal, Watch, Get ready, Act now) are example settings chosen by the authors; in a full system, analysts would update them each month.</p>
-  </section>
-
-  <section class="part" id="sec-timelines" aria-labelledby="h-timelines">
-    <div class="parthead"><span class="pn">4</span><div><h2 id="h-timelines">Possible timelines</h2><p class="snap">How several threats could unfold together, and when acting would still help.</p></div></div>
-    <p class="lede">Threats rarely arrive one at a time, and the same people and money are needed for each. These four timelines show how a bad year could unfold. They are <b>possible, not predicted</b>. Each one marks the <span class="k-window">windows to act</span>, when early action is cheap and still works, and the points after which it is <span class="k-late">too late</span> for anything but damage control.</p>
+    <p class="snap">Warning levels (Normal, Watch, Get ready, Act now) are example settings chosen by the authors; in a full system, analysts would update them each month. See <a href="#methods">how the tests work</a> for how seriousness is judged.</p>`;
+  return `
+    <p class="lede">Threats rarely arrive one at a time, and the same people and money are needed for each. These timelines are <b>possible, not predicted</b>. Each marks the <span class="k-window">windows to act</span> and the point after which it is <span class="k-late">too late</span> for anything but damage control. Choose <b>Test this timeline</b> to load it into the costs below.</p>
     <div class="tlgrid">${TIMELINES.map(t => `
       <article class="tl" id="tl-${t.id}">
         <h3>${t.title}</h3>
@@ -1512,21 +1529,63 @@ function buildHome() {
         <ol class="tlsteps">${t.steps.map(([when, kind, text]) => `<li class="k-${kind}"><span class="when">${when}</span><span class="kind">${KIND[kind]}</span><span class="what">${text.charAt(0).toUpperCase() + text.slice(1)}</span></li>`).join("")}</ol>
         <div class="tlchange"><b>What acting early would change:</b> ${t.change}</div>
         <div class="tlfoot"><span class="snap">Threats involved: ${STORIES.find(s => s.id === t.id).on.map(k => `<a href="#${k}">${SCEN[k].tab}</a>`).join(", ")}</span>
-          <a class="btn" href="#run/${t.id}" style="text-decoration:none">See the combined costs →</a></div>
-      </article>`).join("")}</div>
-  </section>
-
-  <section class="tryit">
-    <div><h2>Try it yourself</h2><p>A three-minute exercise. A grain rail line may close in 72 hours. You choose a plan, get news on Day 5, and see what your choices cost compared with waiting.</p></div>
-    <a class="btn primary" href="#challenge" style="text-decoration:none">Start the exercise</a>
+          <button class="btn primary" type="button" data-tl="${t.id}">Test this timeline ↓</button></div>
+      </article>`).join("")}</div>`;
+}
+function setHomeSet(id) {
+  homeSet = id;
+  integ.set = id === "all" ? MODELLED.slice() : STORIES.find(s => s.id === id).on.slice();
+  mode = id === "all" ? "home" : "run";
+  document.querySelectorAll("[data-set]").forEach(b => b.setAttribute("aria-pressed", b.dataset.set === id));
+  const st = STORIES.find(s => s.id === id);
+  $("setNote").innerHTML = id === "all" ? "All seven tested threats in one year, grouped by type. Choose a group in the chart to see its threats." : `${esc(st.title)}: ${st.on.map(k => SCEN[k].tab).join(", ")}. <a href="#run/${id}">Open this timeline on its own page</a>.`;
+  intControls(); update();
+}
+function buildHome() {
+  showParts("home");
+  $("page").innerHTML = `
+  <section class="dash" id="sec-dashboard" aria-labelledby="h-dashboard">
+    <div class="parthead"><span class="pn">1</span><div><h2 id="h-dashboard">The risk dashboard</h2><p class="snap">Where Canada’s food system is exposed, what could hit it, and what acting early, late or not at all would cost. Situation reviewed ${SNAPSHOT}. ${DEMO}</p></div></div>
+    <div class="dtabs" role="tablist" aria-label="Risk dashboard">${DTABS.map(([id, lab, sub]) => `<button class="dtab" role="tab" type="button" id="tab-${id}" aria-controls="dpanel" aria-selected="${id === dashTab}" tabindex="${id === dashTab ? 0 : -1}" data-tab="${id}"><b>${lab}</b><span>${sub}</span></button>`).join("")}</div>
+    <div class="dpanel" id="dpanel" role="tabpanel" aria-labelledby="tab-${dashTab}" tabindex="0">${dashPanel(dashTab)}</div>
+    <div class="sechead costhead" id="sec-costs"><div class="row"><h2 id="h-costs" tabindex="-1">What a bad year could cost</h2><span class="ev ev-ill">Example figures</span></div>
+      <p class="snap">Several tested threats in the same year, comparing three choices: <b>act early</b> at each “get ready” sign, <b>wait and react</b> at each “act now” sign, or <b>do nothing</b>. Change the settings on the left and every result updates. The tests count different kinds of loss, so the totals show how the method works; they are not an estimate for Canada.</p>
+      <div class="chips" role="group" aria-label="Which threats to include">
+        <button class="chip" type="button" data-set="all" aria-pressed="${homeSet === "all"}">All seven tested threats</button>
+        ${TIMELINES.map(t => `<button class="chip" type="button" data-set="${t.id}" aria-pressed="${homeSet === t.id}">${t.title}</button>`).join("")}
+      </div>
+      <p class="snap" id="setNote"></p></div>
+  </section>`;
+  $("after").innerHTML = `<section class="tryit" id="sec-game">
+    <div><span class="pn light">2</span><h2>The decision game</h2><p>The dashboard shows the risks. The game puts you in charge of one of them. A Prairie grain rail line may close in 72 hours: you choose a plan, get news on Day 5, and see what your choices cost by Day 35 compared with waiting to react. About three minutes.</p></div>
+    <a class="btn primary" href="#challenge" style="text-decoration:none">Play the game</a>
   </section>`;
   const pg = $("page");
   const showNode = (id) => {
     pg.querySelectorAll("[data-show]").forEach(b => b.setAttribute("aria-pressed", b.dataset.show === id));
     pg.querySelectorAll(".ind").forEach(c => c.classList.toggle("hidden", id !== "all" && c.dataset.node !== id));
   };
-  pg.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => showNode(b.dataset.show)));
-  pg.querySelectorAll("a[data-node]").forEach(a => a.addEventListener("click", (e) => { e.preventDefault(); showNode(a.dataset.node); $("sec-indicators").scrollIntoView({ block: "start" }); $("h-indicators").focus?.(); }));
+  const wire = () => {
+    pg.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => showNode(b.dataset.show)));
+    pg.querySelectorAll("a[data-node]").forEach(a => a.addEventListener("click", (e) => { e.preventDefault(); selectTab("indicators", true); showNode(a.dataset.node); }));
+    pg.querySelectorAll("[data-tl]").forEach(b => b.addEventListener("click", () => { setHomeSet(b.dataset.tl); $("sec-costs").scrollIntoView({ block: "start" }); $("h-costs").focus({ preventScroll: true }); }));
+  };
+  const selectTab = (id, focus) => {
+    dashTab = id;
+    pg.querySelectorAll("[data-tab]").forEach(b => { const on = b.dataset.tab === id; b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); });
+    $("dpanel").setAttribute("aria-labelledby", "tab-" + id);
+    $("dpanel").innerHTML = dashPanel(id); wire();
+  };
+  pg.querySelectorAll("[data-tab]").forEach((b, i, all) => {
+    b.addEventListener("click", () => selectTab(b.dataset.tab));
+    b.addEventListener("keydown", (e) => {
+      const k = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (!k && e.key !== "Home" && e.key !== "End") return;
+      e.preventDefault(); const j = e.key === "Home" ? 0 : e.key === "End" ? all.length - 1 : (i + k + all.length) % all.length; selectTab(all[j].dataset.tab, true);
+    });
+  });
+  pg.querySelectorAll("[data-set]").forEach(b => b.addEventListener("click", () => setHomeSet(b.dataset.set)));
+  wire();
+  setHomeSet(homeSet);
 }
 
 function buildCategory() {
@@ -1870,7 +1929,7 @@ function gDebrief(plan) {   // tailored message about the choices made, from the
 }
 function buildChallenge(focusHead) {
   mode = "info"; showParts("info");
-  setCrumbs([["Home", "#"], ["Try it yourself", ""]]);
+  setCrumbs([["Home", "#"], ["The decision game", ""]]);
   const steps = ["Briefing", "Day 0: your plan", "Day 5: update", "Day 35: outcome", "Lessons"];
   const ill = `<span class="ev ev-ill">Example figures</span>`;
   const dots = `<ol class="stepper" aria-label="Progress">${steps.map((n, i) => `<li class="${i === CH.step ? "cur" : i < CH.step ? "done" : ""}" ${i === CH.step ? 'aria-current="step"' : ""}>${n}</li>`).join("")}</ol>`;
@@ -1985,7 +2044,8 @@ function buildChallenge(focusHead) {
         <button class="btn" type="button" data-replay="short">Replay: a short closure</button>
         <button class="btn" type="button" data-restart>Start again with a new plan</button>
         <button class="btn" type="button" data-print>Print a summary</button>
-        <a class="btn primary" href="#research" style="text-decoration:none">See the research programme</a>
+        <a class="btn primary" href="#rail" style="text-decoration:none">See the rail shutdown in the risk dashboard</a>
+        <a class="btn" href="#research" style="text-decoration:none">The research plan</a>
       </div>`;
     after = () => {
       const C = gSim(GCOMP, "long");
@@ -1997,7 +2057,7 @@ function buildChallenge(focusHead) {
         series: [{ name: "Long closure", data: book.long, color: css("--base") }, { name: "Short closure", data: book.short, color: css("--act"), dash: "6 4" }] });
     };
   }
-  $("page").innerHTML = `<div class="chal"><div class="sechead"><h2 id="chHead" tabindex="-1">Try it yourself: a Prairie grain rail line may close</h2><p class="snap">A three-minute exercise · ${ill} · a research demonstration, not a forecast</p></div>${dots}<div id="chStatus" class="sr" role="status"></div>${body}</div>`;
+  $("page").innerHTML = `<div class="chal"><div class="sechead"><h2 id="chHead" tabindex="-1">The decision game: a Prairie grain rail line may close</h2><p class="snap">A three-minute exercise · ${ill} · a research demonstration, not a forecast</p></div>${dots}<div id="chStatus" class="sr" role="status"></div>${body}</div>`;
   if (after) setTimeout(after, 0);
   const pg = $("page");
   pg.querySelectorAll('input[name="p0"]').forEach(r => r.addEventListener("change", () => { CH.p0 = r.value; CH.p5 = ""; buildChallenge(); pg.querySelector('input[name="p0"]:checked')?.focus(); $("chStatus").textContent = GPLANS0[CH.p0].name + " selected"; }));
@@ -2107,7 +2167,7 @@ function evRow(extra) {
   $("evrow").innerHTML = `<span class="ev ev-ill">Example figures</span><span>Example results from a simple model, not forecasts. "Wait and react" acts at the “act now” sign and stands in for current practice until that is documented with partners.</span>${extra || ""}`;
 }
 function update() {
-  if (!SCEN[view]) return (mode === "cat" || mode === "run") ? updateIntegrated() : undefined;
+  if (!SCEN[view]) return (mode === "cat" || mode === "run" || mode === "home") ? updateIntegrated() : undefined;
   const s = SCEN[view], st = state[view];
   s.params.forEach(p => $("out-" + p.id).textContent = p.fmt(st[p.id]));
   const base = s.run(st, Infinity), act = s.run(st, st.a);
@@ -2219,7 +2279,7 @@ function updateIntegrated() {
   }
   if (multi) rows.push({ label: "Extra cost of overlap|(shared buffers, delays)", values: [Math.max(0, none.overlap), Math.max(0, react.overlap), Math.max(0, early.overlap)], strong: true });
   $("c1title").textContent = mode === "home" ? "Where the losses come from, by category" : "Where the losses come from";
-  $("c1sub").textContent = (mode === "home" ? "Each category's tested threats on their own" : "Each threat on its own") + (multi ? ", plus the extra cost when they overlap" : "") + ". Costs include losses and the cost of responding. Select a threat to open it.";
+  $("c1sub").textContent = (mode === "home" ? "Each category's tested threats on their own" : "Each threat on its own") + (multi ? ", plus the extra cost when they overlap" : "") + ". Costs include losses and the cost of responding. Select a row to open it.";
   $("legend1").innerHTML = cases.map(c => `<span><i class="sq" style="background:${c.color}"></i>${c.name}</span>`).join("");
   barChart($("chart1"), $("tip1"), { aria: "Cost under doing nothing, waiting to react and early action", rows, cases });
   const biggest = rows.filter(r => !r.strong).slice().sort((a, b) => b.values[1] - a.values[1])[0];
@@ -2262,15 +2322,17 @@ function route() {
   else if (head === "partners") { view = "partners"; buildPartners(); }
   else { view = "home"; buildHome(); }
   update();
-  const sec = { system: 1, indicators: 1, threats: 1, timelines: 1, scenarios: 1, compound: 1 }[head] ? (head === "scenarios" || head === "compound" ? "timelines" : head) : "";
-  if (sec) setTimeout(() => { $("sec-" + sec).scrollIntoView({ block: "start" }); $("h-" + sec).setAttribute("tabindex", "-1"); $("h-" + sec).focus({ preventScroll: true }); }, 0);
+  const tabFor = { system: "system", indicators: "indicators", threats: "threats", timelines: "timelines", scenarios: "timelines", compound: "timelines" }[head];
+  if (tabFor) { const t = document.querySelector(`[data-tab="${tabFor}"]`); if (t) t.click(); }
+  const target = tabFor || head === "dashboard" ? "dashboard" : head === "costs" ? "costs" : head === "game" ? "game" : "";
+  if (target) setTimeout(() => { $("sec-" + target).scrollIntoView({ block: "start" }); const h = $("h-" + target) || $("sec-" + target).querySelector("h2"); h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }, 0);
   else if (!["methods"].includes(view)) window.scrollTo(0, 0);
 }
 function viewTitle() {
   if (SCEN[view]) return "What if: " + SCEN[view].tab;
   if (view === "cat") return catName(catSel) + ": threats of this type";
   if (view === "run") return "Possible timeline: " + STORIES.find(x => x.id === storySel).title;
-  return { home: "Canada Food System Stress Test", methods: "How the tests work", updates: "Recent events", challenge: "Try it yourself", research: "The research plan", partners: "Potential partners" }[view];
+  return { home: "Canada Food System Stress Test", methods: "How the tests work", updates: "Recent events", challenge: "The decision game", research: "The research plan", partners: "Potential partners" }[view];
 }
 /* ---------- links that leave the prototype open in a new tab ---------- */
 function markExternal(root) {
