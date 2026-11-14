@@ -2325,7 +2325,7 @@ function route() {
   if (tabFor) { const t = document.querySelector(`[data-tab="${tabFor}"]`); if (t) t.click(); }
   const target = tabFor || head === "dashboard" ? "dashboard" : head === "costs" ? "costs" : head === "game" ? "game" : "";
   if (target) setTimeout(() => { $("sec-" + target).scrollIntoView({ block: "start" }); const h = $("h-" + target) || $("sec-" + target).querySelector("h2"); h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }, 0);
-  else if (!["methods"].includes(view)) window.scrollTo(0, 0);
+  else if (!(view === "methods" && head !== "methods")) window.scrollTo(0, 0);
 }
 function viewTitle() {
   if (SCEN[view]) return "What if: " + SCEN[view].tab;
@@ -2359,6 +2359,7 @@ window.addEventListener("beforeprint", () => {
 });
 window.addEventListener("afterprint", () => document.querySelectorAll("details").forEach(d => d.open = !!d.dataset.wasOpen));
 window.addEventListener("hashchange", route);
+document.addEventListener("click", (e) => { const a = e.target.closest("#explore a[href^='#']"); if (a && a.getAttribute("href") === (location.hash || "#")) { e.preventDefault(); window.scrollTo(0, 0); } });
 let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(update, 120); });
 if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", update);
 new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
